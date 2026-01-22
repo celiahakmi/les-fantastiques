@@ -1,0 +1,22 @@
+Exercice : Compte bancaire (Programmation orientée objet)
+
+Créer une classe CompteBancaire avec :
+     un titulaire
+     un solde
+
+Méthodes :
+    deposer(montant)
+    retirer(montant) : seulement si le solde est suffisant
+    afficher() qui affiche par exemple : Compte de Alice : 1200 €
+
+Tester ta classe: 
+Dans ton programme principal :
+
+    Crée un compte pour une personne
+
+    Fais un dépôt
+
+    Fais un retrait
+
+    Affiche le résultat final
+
