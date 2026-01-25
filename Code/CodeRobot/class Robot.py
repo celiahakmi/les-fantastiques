@@ -17,4 +17,8 @@ class Robot:
             self.y = self.y + 1 
         else:
             print("Le robot rencontre un mur")
-            
+    def gauche(self, y): 
+        if self.y != 0: 
+            self.y = self.y - 1 
+        else: 
+            print("Le robot rencontre un mur")
