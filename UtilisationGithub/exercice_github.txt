@@ -1,0 +1,11 @@
+Quizz sur l’utilisation de GitHub
+
+Question 1: Donnez la commande qui envoie les commits vers GitHub.
+
+Question 2: Donnez la commande qui ajoute tous les fichiers modifiés en un seul coup.
+
+Question 3: Donnez la commande qui ajoute un fichier pour le prochain commit. 
+
+Question 4: Donnez la commande qui récupère les dernières modifications depuis GitHub.
+
+Question 5: Donnez la commande qui initialise un dépôt Git dans un dossier existant. 

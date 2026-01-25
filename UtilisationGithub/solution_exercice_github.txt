@@ -1,0 +1,11 @@
+Solutions de l’exercice sur l’utilisation de GitHub
+
+Question 1: git push
+
+Question 2: git add .
+
+Question 3: git add fichier.txt
+
+Question 4: git pull
+
+Question 5: git init 
