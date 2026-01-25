@@ -23,10 +23,10 @@ class Robot:
         else: 
             print("Le robot rencontre un mur")
     def carre(self): 
-        self.droite
-        self.bas
-        self.gauche
-        self.haut
+        self.droite()
+        self.bas()
+        self.gauche()
+        self.haut()
     def afficher(self):
         print(f"x : {self.x}, y = {self.y}")
 
