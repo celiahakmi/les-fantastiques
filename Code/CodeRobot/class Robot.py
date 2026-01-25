@@ -11,4 +11,10 @@ class Robot:
         if self.x != 5:
             self.x = self.x + 1 
         else: 
-            print("Le robot rencontre un mur")   
+            print("Le robot rencontre un mur")
+    def droite(self, y):
+        if self.y != 5: 
+            self.y = self.y + 1 
+        else:
+            print("Le robot rencontre un mur")
+            
