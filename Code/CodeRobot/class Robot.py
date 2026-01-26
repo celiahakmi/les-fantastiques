@@ -1,3 +1,5 @@
+from class_plateforme import Plateforme
+
 class Robot: 
     def __init__(self, x, y):
         self.x = x 
@@ -22,15 +24,40 @@ class Robot:
             self.y = self.y - 1 
         else: 
             print("Le robot rencontre un mur")
-    def carre(self): 
-        self.droite()
-        self.bas()
-        self.gauche()
-        self.haut()
     def afficher(self):
         print(f"x : {self.x}, y = {self.y}")
+    def carre(self, plateforme): 
+        
+        self.droite()
+        print("Nouvelle position logique du robot :")
+        self.afficher()
 
-RobotTest = Robot(2,2)
-RobotTest.afficher()
-RobotTest.carre() 
-RobotTest.afficher()
+        print("\nPlateforme après déplacement :")
+        plateforme.placer_robot(robot)
+        plateforme.afficher()
+
+        self.bas()
+        print("Nouvelle position logique du robot :")
+        self.afficher()
+
+        print("\nPlateforme après déplacement :")
+        plateforme.placer_robot(robot)
+        plateforme.afficher()
+
+        self.gauche()
+        print("Nouvelle position logique du robot :")
+        self.afficher()
+
+        print("\nPlateforme après déplacement :")
+        plateforme.placer_robot(robot)
+        plateforme.afficher()
+
+        self.haut()
+        print("Nouvelle position logique du robot :")
+        self.afficher()
+
+        print("\nFin du déplacement en carré :")
+        plateforme.placer_robot(robot)
+        plateforme.afficher()
+
+   
