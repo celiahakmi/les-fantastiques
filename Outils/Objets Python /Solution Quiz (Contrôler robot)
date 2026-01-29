@@ -8,6 +8,12 @@
 
 5- Il faut : importer pygame + l'initialiser + avoir une boucle qui tourne.
 
+6- Les deux roues tournent dans le même sens
+
+7- Roue gauche avance, roue droite recule 
+
+8- Roue gauche immobile, roue droite avance 
+
 
 Schéma à retenir :
  Clavier(tu appuies sur une touche) -> PyGame(détecte la touche) -> RPi.GPIO(reçoit l'instruction) -> Moteurs(actionnent les roues)
