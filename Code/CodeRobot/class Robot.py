@@ -60,9 +60,23 @@ class Robot:
         plateforme.placer_robot(robot)
         plateforme.afficher()
 
+        
+lignes = int(input("Nombre de lignes de la plateforme : "))
+colonnes = int(input("Nombre de colonnes de la plateforme : "))
+
+if lignes <0 or colonnes <0:
+    print("Les dimensions doivent etre positives")
+else:
+    plateforme = Plateforme(lignes, colonnes)
+
+x = int(input("Entrez la position x du robot : "))
+y = int(input("Entrez la position y du robot : "))
+
+if 0 <= x < lignes and 0 <= y < colonnes:
+    robot = Robot(x, y)   
+else:
+    print("valeurs hors plateforme ")
    
-robot = Robot(1, 2)
-plateforme = Plateforme(6, 6)
 
 print("Position logique du robot :")
 robot.afficher()
