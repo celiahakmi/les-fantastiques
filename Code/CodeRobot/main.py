@@ -1,7 +1,7 @@
 import tkinter as tk
 from class_plateforme import Plateforme
 from Robot import Robot
-from interface_graphique import InterfacePlateforme
+from interface import InterfacePlateforme
 
 # Inputs
 lignes = int(input("Nombre de lignes : "))
