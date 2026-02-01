@@ -2,6 +2,8 @@ class Plateforme:
     def __init__(self, lignes, colonnes):
         self.lignes = lignes      # nombre de lignes
         self.colonnes = colonnes  # nombre de colonnes
+        self.hauteur = lignes 
+        self.largeur = colonnes
         self.matrice = []
     # obstacles prédéfinis 
         self.obstacles = [(1, 2), (3, 3), (4, 1)]
