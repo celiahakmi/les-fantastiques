@@ -75,38 +75,34 @@ class Robot:
     def afficher(self):
         print(f"x : {self.x}, y = {self.y}")
         
-    def carre(self, plateforme): 
-        
-        self.droite()
-        print("Nouvelle position du robot :")
-        self.afficher()
+    def carre(self): 
+            self.droite()
+            print("Nouvelle position du robot :")
+            self.afficher()
+            print("\nPlateforme après déplacement :")
+            self.plateforme.placer_robot(self)
+            self.plateforme.afficher()
+    
+            self.bas()
+            print("Nouvelle position du robot :")
+            self.afficher()
+            print("\nPlateforme après déplacement :")
+            self.plateforme.placer_robot(self)
+            self.plateforme.afficher()
+    
+            self.gauche()
+            print("Nouvelle position du robot :")
+            self.afficher()
+            print("\nPlateforme après déplacement :")
+            self.plateforme.placer_robot(self)
+            self.plateforme.afficher()
+    
+            self.haut()
+            print("Nouvelle position du robot :")
+            self.afficher()
+            print("\nFin du déplacement en carré :")
+            self.plateforme.placer_robot(self)
+            self.plateforme.afficher()
 
-        print("\nPlateforme après déplacement :")
-        plateforme.placer_robot(self)
-        plateforme.afficher()
-
-        self.bas()
-        print("Nouvelle position du robot :")
-        self.afficher()
-
-        print("\nPlateforme après déplacement :")
-        plateforme.placer_robot(self)
-        plateforme.afficher()
-
-        self.gauche()
-        print("Nouvelle position  du robot :")
-        self.afficher()
-
-        print("\nPlateforme après déplacement :")
-        plateforme.placer_robot(self)
-        plateforme.afficher()
-
-        self.haut()
-        print("Nouvelle position du robot :")
-        self.afficher()
-
-        print("\nFin du déplacement en carré :")
-        plateforme.placer_robot(self)
-        plateforme.afficher()
 
         
