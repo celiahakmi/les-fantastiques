@@ -5,52 +5,76 @@ class Robot:
         self.x = x 
         self.y = y
         self.plateforme = plateforme 
-    def haut(self): 
-        if self.x != 0 :
-            self.x = self.x - 1 
-        else: 
-            print("Le robot rencontre un mur")
-    def bas(self): 
-        if self.x != (self.plateforme.lignes - 1):
-            self.x = self.x + 1 
-        else: 
-            print("Le robot rencontre un mur")
+
+    def haut(self):
+        new_y = self.y + 1
+        if new_y < self.plateforme.hauteur and self.plateforme.est_vide(self.x, new_y):
+            self.y = new_y
+        else:
+            print("Mur ou obstacle en haut")
+
+    def bas(self):
+        new_y = self.y - 1
+        if new_y >= 0 and self.plateforme.est_vide(self.x, new_y):
+            self.y = new_y
+        else:
+            print("Mur ou obstacle en bas")
+
     def droite(self):
-        if self.y != (self.plateforme.colonnes - 1) :
-            self.y = self.y + 1 
+        new_x = self.x + 1
+        if new_x < self.plateforme.largeur and self.plateforme.est_vide(new_x, self.y):
+            self.x = new_x
         else:
-            print("Le robot rencontre un mur")
-    def gauche(self): 
-        if self.y != 0: 
-            self.y = self.y - 1 
-        else: 
-            print("Le robot rencontre un mur")
-    def diag_haut_droite(self):
-        if self.x != 0  and self.y != (self.plateforme.colonnes -1): 
-            self.x = self.x - 1
-            self.y = self.y + 1
-        else: 
-            print("Le robot rencontre un mur")
+            print("Mur ou obstacle à droite")
+
+    def gauche(self):
+        new_x = self.x - 1
+        if new_x >= 0 and self.plateforme.est_vide(new_x, self.y):
+            self.x = new_x
+        else:
+            print("Mur ou obstacle à gauche")
+
+    
     def diag_haut_gauche(self):
-        if self.x != 0 and self.y != 0:
-            self.x = self.x - 1
-            self.y = self.y - 1
-        else : 
-            print("Le robot rencntre un mur")
-    def diag_bas_droite(self):
-        if self.x != (self.plateforme.lignes - 1) and self.y != (self.plateforme.colonnes - 1):
-            self.x = self.x + 1
-            self.y = self.y + 1 
+        new_x = self.x - 1
+        new_y = self.y + 1
+        if new_x >= 0 and new_y < self.plateforme.hauteur and self.plateforme.est_vide(new_x, new_y):
+            self.x = new_x
+            self.y = new_y
         else:
-            print("Le robot rencontre un mur")
+            print("Mur ou obstacle en diagonale haut-gauche")
+
+    def diag_haut_droite(self):
+        new_x = self.x + 1
+        new_y = self.y + 1
+        if new_x < self.plateforme.largeur and new_y < self.plateforme.hauteur and self.plateforme.est_vide(new_x, new_y):
+            self.x = new_x
+            self.y = new_y
+        else:
+            print("Mur ou obstacle en diagonale haut-droite")
+
     def diag_bas_gauche(self):
-        if self.x != (self.plateforme.lignes - 1) and self.y != 0:
-            self.x = self.x + 1 
-            self.y = self.y - 1 
-        else: 
-            print("Le robot rencontre un mur")
+        new_x = self.x - 1
+        new_y = self.y - 1
+        if new_x >= 0 and new_y >= 0 and self.plateforme.est_vide(new_x, new_y):
+            self.x = new_x
+            self.y = new_y
+        else:
+            print("Mur ou obstacle en diagonale bas-gauche")
+
+    def diag_bas_droite(self):
+        new_x = self.x + 1
+        new_y = self.y - 1
+        if new_x < self.plateforme.largeur and new_y >= 0 and self.plateforme.est_vide(new_x, new_y):
+            self.x = new_x
+            self.y = new_y
+        else:
+            print("Mur ou obstacle en diagonale bas-droite")
+
+            
     def afficher(self):
         print(f"x : {self.x}, y = {self.y}")
+        
     def carre(self, plateforme): 
         
         self.droite()
