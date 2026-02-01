@@ -15,7 +15,7 @@ plateforme = Plateforme(lignes, colonnes)
 x = int(input("Position x du robot : "))
 y = int(input("Position y du robot : "))
 
-if not (0 <= x < lignes and 0 <= y < colonnes):
+if not (0 <= x < colonnes and 0 <= y < lignes):
     print("Position hors plateforme")
    
 robot = Robot(x, y, plateforme) 
@@ -28,7 +28,7 @@ plateforme.placer_robot(robot)
 plateforme.afficher()
 
 print("Déplacement en carré...\n")
-robot.carre(plateforme)  
+robot.carre()  
 
 # Interface Tkinter
 root = tk.Tk()
