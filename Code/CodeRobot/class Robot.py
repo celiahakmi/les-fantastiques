@@ -24,6 +24,28 @@ class Robot:
             self.y = self.y - 1 
         else: 
             print("Le robot rencontre un mur")
+    def diag_haut_droite(self):
+        if self.x != 0  and self.y != (colonnes -1): 
+            self.x = self.x - 1
+            self.y = self.y + 1
+        else: 
+            print("Le robot rencontre un mur")
+    def diag_haut_gauche(self):
+        if self.x != 0 and self.y != 0:
+            self.x = self.x - 1
+            self.y = self.y - 1
+        else : 
+            print("Le robot rencntre un mur")
+    def diag_bas_droite(self):
+        if self.x != (lignes - 1) and self.y != (colonnes - 1):
+            self.x = self.x + 1
+            self.y = self.y + 1 
+        else:
+            print("Le robot rencontre un mur")
+    def diag_bas_gauche(self):
+        if self.x != (lignes - 1) and self.y != 0:
+            self.x = self.x + 1 
+            self.y = self.y - 1 
     def afficher(self):
         print(f"x : {self.x}, y = {self.y}")
     def carre(self, plateforme): 
