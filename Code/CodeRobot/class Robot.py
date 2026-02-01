@@ -1,5 +1,3 @@
-from class_plateforme import Plateforme
-
 class Robot: 
     def __init__(self, x, y,plateforme):
         self.x = x 
