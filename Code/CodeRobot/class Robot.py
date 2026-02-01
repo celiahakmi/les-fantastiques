@@ -46,6 +46,8 @@ class Robot:
         if self.x != (lignes - 1) and self.y != 0:
             self.x = self.x + 1 
             self.y = self.y - 1 
+        else: 
+            print("Le robot rencontre un mur")
     def afficher(self):
         print(f"x : {self.x}, y = {self.y}")
     def carre(self, plateforme): 
