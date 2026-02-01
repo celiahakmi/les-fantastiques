@@ -39,8 +39,8 @@ class InterfacePlateforme:
                 self.canvas.create_rectangle(x1, y1, x2, y2, outline="white")
 
         #Dessine un cercle rouge oval dans la case du robot avec une marge pour qu'elle touche pas les bords
-        rx1 = self.robot.y * TAILLE_CASE
-        ry1 = self.robot.x * TAILLE_CASE
+        rx1 = self.robot.x * TAILLE_CASE
+        ry1 = (self.plateforme.lignes - 1 - self.robot.y) * TAILLE_CASE
         rx2 = rx1 + TAILLE_CASE
         ry2 = ry1 + TAILLE_CASE
         self.canvas.create_oval(rx1+5, ry1+5, rx2-5, ry2-5, fill="red")
