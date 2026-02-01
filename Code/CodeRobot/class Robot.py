@@ -10,12 +10,12 @@ class Robot:
         else: 
             print("Le robot rencontre un mur")
     def bas(self): 
-        if self.x != 5:
+        if self.x != (lignes - 1):
             self.x = self.x + 1 
         else: 
             print("Le robot rencontre un mur")
     def droite(self):
-        if self.y != 5: 
+        if self.y != (colonnes - 1) :
             self.y = self.y + 1 
         else:
             print("Le robot rencontre un mur")
@@ -65,7 +65,7 @@ lignes = int(input("Nombre de lignes de la plateforme : "))
 colonnes = int(input("Nombre de colonnes de la plateforme : "))
 
 if lignes <0 or colonnes <0:
-    print("Les dimensions doivent etre positives")
+    print("Les dimensions doivent etre 6positives")
 else:
     plateforme = Plateforme(lignes, colonnes)
 
