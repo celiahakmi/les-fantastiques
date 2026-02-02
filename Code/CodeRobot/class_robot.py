@@ -6,7 +6,7 @@ class Robot:
         self.vitesse = vitesse
 
     def haut(self):
-        for _ in range(self.vitesse):
+        for i in range(self.vitesse):
             new_y = self.y + 1
             if new_y < self.plateforme.hauteur and self.plateforme.est_vide(self.x, new_y):
                 self.y = new_y
@@ -16,7 +16,7 @@ class Robot:
 
 
     def bas(self):
-        for _ in range(self.vitesse):
+        for i in range(self.vitesse):
             new_y = self.y - 1
             if new_y >= 0 and self.plateforme.est_vide(self.x, new_y):
                 self.y = new_y
@@ -26,7 +26,7 @@ class Robot:
 
 
     def droite(self):
-        for _ in range(self.vitesse):
+        for i in range(self.vitesse):
             new_x = self.x + 1
             if new_x < self.plateforme.largeur and self.plateforme.est_vide(new_x, self.y):
                 self.x = new_x
@@ -36,7 +36,7 @@ class Robot:
 
 
     def gauche(self):
-        for _ in range(self.vitesse):
+        for i in range(self.vitesse):
             new_x = self.x - 1
             if new_x >= 0 and self.plateforme.est_vide(new_x, self.y):
                 self.x = new_x
@@ -47,7 +47,7 @@ class Robot:
 
     
     def diag_haut_gauche(self):
-        for _ in range(self.vitesse):
+        for i in range(self.vitesse):
             new_x = self.x - 1
             new_y = self.y + 1
             if new_x >= 0 and new_y < self.plateforme.hauteur and self.plateforme.est_vide(new_x, new_y):
@@ -59,7 +59,7 @@ class Robot:
 
 
     def diag_haut_droite(self):
-        for _ in range(self.vitesse):
+        for i in range(self.vitesse):
             new_x = self.x + 1
             new_y = self.y + 1
             if (
@@ -75,7 +75,7 @@ class Robot:
 
 
     def diag_bas_gauche(self):
-        for _ in range(self.vitesse):
+        for i in range(self.vitesse):
             new_x = self.x - 1
             new_y = self.y - 1
             if (
@@ -91,7 +91,7 @@ class Robot:
 
 
     def diag_bas_droite(self):
-        for _ in range(self.vitesse):
+        for i in range(self.vitesse):
             new_x = self.x + 1
             new_y = self.y - 1
             if (
