@@ -2,7 +2,7 @@ import pygame
 from class_plateforme import Plateforme
 from class_robot import Robot
 
-# les inputs
+#l'utilisateur peut entrer le nb de lignes et colonnes qu'il souhaite
 lignes = int(input("Nombre de lignes : "))
 colonnes = int(input("Nombre de colonnes : "))
 
@@ -82,7 +82,7 @@ while marche:
             if event.key in touches:
                 touches.remove(event.key)
 
-    # Déplacements continus avec les flèches
+#Déplacements continus avec les flèches du clavier
     if pygame.K_UP in touches:
         robot.haut()
     if pygame.K_DOWN in touches:
@@ -92,8 +92,24 @@ while marche:
     if pygame.K_RIGHT in touches:
         robot.droite()
 
-    # Rafraîchir l'écran
-    dessiner()
-    horloge.tick(10) # Vitesse de la boucle (10 FPS)
+    #Déplacements pour les diagonales
+    if pygame.K_a in touches:
+        robot.diag_haut_gauche()
+        
+    if pygame.K_z in touches:
+        robot.diag_haut_droite()
+        
+    if pygame.K_q in touches:
+        robot.diag_bas_droite()
+        
+    if pygame.K_s in touches:
+        robot.diag_bas_gauche()
+        
 
-pygame.quit()
+
+#raffraichit l'écran
+    dessiner()
+    horloge.tick(10) #vitesse de la boucle
+
+pygame.quit() #fin 
+
