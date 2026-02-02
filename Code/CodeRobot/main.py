@@ -100,10 +100,10 @@ while marche:
         robot.diag_haut_droite()
         
     if pygame.K_q in touches:
-        robot.diag_bas_droite()
+        robot.diag_bas_gauche()
         
     if pygame.K_s in touches:
-        robot.diag_bas_gauche()
+        robot.diag_bas_droite()
         
 
 
