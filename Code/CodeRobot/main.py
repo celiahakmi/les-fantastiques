@@ -21,8 +21,10 @@ if not (0 <= x < colonnes and 0 <= y < lignes):
     print("Position hors plateforme")
     exit()
 
-# Créer le robot
-robot = Robot(x, y, plateforme)
+#on demande à l'utilisateur la vitesse de déplacement 
+vitesse = int(input("À quelle vitesse voulez-vous aller ? : "))
+
+robot = Robot(x, y, plateforme, vitesse) #création du robot
 
 # Config de Pygame 
 TAILLE = 60 # Taille d'une case en pixels
