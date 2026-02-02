@@ -1,6 +1,6 @@
 import pygame
 from class_plateforme import Plateforme
-from Robot import Robot
+from class_robot import Robot
 
 # les inputs
 lignes = int(input("Nombre de lignes : "))
