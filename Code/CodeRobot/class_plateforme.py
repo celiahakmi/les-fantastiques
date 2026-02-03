@@ -17,7 +17,7 @@ class Plateforme:
     def placer_obstacles(self):
         """Place les obstacles X"""
         for (x, y) in self.obstacles:
-            ligne = self.lignes - 1 - y  # conversion y (index ligne)
+            ligne = self.lignes - 1 - y  #conversion y (index ligne)
             colonne = x
             self.matrice[ligne][colonne] = "X"
 
