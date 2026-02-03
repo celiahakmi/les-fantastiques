@@ -1,11 +1,12 @@
 class Robot: 
     def __init__(self, x, y,plateforme,vitesse):
+        #position initiale du robot
         self.x = x 
         self.y = y
         self.plateforme = plateforme 
-        self.vitesse = vitesse
+        self.vitesse = vitesse #nb de cases paercourues par déplacement
 
-    def haut(self):
+    def haut(self): 
         for i in range(self.vitesse):
             new_y = self.y + 1
             if new_y < self.plateforme.hauteur and self.plateforme.est_vide(self.x, new_y):
@@ -15,7 +16,7 @@ class Robot:
                 break
 
 
-    def bas(self):
+    def bas(self): 
         for i in range(self.vitesse):
             new_y = self.y - 1
             if new_y >= 0 and self.plateforme.est_vide(self.x, new_y):
@@ -25,7 +26,7 @@ class Robot:
                 break
 
 
-    def droite(self):
+    def droite(self): 
         for i in range(self.vitesse):
             new_x = self.x + 1
             if new_x < self.plateforme.largeur and self.plateforme.est_vide(new_x, self.y):
@@ -35,7 +36,7 @@ class Robot:
                 break
 
 
-    def gauche(self):
+    def gauche(self): 
         for i in range(self.vitesse):
             new_x = self.x - 1
             if new_x >= 0 and self.plateforme.est_vide(new_x, self.y):
@@ -44,9 +45,8 @@ class Robot:
                 print("Mur ou obstacle à gauche")
                 break
 
-
     
-    def diag_haut_gauche(self):
+    def diag_haut_gauche(self): 
         for i in range(self.vitesse):
             new_x = self.x - 1
             new_y = self.y + 1
@@ -58,7 +58,7 @@ class Robot:
                 break
 
 
-    def diag_haut_droite(self):
+    def diag_haut_droite(self): 
         for i in range(self.vitesse):
             new_x = self.x + 1
             new_y = self.y + 1
