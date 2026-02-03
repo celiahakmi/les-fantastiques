@@ -1,11 +1,11 @@
 class Plateforme:
     def __init__(self, lignes, colonnes):
-        self.lignes = lignes      # nombre de lignes
-        self.colonnes = colonnes  # nombre de colonnes
+        self.lignes = lignes      #nombre de lignes
+        self.colonnes = colonnes  #nombre de colonnes
         self.hauteur = lignes 
         self.largeur = colonnes
-        self.matrice = []
-    # obstacles prédéfinis 
+        self.matrice = [] #représente la grille
+    #obstacles prédéfinis 
         self.obstacles = [(1, 2), (3, 3), (4, 1)]
         self.initialiser_matrice()
         self.placer_obstacles()
@@ -40,7 +40,7 @@ class Plateforme:
     def placer_robot(self, robot):
         """Place le robot sur la matrice sans effacer les obstacles"""
         self.initialiser_matrice()
-        self.placer_obstacles()  # remet les obstacles
+        self.placer_obstacles()  #remet les obstacles
         ligne = self.lignes - 1 - robot.y
         colonne = robot.x
         self.matrice[ligne][colonne] = "R"
