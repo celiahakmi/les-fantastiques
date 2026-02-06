@@ -5,3 +5,11 @@ class Robot:
         self.largeur=largeur
         self.longueur=longueur
         self.plateforme = plateforme 
+     def haut(self, d):
+            new_y = self.y + d
+            if self.plateforme.position_valide(self.x, new_y, self.largeur, self.hauteur):
+                self.y = new_y
+            else:
+                print("Mur en haut")
+
+       
