@@ -10,6 +10,14 @@ class Robot:
             if self.plateforme.position_valide(self.x, new_y, self.largeur, self.hauteur):
                 self.y = new_y
             else:
-                print("Mur en haut")
+                print("Mur ou obstacle en haut")
+
+    def bas(self, d):
+            new_y = self.y - d
+            if self.plateforme.position_valide(self.x, new_y, self.largeur, self.hauteur):
+                self.y = new_y
+            else:
+                print("Mur ou obstacle en bas")
+
 
        
