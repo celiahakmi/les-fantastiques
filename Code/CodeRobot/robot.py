@@ -26,6 +26,14 @@ class Robot:
             else:
                 print("Mur ou obstacle a droite")
 
+    def gauche(self, d):
+            new_x = self.x - d
+            if self.plateforme.position_valide(new_x, self.y, self.largeur, self.hauteur):
+                self.x = new_x
+            else:
+                print("Mur ou obstacle a gauche")
+
+
     
 
 
