@@ -33,6 +33,11 @@ class Robot:
             else:
                 print("Mur ou obstacle a gauche")
 
+    def afficher(self):
+        print(f"Position : x={self.x:.2f}, y={self.y:.2f}")
+
+    
+
 
     
 
