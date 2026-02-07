@@ -1,3 +1,4 @@
+from plateforme import Plateforme
 class Robot:
     def __init__(self,x,y,largeur,longueur,plateforme):
         self.x=x
