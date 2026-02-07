@@ -1,6 +1,6 @@
 import pygame
-from class_plateforme import Plateforme
-from class_robot import Robot
+from plateforme0 import Plateforme
+from robot0 import Robot
 
 #l'utilisateur choisit la taille de la plateforme
 lignes = int(input("Nombre de lignes : "))
