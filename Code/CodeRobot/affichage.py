@@ -42,7 +42,26 @@ class PygameView:
                 (0, j * self.TAILLE_PIXEL),
                 (self.plateforme.taille * self.TAILLE_PIXEL, j * self.TAILLE_PIXEL)
             )
-        
+       
+        for obs in self.plateforme.obstacles:
+            #cercle (surface, couleur, centre, rayon)
+            if obs[0] == "cercle":
+                _, x, y, r = obs
+                pygame.draw.circle(self.fenetre, (212, 115, 212),(int(x*self.TAILLE_PIXEL), int(y*self.TAILLE_PIXEL)),int(r*self.TAILLE_PIXEL))
+
+            #carre (surface, couleur, C)
+            elif obs[0] == "carre":
+                _, x, y, c = obs
+                # C = (x, y, largeur, hauteur) multiplié par la taille des pixels
+                pygame.draw.rect(self.fenetre, (135, 233, 144),(x*self.TAILLE_PIXEL, y*self.TAILLE_PIXEL,c*self.TAILLE_PIXEL,c*self.TAILLE_PIXEL))
+
+            #triangle(surface, couleur, points)
+            elif obs[0] == "triangle":
+                _, x, y, c = obs
+                # Calcul des 3 sommets du triangle en fonction de la taille 'c'
+                points = [(x*self.TAILLE_PIXEL, y*self.TAILLE_PIXEL),((x+c)*self.TAILLE_PIXEL, y*self.TAILLE_PIXEL),((x+c/2)*self.TAILLE_PIXEL, (y-c)*self.TAILLE_PIXEL)]
+                pygame.draw.polygon(self.fenetre,(253, 108, 158), points)
+
         pygame.display.flip() #Actualisation de l'affichage
 
         self.horloge.tick(30) #Limitation du FPS (régulation du temps d'affichage, fps = frame par seconde)
