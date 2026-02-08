@@ -1,0 +1,3 @@
+Apprendre qu'est ce que la méthode MVC :
+
+https://openclassrooms.com/fr/courses/7160741-ecrivez-du-code-python-maintenable/7188702-structurez-une-application-avec-le-pattern-d-architecture-mvc 
