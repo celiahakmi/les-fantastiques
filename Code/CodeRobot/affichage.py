@@ -42,6 +42,10 @@ class PygameView:
                 (0, j * self.TAILLE_PIXEL),
                 (self.plateforme.taille * self.TAILLE_PIXEL, j * self.TAILLE_PIXEL)
             )
+        
+        pygame.display.flip() #Actualisation de l'affichage
+
+        self.horloge.tick(30) #Limitation du FPS (régulation du temps d'affichage, fps = frame par seconde)
 
 
     
