@@ -5,6 +5,11 @@ from affichage import PygameView
 # Création de la  la plateforme
 plateforme = Plateforme(taille=20)
 
+# OBSTACLES PREDEFINIS
+plateforme.ajouter_cercle(4, 4, 2)
+plateforme.ajouter_carre(16, 4, 3)
+plateforme.ajouter_triangle(10, 10, 3)
+
 # configuration  de Pygame et la View
 pygame.init()
 view = PygameView(plateforme, TAILLE_PIXEL=40)
