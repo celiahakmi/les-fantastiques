@@ -18,6 +18,15 @@ class PygameView:
 
         self.horloge = pygame.time.Clock()  # Horloge pour contrôler le FPS (régulation du temps d'affichage)
 
+    def dessiner(self):
+        """fonction permettant de dessiner la plateforme dans la fenêtre Pygame en plusieurs étapes : 
+            - Remplit le fond en blanc
+            - Trace la grille 
+            - Actualise l'affichage
+            - Limite la vitesse de la boucle pour que l'affichage soit fluide
+        """ 
+        self.fenetre.fill((255, 255, 255)) 
+
 
     
 
