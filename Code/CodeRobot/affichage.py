@@ -34,6 +34,14 @@ class PygameView:
                 (i * self.TAILLE_PIXEL, 0),
                 (i * self.TAILLE_PIXEL, self.plateforme.taille * self.TAILLE_PIXEL)
             )
+        for j in range(self.plateforme.taille + 1): # dessin des lignes horizontales
+
+            pygame.draw.line(
+                self.fenetre,
+                (0, 0, 0),
+                (0, j * self.TAILLE_PIXEL),
+                (self.plateforme.taille * self.TAILLE_PIXEL, j * self.TAILLE_PIXEL)
+            )
 
 
     
