@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
  
+from robot import Robot
 
 class Plateforme:
     def __init__(self, taille):
@@ -7,6 +8,12 @@ class Plateforme:
         self.fig, self.ax = plt.subplots()
         self.obstacles = [] 
 
+    def position_valide(self, robot):
+        return (
+            0 <= robot.x <= self.taille and
+            0 <= robot.y <= self.taille
+        )
+     
     def initialiser_plan(self):
         """Initialise la plateforme avec une grille"""
         self.ax.set_xlim(0, self.taille)
