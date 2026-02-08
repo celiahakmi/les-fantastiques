@@ -25,7 +25,15 @@ class PygameView:
             - Actualise l'affichage
             - Limite la vitesse de la boucle pour que l'affichage soit fluide
         """ 
-        self.fenetre.fill((255, 255, 255)) 
+        self.fenetre.fill((255, 255, 255)) # Fond blanc
+        
+        for i in range(self.plateforme.taille + 1): # dessin des lignes verticales
+            pygame.draw.line(
+                self.fenetre,
+                (0, 0, 0),
+                (i * self.TAILLE_PIXEL, 0),
+                (i * self.TAILLE_PIXEL, self.plateforme.taille * self.TAILLE_PIXEL)
+            )
 
 
     
