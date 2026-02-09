@@ -19,8 +19,8 @@ angle = float(input("Angle initial du robot (en degrés) : "))
 robot = Robot(
     x=x,
     y=y,
-    largeur=1,
-    longueur=2,
+    largeur=2,
+    longueur=1,
     angle=angle,
     plateforme=plateforme
 )
@@ -34,6 +34,19 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+            
+    keys = pygame.key.get_pressed()
+    # Avancer/reculer
+    if keys[pygame.K_UP]:
+        robot.avancer(1.0)   # avancer petit pas
+    if keys[pygame.K_DOWN]:
+        robot.avancer(-1.0)  # reculer
+
+    # Tourner
+    if keys[pygame.K_LEFT]:
+        robot.tourner(-5)    # tourner 5° à gauche
+    if keys[pygame.K_RIGHT]:
+        robot.tourner(5)     # tourner 5° à droite
 
     view.dessiner()
 
