@@ -63,6 +63,13 @@ class PygameView:
                 points = [(x*self.TAILLE_PIXEL, y*self.TAILLE_PIXEL),((x+c)*self.TAILLE_PIXEL, y*self.TAILLE_PIXEL),((x+c/2)*self.TAILLE_PIXEL, (y-c)*self.TAILLE_PIXEL)]
                 pygame.draw.polygon(self.fenetre,(253, 108, 158), points)
 
+        rect = pygame.Rect(
+            self.robot.x * self.TAILLE_PIXEL,      # x en pixels
+            self.robot.y * self.TAILLE_PIXEL,      # y en pixels
+            self.robot.largeur * self.TAILLE_PIXEL,  # largeur en pixels
+            self.robot.longueur * self.TAILLE_PIXEL  # longueur en pixels
+        )
+        pygame.draw.rect(self.fenetre, (0, 0, 255), rect)  # rectangle bleu (0, 0, 255 = formabt RGB : bleu)
         pygame.display.flip() #Actualisation de l'affichage
 
         self.horloge.tick(30) #Limitation du FPS (régulation du temps d'affichage, fps = frame par seconde)
