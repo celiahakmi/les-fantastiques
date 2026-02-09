@@ -1,4 +1,5 @@
-import matplotlib.pyplot as plt
+from plateforme import Plateforme
+import math
 
 class Robot:
     def __init__(self,x,y,largeur,longueur,angle,plateforme):
@@ -14,6 +15,24 @@ class Robot:
         """ pour faire tourner le robot"""
         
         self.angle = (self.angle + delta_angle) % 360 # de combien est ce que on veut tourner notre robot
+
+    def avancer(self, distance):
+    
+        """pour faire  avancer le robot dans la direction qu'on veut """
+        
+        angle_rad = math.radians(self.angle)
+
+        dx = distance * math.cos(angle_rad) #projection horizontale
+        dy = distance * math.sin(angle_rad) #projection verticale
+
+        new_x = self.x + dx #translation
+        new_y = self.y + dy #translation
+
+        if self.plateforme.position_valide(new_x, new_y, self.largeur, self.longueur):
+            self.x = new_x
+            self.y = new_y
+        else:
+            print("Mur ou obsatcle")
 
         
     
