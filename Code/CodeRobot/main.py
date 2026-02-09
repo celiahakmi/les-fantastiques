@@ -20,7 +20,7 @@ robot = Robot(
     x=x,
     y=y,
     largeur=1,
-    longueur=1,
+    longueur=2,
     angle=angle,
     plateforme=plateforme
 )
