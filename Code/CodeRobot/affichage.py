@@ -66,7 +66,7 @@ class PygameView:
         # Création d'une surface pour le robot
         surface = pygame.Surface((self.robot.largeur * self.TAILLE_PIXEL,
                           self.robot.longueur * self.TAILLE_PIXEL))
-        surface.fill((0, 0, 255))  # couleur bleu
+        surface.fill((0, 0, 255))  # rectangle bleu (0, 0, 255 = formabt RGB : bleu)
 
         # Rotation selon l'angle du robot
         rotated_surface = pygame.transform.rotate(surface, -self.robot.angle)
@@ -78,8 +78,6 @@ class PygameView:
         # Affichage du robot tourné
         self.fenetre.blit(rotated_surface, rect.topleft)
 
-
-        pygame.draw.rect(self.fenetre, (0, 0, 255), rect)  # rectangle bleu (0, 0, 255 = formabt RGB : bleu)
         pygame.display.flip() #Actualisation de l'affichage
 
         self.horloge.tick(30) #Limitation du FPS (régulation du temps d'affichage, fps = frame par seconde)
