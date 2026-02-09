@@ -63,12 +63,22 @@ class PygameView:
                 points = [(x*self.TAILLE_PIXEL, y*self.TAILLE_PIXEL),((x+c)*self.TAILLE_PIXEL, y*self.TAILLE_PIXEL),((x+c/2)*self.TAILLE_PIXEL, (y-c)*self.TAILLE_PIXEL)]
                 pygame.draw.polygon(self.fenetre,(253, 108, 158), points)
 
-        rect = pygame.Rect(
-            self.robot.x * self.TAILLE_PIXEL,      # x en pixels
-            self.robot.y * self.TAILLE_PIXEL,      # y en pixels
-            self.robot.largeur * self.TAILLE_PIXEL,  # largeur en pixels
-            self.robot.longueur * self.TAILLE_PIXEL  # longueur en pixels
-        )
+        # Création d'une surface pour le robot
+        surface = pygame.Surface((self.robot.largeur * self.TAILLE_PIXEL,
+                          self.robot.longueur * self.TAILLE_PIXEL))
+        surface.fill((0, 0, 255))  # couleur bleu
+
+        # Rotation selon l'angle du robot
+        rotated_surface = pygame.transform.rotate(surface, -self.robot.angle)
+
+        # Calcul du rectangle après rotation
+        rect = rotated_surface.get_rect(center=(self.robot.x * self.TAILLE_PIXEL,
+                                       self.robot.y * self.TAILLE_PIXEL))
+
+        # Affichage du robot tourné
+        self.fenetre.blit(rotated_surface, rect.topleft)
+
+
         pygame.draw.rect(self.fenetre, (0, 0, 255), rect)  # rectangle bleu (0, 0, 255 = formabt RGB : bleu)
         pygame.display.flip() #Actualisation de l'affichage
 
