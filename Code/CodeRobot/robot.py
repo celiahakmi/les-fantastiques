@@ -1,4 +1,4 @@
-from plateforme import Plateforme
+
 import math
 
 class Robot:
