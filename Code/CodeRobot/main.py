@@ -3,10 +3,10 @@ from plateforme import Plateforme
 from robot import Robot 
 from affichage import PygameView
 
-# Création de la  la plateforme
+#Création de la plateforme
 plateforme = Plateforme(taille=20)
 
-# OBSTACLES PREDEFINIS
+#Obstacles prédéfinis
 plateforme.ajouter_cercle(4, 4, 2)
 plateforme.ajouter_carre(16, 4, 3)
 plateforme.ajouter_triangle(10, 10, 3)
@@ -30,6 +30,7 @@ pygame.init()
 view = PygameView(plateforme, robot, TAILLE_PIXEL=40)
 #longueur d'un coté du carré
 carre_cote = 3 
+
 # Boucle principale 
 running = True
 while running:
