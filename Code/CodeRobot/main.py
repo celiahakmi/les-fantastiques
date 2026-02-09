@@ -64,6 +64,10 @@ while running:
                 robot.avancer(carre_cote)
                 view.dessiner()
                 pygame.time.delay(400)
+
+                robot.tourner(90)
+                view.dessiner()
+                pygame.time.delay(400)
             
     keys = pygame.key.get_pressed()
     # Avancer/reculer
@@ -79,5 +83,6 @@ while running:
         robot.tourner(5)     # tourner 5° à droite
 
     view.dessiner()
+    view.horloge.tick(30)
 
 pygame.quit()
