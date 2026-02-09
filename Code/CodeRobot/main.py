@@ -48,6 +48,14 @@ while running:
                 robot.avancer(carre_cote)
                 view.dessiner()
                 pygame.time.delay(400)
+
+                robot.tourner(90)
+                view.dessiner()
+                pygame.time.delay(400)
+
+                robot.avancer(carre_cote)
+                view.dessiner()
+                pygame.time.delay(400)
             
     keys = pygame.key.get_pressed()
     # Avancer/reculer
