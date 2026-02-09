@@ -3,13 +3,14 @@ import pygame
 class PygameView:
     """Classe permettant d'afficher toute nos fonctions controllant le robot 
         Partie View de la méthode MVC""" 
-    def __init__(self, plateforme, TAILLE_PIXEL=30):
+    def __init__(self, plateforme, robot, TAILLE_PIXEL=30):
         """ Initialise l'interface graphique Pygame pour afficher la plateforme.
         Paramètres : 
             - Plateforme (Objet : notre plan continu)
             - TAILLE_PIXEL (int : La taille d'une unité de la plateforme en pixels
         """
         self.plateforme = plateforme   # plateforme = notre plan continu avec la grille
+        self.robot = robot 
         self.TAILLE_PIXEL = TAILLE_PIXEL  # Taille d'une case en pixels
 
         # Création de la fenêtre Pygame
