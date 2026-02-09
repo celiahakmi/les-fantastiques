@@ -28,6 +28,8 @@ robot = Robot(
 # configuration  de Pygame et la View
 pygame.init()
 view = PygameView(plateforme, robot, TAILLE_PIXEL=40)
+#longueur d'un coté du carré
+carre_cote = 3 
 # Boucle principale 
 running = True
 while running:
