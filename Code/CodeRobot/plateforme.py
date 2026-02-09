@@ -9,11 +9,8 @@ class Plateforme:
         self.obstacles = [] 
 
     def position_valide(self, x, y, largeur, longueur):
-        return (
-            0 <= x <= self.taille - largeur and
-            0 <= y <= self.taille - longueur
-        )
-     
+        return self.verifier_position(x, y, largeur, longueur)
+   
     def initialiser_plan(self):
         """Initialise la plateforme avec une grille"""
         self.ax.set_xlim(0, self.taille)
