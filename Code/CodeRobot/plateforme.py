@@ -65,8 +65,3 @@ class Plateforme:
 
         return True
 
-    
-#Test
-plateforme = Plateforme(20)
-plateforme.initialiser_plan()
-plt.show()
