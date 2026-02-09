@@ -1,4 +1,4 @@
-
+import random
 import math
 
 class Robot:
@@ -17,20 +17,10 @@ class Robot:
         self.angle = (self.angle + delta_angle) % 360 # de combien est ce que on veut tourner notre robot
     
     def contourner(self):
-        """Tourne jusqu'à trouver une direction libre"""
-        tentatives = 0
-        while tentatives < 8: # On essaie 8 directions (tous les 45°)
-            self.tourner(45)
-            
-            # On vérifie si on peut avancer de 1 unité dans cette direction
-            angle_rad = math.radians(self.angle)
-            test_x = self.x + math.cos(angle_rad)
-            test_y = self.y + math.sin(angle_rad)
-            
-            if self.plateforme.position_valide(test_x, test_y, self.largeur, self.longueur):
-                print(f"Direction trouvée : {self.angle}°")
-                break
-            tentatives += 1
+        """Change de position de manière aléatoire"""
+        angles_possibles = [45, 90, 135, 180, 225, 270]
+        nouvel_angle = random.choice(angles_possibles)
+        self.tourner(nouvel_angle)
     
     def avancer(self, distance):
     
