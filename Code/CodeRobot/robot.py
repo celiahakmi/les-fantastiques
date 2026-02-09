@@ -34,6 +34,9 @@ class Robot:
         else:
             print("Mur ou obsatcle")
 
+    def afficher(self):
+        print(f"Position : ({self.x:.2f}, {self.y:.2f}) , Angle : {self.angle}°")
+
         
     
 
