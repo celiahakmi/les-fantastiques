@@ -8,10 +8,10 @@ class Plateforme:
         self.fig, self.ax = plt.subplots()
         self.obstacles = [] 
 
-    def position_valide(self, robot):
+    def position_valide(self, x, y, largeur, longueur):
         return (
-            0 <= robot.x <= self.taille and
-            0 <= robot.y <= self.taille
+            0 <= x <= self.taille - largeur and
+            0 <= y <= self.taille - longueur
         )
      
     def initialiser_plan(self):
