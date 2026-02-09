@@ -37,7 +37,7 @@ class Robot:
     def afficher(self):
         print(f"Position : ({self.x:.2f}, {self.y:.2f}) , Angle : {self.angle}°")
 
-    def carre(self, cote):
+    def carre(self, cote) :
         """ fait déplacer le robot en carré dans un plan continu"""
         for i in range(4):
             self.avancer(cote)
