@@ -15,7 +15,23 @@ class Robot:
         """ pour faire tourner le robot"""
         
         self.angle = (self.angle + delta_angle) % 360 # de combien est ce que on veut tourner notre robot
-
+    
+    def contourner(self):
+        """Tourne jusqu'à trouver une direction libre"""
+        tentatives = 0
+        while tentatives < 8: # On essaie 8 directions (tous les 45°)
+            self.tourner(45)
+            
+            # On vérifie si on peut avancer de 1 unité dans cette direction
+            angle_rad = math.radians(self.angle)
+            test_x = self.x + math.cos(angle_rad)
+            test_y = self.y + math.sin(angle_rad)
+            
+            if self.plateforme.position_valide(test_x, test_y, self.largeur, self.longueur):
+                print(f"Direction trouvée : {self.angle}°")
+                break
+            tentatives += 1
+    
     def avancer(self, distance):
     
         """pour faire  avancer le robot dans la direction qu'on veut """
@@ -33,6 +49,7 @@ class Robot:
             self.y = new_y
         else:
             print("Mur ou obsatcle")
+            self.contourner()
 
     def afficher(self):
         print(f"Position : ({self.x:.2f}, {self.y:.2f}) , Angle : {self.angle}°")
