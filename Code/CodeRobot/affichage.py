@@ -1,4 +1,5 @@
 import pygame
+import math
 
 class PygameView:
     """Classe permettant d'afficher toute nos fonctions controllant le robot 
