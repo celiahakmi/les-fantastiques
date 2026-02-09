@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 from plateforme import Plateforme
 from robot import Robot
 
