@@ -75,7 +75,7 @@ while running:
     keys = pygame.key.get_pressed()
     # Avancer/reculer
     if keys[pygame.K_UP]:
-        robot.avancer(1.0)   # avancer petit pas
+        robot.avancer(1.0)   # avancer
     if keys[pygame.K_DOWN]:
         robot.avancer(-1.0)  # reculer
 
