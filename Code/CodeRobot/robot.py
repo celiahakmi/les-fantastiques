@@ -12,19 +12,18 @@ class Robot:
         
         
     def tourner(self, delta_angle):
-        """ pour faire tourner le robot"""
+        """ Fait tourner le robot en fonction d'un angle"""
         
         self.angle = (self.angle + delta_angle) % 360 # de combien est ce que on veut tourner notre robot
     
     def contourner(self):
-        """Change de position de manière aléatoire"""
+        """Change la direction du robot de manière aléatoire"""
         angles_possibles = [45, 90, 135, 180, 225, 270]
         nouvel_angle = random.choice(angles_possibles)
         self.tourner(nouvel_angle)
     
     def avancer(self, distance):
-    
-        """pour faire  avancer le robot dans la direction qu'on veut """
+        """Fait avancer le robot dans la direction que l'on veut"""
         
         angle_rad = math.radians(self.angle)
 
@@ -45,7 +44,7 @@ class Robot:
         print(f"Position : ({self.x:.2f}, {self.y:.2f}) , Angle : {self.angle}°")
 
     def carre(self, cote, view=None) :
-        """ fait déplacer le robot en carré dans un plan continu"""
+        """Fait déplacer le robot en carré dans un plan continu"""
         for i in range(4):
             self.avancer(cote)
             self.afficher()
