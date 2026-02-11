@@ -1,64 +1,59 @@
-import matplotlib.pyplot as plt
- 
-from robot import Robot
+import random
+import math
 
-class Plateforme:
-    def __init__(self, taille):
-        self.taille = taille
-        self.fig, self.ax = plt.subplots()
-        self.obstacles = [] 
+class Robot:
+    def __init__(self,x,y,largeur,longueur,angle,plateforme):
+        self.x=x
+        self.y=y
+        self.largeur=largeur
+        self.longueur=longueur
+        self.angle = angle   # position actuelle du robot en degrés
+        self.plateforme = plateforme
+        
+    def tourner(self, delta_angle):
+        """ pour faire tourner le robot"""
+        
+        self.angle = (self.angle + delta_angle) % 360 # de combien est ce que on veut tourner notre robot
+    
+    def contourner(self):
+        """Change de position de manière aléatoire"""
+        angles_possibles = [45, 90, 135, 180, 225, 270]
+        nouvel_angle = random.choice(angles_possibles)
+        self.tourner(nouvel_angle)
+    
+    def avancer(self, distance):
+    
+        """pour faire  avancer le robot dans la direction qu'on veut """
+        
+        angle_rad = math.radians(self.angle)
 
-    def position_valide(self, x, y, largeur, longueur):
-        return self.verifier_position(x, y, largeur, longueur)
+        dx = distance * math.cos(angle_rad) #projection horizontale
+        dy = distance * math.sin(angle_rad) #projection verticale
+
+        new_x = self.x + dx #translation
+        new_y = self.y + dy #translation
+
+        if self.plateforme.verifier_position(new_x, new_y, self.largeur, self.longueur):
+            self.x = new_x
+            self.y = new_y
+        else:
+            print("Mur ou obsatcle")
+            self.contourner()
+
+    def afficher(self):
+        print(f"Position : ({self.x:.2f}, {self.y:.2f}) , Angle : {self.angle}°")
+
+    def carre(self, cote, view=None) :
+        """ fait déplacer le robot en carré dans un plan continu"""
+        for i in range(4):
+            self.avancer(cote)
+            self.afficher()
+            if view is not None:
+                view.dessiner()     
+                pygame.time.delay(400)
+            self.tourner(90)
+
+        
+    
+
    
-    def initialiser_plan(self):
-        """Initialise la plateforme avec une grille"""
-        self.ax.set_xlim(0, self.taille)
-        self.ax.set_ylim(0, self.taille)
-        #Ajouter une grille
-        self.ax.grid(True)
-        
-    def afficher_robot(self, robot):
-        """Afficher le robot dans le plan -> cercle rouge"""
-        self.point, = self.ax.plot(robot.y, robot.x, 'ro')
-        
-    def ajouter_cercle(self, x, y, rayon):
-        self.obstacles.append(("cercle", x, y, rayon))
-
-    def ajouter_carre(self, x, y, cote):
-        self.obstacles.append(("carre", x, y, cote))
-
-    def ajouter_triangle(self, x, y, cote):
-        self.obstacles.append(("triangle", x, y, cote))
-
-    def verifier_position(self, x, y, largeur, hauteur):
-        #Vérification des bords 
-        if x < 0 or y < 0 or x + largeur > self.taille or y + hauteur > self.taille:
-            return False
-
-        for obs in self.obstacles:
-            type_obs = obs[0]
-
-            # collision cercle 
-            if type_obs == "cercle":
-                _, ox, oy, r = obs
-                # Trouver le point sur le rectangle le plus proche du centre du cercle
-                proche_x = max(x, min(ox, x + largeur))
-                proche_y = max(y, min(oy, y + hauteur))
-                
-                # Calculer la distance entre ce point et le centre
-                dist_x = ox - proche_x
-                dist_y = oy - proche_y
-                if (dist_x**2 + dist_y**2) < r**2: 
-                    return False
-
-            #  collision carré triangle 
-            elif type_obs in ["carre", "triangle"]:
-                _, ox, oy, c = obs
-                # Vérifier si deux rectangles se touchent
-                if (x < ox + c and x + largeur > ox and 
-                    y < oy + c and y + hauteur > oy):
-                    return False
-
-        return True
-
