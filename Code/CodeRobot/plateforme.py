@@ -1,4 +1,3 @@
-import matplotlib.pyplot as plt
 from robot import Robot
 
 class Plateforme:
