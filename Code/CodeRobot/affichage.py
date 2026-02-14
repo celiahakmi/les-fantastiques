@@ -46,27 +46,18 @@ class PygameView:
             )
        
         for obs in self.plateforme.obstacles:
-            #cercle (surface, couleur, centre, rayon)
-            if obs[0] == "cercle":
-                _, x, y, r = obs
-                pygame.draw.circle(self.fenetre, (212, 115, 212),(int(x*self.TAILLE_PIXEL), int(y*self.TAILLE_PIXEL)),int(r*self.TAILLE_PIXEL))
-
-            #carre (surface, couleur, C)
-            elif obs[0] == "carre":
-                _, x, y, c = obs
-                # C = (x, y, largeur, hauteur) multiplié par la taille des pixels
-                pygame.draw.rect(self.fenetre, (135, 233, 144),(x*self.TAILLE_PIXEL, y*self.TAILLE_PIXEL,c*self.TAILLE_PIXEL,c*self.TAILLE_PIXEL))
-
-            #triangle(surface, couleur, points)
-            elif obs[0] == "triangle":
-                _, x, y, c = obs
-                # Calcul des 3 sommets du triangle en fonction de la taille 'c'
-                points = [(x*self.TAILLE_PIXEL, y*self.TAILLE_PIXEL),((x+c)*self.TAILLE_PIXEL, y*self.TAILLE_PIXEL),((x+c/2)*self.TAILLE_PIXEL, (y-c)*self.TAILLE_PIXEL)]
-                pygame.draw.polygon(self.fenetre,(253, 108, 158), points)
+            # On dépaquette 5 valeurs : type, x, y, largeur, hauteur
+            # On utilise _ pour le type car on sait que c'est un rectangle
+            _, x, y, l, h = obs 
+            
+            pygame.draw.rect(
+                self.fenetre,
+                (135, 233, 144), # Ta couleur verte
+                (x * self.TAILLE_PIXEL, y * self.TAILLE_PIXEL, l * self.TAILLE_PIXEL, h * self.TAILLE_PIXEL)
+            )
 
         # Création d'une surface pour le robot
-        surface = pygame.Surface((self.robot.largeur * self.TAILLE_PIXEL,
-                          self.robot.longueur * self.TAILLE_PIXEL))
+        surface = pygame.Surface((self.robot.largeur * self.TAILLE_PIXEL, self.robot.longueur * self.TAILLE_PIXEL), pygame.SRCALPHA) # Ajout de SRCALPHA pour la transparence
         surface.fill((0, 0, 255))  # rectangle bleu (0, 0, 255 = formabt RGB : bleu)
 
         # Rotation selon l'angle du robot
@@ -96,7 +87,7 @@ class PygameView:
         #on dessine le vecteur après l'avoir crée 
         pygame.draw.line(
             self.fenetre,
-            (255,0,0), #couleur=rouge
+            (255,0,0), #couleur=rouge=
             (x1,y1),
             (x2,y2),
             3 #épaisseur de la ligne
@@ -108,5 +99,3 @@ class PygameView:
 
 
     
-
-
