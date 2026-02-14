@@ -10,11 +10,9 @@ class Robot:
         self.angle = angle   # position actuelle du robot en degrés
         self.plateforme = plateforme
         
-        
     def tourner(self, delta_angle):
         """ Fait tourner le robot en fonction d'un angle"""
-        
-        self.angle = (self.angle + delta_angle) % 360 # de combien est ce que on veut tourner notre robot
+        self.angle = (self.angle + delta_angle) % 360 #de combien est ce que on veut tourner notre robot
     
     def contourner(self):
         """Change la direction du robot de manière aléatoire"""
