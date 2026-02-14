@@ -33,7 +33,7 @@ class Robot:
         new_x = self.x + dx #translation
         new_y = self.y + dy #translation
 
-        if self.plateforme.position_valide(new_x, new_y, self.largeur, self.longueur):
+        if self.plateforme.verifier_position(new_x, new_y, self.largeur, self.longueur):
             self.x = new_x
             self.y = new_y
         else:
