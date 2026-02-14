@@ -40,17 +40,11 @@ class Robot:
             print("Mur ou obsatcle")
             self.contourner()
 
-    def afficher(self):
-        print(f"Position : ({self.x:.2f}, {self.y:.2f}) , Angle : {self.angle}°")
 
-    def carre(self, cote, view=None) :
-        """Fait déplacer le robot en carré dans un plan continu"""
+    def carre(self, cote):
+        """ fait déplacer le robot en carré dans un plan continu"""
         for i in range(4):
             self.avancer(cote)
-            self.afficher()
-            if view is not None:
-                view.dessiner()     
-                pygame.time.delay(400)
             self.tourner(90)
 
         
