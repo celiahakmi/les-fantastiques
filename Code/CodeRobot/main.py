@@ -7,11 +7,13 @@ from affichage import PygameView
 plateforme = Plateforme(taille=20)
 
 #Obstacles prédéfinis
-plateforme.ajouter_cercle(4, 4, 2)
-plateforme.ajouter_carre(16, 4, 3)
-plateforme.ajouter_triangle(10, 10, 3)
+plateforme.ajouter_rectangle(16, 4, 3, 3)
+plateforme.ajouter_rectangle(2, 2, 2, 7)
+plateforme.ajouter_rectangle(16, 16, 5, 5)
+
 
 #Paramètre du robot
+# position minimale est x = 1.0 et y = 0.5
 x = float(input("Position initiale x du robot : "))
 y = float(input("Position initiale y du robot : "))
 angle = float(input("Angle initial du robot (en degrés) : "))
@@ -25,7 +27,7 @@ robot = Robot(
     plateforme=plateforme
 )
 
-# configuration  de Pygame et la View
+# configuration de Pygame et la View
 pygame.init()
 view = PygameView(plateforme, robot, TAILLE_PIXEL=40)
 #longueur d'un coté du carré
