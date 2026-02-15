@@ -2,13 +2,26 @@ import random
 import math
 
 class Robot:
-    def __init__(self,x,y,largeur,longueur,angle,plateforme):
-        self.x=x
-        self.y=y
-        self.largeur=largeur
-        self.longueur=longueur
-        self.angle = angle   # position actuelle du robot en degrés
+    def __init__(self,x,y,largeur, theta_deg, width, height,wheel_base, plateforme,vmax=4.0, amax=10.0):
+        self.x = float(x)
+        self.y = float(y)
+        self.theta = math.radians(theta_deg)
+
+        self.width = float(width)
+        self.height = float(height)
+
+        self.L = float(wheel_base)
         self.plateforme = plateforme
+
+        self.vmax = float(vmax)
+        self.amax = float(amax)
+
+        self.vL = 0.0
+        self.vR = 0.0
+        self.target_vL = 0.0
+        self.target_vR = 0.0
+
+        self.range = None
         
     def tourner(self, delta_angle):
         """ Fait tourner le robot en fonction d'un angle"""
