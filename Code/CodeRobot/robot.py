@@ -47,7 +47,7 @@ class Robot:
         self.target_vR = max(-self.vmax, min(self.vmax, float(vR)))
 
     def _approach(self, cur: float, target: float, max_delta: float):
-        """ 
+        """ Cette fonction permet de faire varier une valeur petit à petit vers une cible, sans la changer brutalement d’un coup.
             - cur = valeur actuelle
             - target = valeur cible 
             - max_delta = variation maximale autorisé"""
