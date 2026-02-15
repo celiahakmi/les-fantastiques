@@ -51,9 +51,11 @@ class PygameView:
             )
        
         for obs in self.plateforme.obstacles:
-            # On dépaquette 5 valeurs : type, x, y, largeur, hauteur
-            # On utilise _ pour le type car on sait que c'est un rectangle
-            _, x, y, l, h = obs 
+            t = obs[0]                        
+            if t != "rect":                  
+                continue
+            _, x, y, w, h = obs                
+            rect = pygame.Rect(x * self.TAILLE_PIXEL, y * self.TAILLE_PIXEL,w * self.TAILLE_PIXEL,h * self.TAILLE_PIXEL)
             
             pygame.draw.rect(
                 self.fenetre,
