@@ -5,25 +5,20 @@ class Plateforme:
         self.taille = taille
         self.obstacles = [] 
    
-    def ajouter_rectangle(self, x, y, cote1, cote2):
-        self.obstacles.append(("carre", x, y, cote1, cote2))
+    def ajouter_rectangle(self, x, y, w, h):
+        self.obstacles.append(("rect", float(x), float(y), float(w), float(h)))
 
-    def verifier_position(self, x, y, largeur, hauteur):
-        # On calcule les bords en partant du centre
-        gauche = x - (largeur / 2)
-        droite = x + (largeur / 2)
-        haut = y - (hauteur / 2)
-        bas = y + (hauteur / 2)
 
-        # Vérification des bords de la plateforme
-        if gauche < 0 or haut < 0 or droite > self.taille or bas > self.taille:
-            return False
+    def collision_rectangle(self, x, y, w, h):
+        # bords
+        if x < 0 or y < 0 or x + w > self.taille or y + h > self.taille:
+            return True
 
-        # Vérification des obstacles
-        for obs in self.obstacles:
-            _, ox, oy, o_l, o_h = obs
-            
-            # Collision ajustée au centre du robot
-            if (gauche < ox + o_l and droite > ox and haut < oy + o_h and bas > oy):
-                return False
-        return True
+        # obstacles
+        for _, ox, oy, ow, oh in self.obstacles:
+            if (x < ox + ow and x + w > ox and
+                y < oy + oh and y + h > oy):
+                return True
+        return False
+
+        
