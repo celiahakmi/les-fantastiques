@@ -41,13 +41,23 @@ class Robot:
         self.range = self.plateforme.distance_jusqua_obstacle( center_x, center_y, self.theta, max_range=max_range, step=0.02,marge=marge )
         return self.range()
 
+    
+    def step(self, dt):
+        dt = min(dt, 0.05)
 
-    def carre(self, cote):
-        """ fait déplacer le robot en carré dans un plan continu"""
-        for i in range(4):
-            self.avancer(cote)
-            self.tourner(90)
+        max_delta = self.amax * dt
+        self.vL = self._approach(self.vL, self.target_vL, max_delta)
+        self.vR = self._approach(self.vR, self.target_vR, max_delta)
+         v = (self.vR + self.vL) / 2.0
+        omega = (self.vR - self.vL) / self.L
 
+        dist = abs(v) * dt
+        step_max = 0.03
+        n = max(1, int(dist / step_max) + 1)
+        sub_dt = dt / n
+
+
+       
         
     
 
