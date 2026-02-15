@@ -37,7 +37,7 @@ class PygameView:
         for i in range(self.plateforme.taille + 1): # dessin des lignes verticales
             pygame.draw.line(
                 self.fenetre,
-                (0, 0, 0),
+                (220, 220, 220),
                 (i * self.TAILLE_PIXEL, 0),
                 (i * self.TAILLE_PIXEL, self.plateforme.taille * self.TAILLE_PIXEL)
             )
@@ -45,7 +45,7 @@ class PygameView:
 
             pygame.draw.line(
                 self.fenetre,
-                (0, 0, 0),
+                (220, 220, 220),
                 (0, j * self.TAILLE_PIXEL),
                 (self.plateforme.taille * self.TAILLE_PIXEL, j * self.TAILLE_PIXEL)
             )
