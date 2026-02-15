@@ -76,9 +76,12 @@ while running:
             mean = 0
             robot.vL = 0
             robot.vR = 0
-        
-       
+        vL = mean - diff
+        vR = mean + diff
 
-    view.dessiner()
+        robot.set_wheel_targets(vL, vR)
+        robot.step(dt)   
+
+        view.dessiner()
 
 pygame.quit()
