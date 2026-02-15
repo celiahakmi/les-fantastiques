@@ -65,6 +65,10 @@ while running:
             turn = -1
         vL = forward * base_speed - turn * turn_speed
         vR = forward * base_speed + turn * turn_speed
+        if not brake and d <= d_stop:
+            brake = True
+        elif brake and d >= d_go:
+            brake = False
 
         
        
