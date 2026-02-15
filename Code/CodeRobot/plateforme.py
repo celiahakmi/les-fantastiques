@@ -16,9 +16,23 @@ class Plateforme:
 
         # obstacles
         for _, ox, oy, ow, oh in self.obstacles:
-            if (x < ox + ow and x + w > ox and
-                y < oy + oh and y + h > oy):
+            if (x < ox + ow and x + w > ox and y < oy + oh and y + h > oy):
                 return True
         return False
 
-        
+    #capteur de distance
+    def distance_jusqua_obstacle(self, x, y, angle, max_range=10.0,step=0.02,marge=0.0):
+        d = 0.0
+        while d <= max_range:
+            px = x + d * math.cos(angle)
+            py = y + d * math.sin(angle)
+            # bords (avec marge)
+            if px < marge or py < marge or px > self.taille - marge or py > self.taille - marge:
+                return d
+            # obstacles (avec marge)
+            for _, ox, oy, ow, oh in self.obstacles:
+                if (ox - marge) <= px <= (ox + ow + marge) and (oy - marge) <= py <= (oy + oh + marge):
+                    return d
+            d += step
+        return max_range
+
