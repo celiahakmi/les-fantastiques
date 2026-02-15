@@ -3,7 +3,9 @@ import math
 
 class PygameView:
 
-    def __init__(self, plateforme, robot, TAILLE_PIXEL=40):
+    def __init__(self, plateforme, robot, TAILLE_PIXEL: int=40):
+        """ initialise la fenêtre graphique"""
+
         self.plateforme = plateforme      
         self.robot = robot                
         self.TAILLE_PIXEL = int(TAILLE_PIXEL)  
@@ -14,10 +16,12 @@ class PygameView:
         pygame.display.set_caption("Simulation robot diff-drive")  
         self.horloge = pygame.time.Clock()                   
 
-    def to_px(self, x, y):
+    def to_px(self, x: float, y: float):
+        """ Transforme une position sur la plateforme en position en pixels pour l’affichage."""
         return (int(x * self.TAILLE_PIXEL), int(y * self.TAILLE_PIXEL)) 
 
     def dessiner(self):
+        """met à jour l'affichage complet de la simulation"""
         self.fenetre.fill((255, 255, 255))  
 
         # Grille
