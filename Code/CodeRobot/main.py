@@ -1,4 +1,3 @@
-# main.py
 import pygame
 from plateforme import Plateforme
 from robot import Robot
