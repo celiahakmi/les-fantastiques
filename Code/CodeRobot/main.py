@@ -1,25 +1,22 @@
+# main.py
 import pygame
 from plateforme import Plateforme
-from robot import Robot 
+from robot import Robot
 from affichage import PygameView
 
 
 def main():
     pygame.init()
-    #Création de la plateforme
-    plateforme = Plateforme(taille=20)
-    
-    #Obstacles prédéfinis
-    plateforme.ajouter_rectangle(16, 4, 3, 3)
-    plateforme.ajouter_rectangle(2, 2, 2, 7)
-    plateforme.ajouter_rectangle(16, 16, 5, 5)
 
+    plateforme = Plateforme(20)
 
-    #Paramètre du robot
-    # position minimale est x = 1.0 et y = 0.5
-    x = float(input("Position initiale x du robot : "))
-    y = float(input("Position initiale y du robot : "))
-    angle = float(input("Angle initial du robot (en degrés) : "))
+    plateforme.ajouter_rectangle(2, 2, 3, 7)
+    plateforme.ajouter_rectangle(12, 4, 4, 3)
+    plateforme.ajouter_rectangle(8, 14, 6, 2)
+
+    x = float(input("Position x : "))
+    y = float(input("Position y : "))
+    angle = float(input("Angle (degrés) : "))
 
     robot = Robot(
         x=x,
@@ -31,18 +28,19 @@ def main():
         plateforme=plateforme
     )
 
+    view = PygameView(plateforme, robot, 40)
 
-view = PygameView(plateforme, robot, TAILLE_PIXEL=40)
-d_stop = 0.05
-d_go = 0.08
-brake = False
-base_speed = 3
-turn_speed = 2
+    d_stop = 0.05
+    d_go = 0.08
+    brake = False
 
-# Boucle principale 
-running = True
-while running:
-   dt = view.horloge.tick(60) / 1000
+    base_speed = 3
+    turn_speed = 2
+
+    running = True
+    while running:
+
+        dt = view.horloge.tick(60) / 1000
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -63,12 +61,15 @@ while running:
             turn = 1
         if keys[pygame.K_RIGHT]:
             turn = -1
+
         vL = forward * base_speed - turn * turn_speed
         vR = forward * base_speed + turn * turn_speed
+
         if not brake and d <= d_stop:
             brake = True
         elif brake and d >= d_go:
             brake = False
+
         mean = (vL + vR) / 2
         diff = (vR - vL) / 2
 
@@ -76,15 +77,22 @@ while running:
             mean = 0
             robot.vL = 0
             robot.vR = 0
+
         vL = mean - diff
         vR = mean + diff
 
         robot.set_wheel_targets(vL, vR)
-        robot.step(dt)   
+        robot.step(dt)
 
         view.dessiner()
 
     pygame.quit()
 
+
 if __name__ == "__main__":
     main()
+
+
+
+
+
