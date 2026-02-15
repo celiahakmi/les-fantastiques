@@ -7,6 +7,14 @@ class Robot:
                  plateforme,
                  vmax=4.0,
                  amax=10.0):
+        """ Modélisation du robot :
+            - coordonnées x et y 
+            - theta_deg : orientation en degré
+            - largeur et hauteur : dimension du robot
+            - dist_roue : distance entre les roues
+            - vmax : vitesse max d'une roue 
+            - amax : accélération maximale d'une roue
+            """
 
         # x,y = coin haut-gauche du rectangle robot
         self.x = float(x)
