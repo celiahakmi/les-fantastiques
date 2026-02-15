@@ -69,7 +69,13 @@ while running:
             brake = True
         elif brake and d >= d_go:
             brake = False
+        mean = (vL + vR) / 2
+        diff = (vR - vL) / 2
 
+        if brake and mean > 0:
+            mean = 0
+            robot.vL = 0
+            robot.vR = 0
         
        
 
