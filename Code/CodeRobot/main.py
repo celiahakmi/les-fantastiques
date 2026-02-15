@@ -31,11 +31,13 @@ def main():
         plateforme=plateforme
     )
 
-# configuration de Pygame et la View
-pygame.init()
+
 view = PygameView(plateforme, robot, TAILLE_PIXEL=40)
-#longueur d'un coté du carré
-carre_cote = 3 
+d_stop = 0.05
+d_go = 0.08
+brake = False
+base_speed = 3
+turn_speed = 2
 
 # Boucle principale 
 running = True
