@@ -97,7 +97,7 @@ class PygameView:
             pygame.draw.circle(self.fenetre, (0, 0, 0), (xrp, yrp), 4)
     
 
-        pygame.display.flip() #Actualisation de l'affichage
+    pygame.display.flip() #Actualisation de l'affichage
 
 
 
