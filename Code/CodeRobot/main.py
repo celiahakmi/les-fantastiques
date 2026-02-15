@@ -8,11 +8,11 @@ def main():
     pygame.init()
 
     plateforme = Plateforme(20)
-
+    #obstacles
     plateforme.ajouter_rectangle(2, 2, 3, 7)
     plateforme.ajouter_rectangle(12, 4, 4, 3)
     plateforme.ajouter_rectangle(8, 14, 6, 2)
-
+    #paramètre initiaux 
     x = float(input("Position x : "))
     y = float(input("Position y : "))
     angle = float(input("Angle (degrés) : "))
@@ -28,7 +28,7 @@ def main():
     )
 
     view = PygameView(plateforme, robot, 40)
-
+    #paramètre capteurs 
     d_stop = 0.05
     d_go = 0.08
     brake = False
