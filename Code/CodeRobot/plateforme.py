@@ -1,14 +1,17 @@
 import math
 
 class Plateforme:
-    def __init__(self, taille):
+    def __init__(self, taille: float):
+        """initialise le plan continu"""
         self.taille = float(taille)
         self.obstacles = []  
 
-    def ajouter_rectangle(self, x, y, w, h):
+    def ajouter_rectangle(self, x: float, y:float, w:float , h:float):
+        """ajoute un obstacle rectangulaire"""
         self.obstacles.append(("rect", float(x), float(y), float(w), float(h)))
    
-    def collision_rectangle(self, x, y, w, h):
+    def collision_rectangle(self, x: float, y:float, w:float , h:float):
+        """vérifie si un rectangle est en collision avec un mur ou un obstacle"""
         # bords
         if x < 0 or y < 0 or x + w > self.taille or y + h > self.taille:
             return True
@@ -21,7 +24,8 @@ class Plateforme:
         return False
 
     # Capteur distance 
-    def distance_jusqua_obstacle(self, x, y, angle, max_range=10.0,step=0.02,marge=0.0):
+    def distance_jusqua_obstacle(self, x:float, y:float, angle:float , max_range: float =10.0,step: float =0.02,marge: float =0.0):
+        """ retourne la distance jusqu'au premier obstacle ou mur detecté"""
         d = 0.0
         while d <= max_range:
             px = x + d * math.cos(angle)
