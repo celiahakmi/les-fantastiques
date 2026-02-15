@@ -23,10 +23,10 @@ class Robot:
 
         self.range = None
         
-    def tourner(self, delta_angle):
-        """ Fait tourner le robot en fonction d'un angle"""
-        self.angle = (self.angle + delta_angle) % 360 #de combien est ce que on veut tourner notre robot
-    
+    def set_wheel_targets(self, vL, vR):
+        self.target_vL = max(-self.vmax, min(self.vmax, float(vL)))
+        self.target_vR = max(-self.vmax, min(self.vmax, float(vR)))
+        
     def contourner(self):
         """Change la direction du robot de manière aléatoire"""
         angles_possibles = [45, 90, 135, 180, 225, 270]
