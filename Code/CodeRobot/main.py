@@ -42,58 +42,30 @@ turn_speed = 2
 # Boucle principale 
 running = True
 while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                # Déplacement carré étape par étape
-                robot.avancer(carre_cote)
-                view.dessiner()
-                pygame.time.delay(400)
+   dt = view.horloge.tick(60) / 1000
 
-                robot.tourner(90)
-                view.dessiner()
-                pygame.time.delay(400)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
 
-                robot.avancer(carre_cote)
-                view.dessiner()
-                pygame.time.delay(400)
+        keys = pygame.key.get_pressed()
 
-                robot.tourner(90)
-                view.dessiner()
-                pygame.time.delay(400)
+        d = robot.scan_distance()
 
-                robot.avancer(carre_cote)
-                view.dessiner()
-                pygame.time.delay(400)
+        forward = 0
+        turn = 0
 
-                robot.tourner(90)
-                view.dessiner()
-                pygame.time.delay(400)
+        if keys[pygame.K_UP]:
+            forward = 1
+        if keys[pygame.K_DOWN]:
+            forward = -1
+        if keys[pygame.K_LEFT]:
+            turn = 1
+        if keys[pygame.K_RIGHT]:
+            turn = -1
 
-                robot.avancer(carre_cote)
-                view.dessiner()
-                pygame.time.delay(400)
-
-                robot.tourner(90)
-                view.dessiner()
-                pygame.time.delay(400)
-            
-    keys = pygame.key.get_pressed()
-    # Avancer/reculer
-    if keys[pygame.K_UP]:
-        robot.avancer(1.0)   # avancer
-    if keys[pygame.K_DOWN]:
-        robot.avancer(-1.0)  # reculer
-
-    # Tourner
-    if keys[pygame.K_LEFT]:
-        robot.tourner(-5)    # tourner 5° à gauche
-    if keys[pygame.K_RIGHT]:
-        robot.tourner(5)     # tourner 5° à droite
+       
 
     view.dessiner()
-    view.horloge.tick(30)
 
 pygame.quit()
