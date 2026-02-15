@@ -32,23 +32,14 @@ class Robot:
             return min(target, cur + max_delta)
         return max(target, cur - max_delta)
         
-    def avancer(self, distance):
-        """Fait avancer le robot dans la direction que l'on veut"""
-        
-        angle_rad = math.radians(self.angle)
+   # Capteur: on le lance depuis le CENTRE du robot
+    def scan_distance(self, max_range=10.0):
+        center_x = self.x + self.width / 2.0
+        center_y = self.y + self.height / 2.0
+        marge = 0.5 * math.sqrt(self.width**2 + self.height**2)
 
-        dx = distance * math.cos(angle_rad) #projection horizontale
-        dy = distance * math.sin(angle_rad) #projection verticale
-
-        new_x = self.x + dx #translation
-        new_y = self.y + dy #translation
-
-        if self.plateforme.verifier_position(new_x, new_y, self.largeur, self.longueur):
-            self.x = new_x
-            self.y = new_y
-        else:
-            print("Mur ou obsatcle")
-            self.contourner()
+        self.range = self.plateforme.distance_jusqua_obstacle( center_x, center_y, self.theta, max_range=max_range, step=0.02,marge=marge )
+        return self.range()
 
 
     def carre(self, cote):
