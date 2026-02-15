@@ -63,7 +63,10 @@ while running:
             turn = 1
         if keys[pygame.K_RIGHT]:
             turn = -1
+        vL = forward * base_speed - turn * turn_speed
+        vR = forward * base_speed + turn * turn_speed
 
+        
        
 
     view.dessiner()
