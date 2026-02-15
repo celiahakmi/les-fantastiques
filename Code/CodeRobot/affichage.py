@@ -71,38 +71,18 @@ class PygameView:
         surf_w = int(self.robot.width * self.TAILLE_PIXEL)
         surf_h = int(self.robot.height * self.TAILLE_PIXEL)
 
-        # Rotation selon l'angle du robot
-        rotated_surface = pygame.transform.rotate(surface, -self.robot.angle)
+        robot_surf = pygame.Surface((surf_w, surf_h), pygame.SRCALPHA)
+        robot_surf.fill((0, 0, 255))  
 
-        # Calcul du rectangle après rotation
-        rect = rotated_surface.get_rect(center=(self.robot.x * self.TAILLE_PIXEL,
-                                       self.robot.y * self.TAILLE_PIXEL))
+     # Rotation 
+        angle_deg = -math.degrees(self.robot.theta)
+        rotated = pygame.transform.rotate(robot_surf, angle_deg)
 
-        # Affichage du robot tourné
-        self.fenetre.blit(rotated_surface, rect.topleft)
-        
-
-        #création et affichage du vecteur de déplacement
-
-        #position de départ
-        x1= self.robot.x * self.TAILLE_PIXEL
-        y1= self.robot.y * self.TAILLE_PIXEL
-
-        longueur=40 #longueur qui sera affichée à l'écran
-        angle_radian= math.radians(self.robot.angle) #on convertit l'angle en radians
-
-        #point d'arrivée 
-        x2= x1+longueur*math.cos(angle_radian)
-        y2= y1 +longueur*math.sin(angle_radian)
-
-        #on dessine le vecteur après l'avoir crée 
-        pygame.draw.line(
-            self.fenetre,
-            (255,0,0), #couleur=rouge=
-            (x1,y1),
-            (x2,y2),
-            3 #épaisseur de la ligne
-        )
+     # placer le rectangle tourné au centre
+        rect_rot = rotated.get_rect(center=(cx, cy))
+        self.fenetre.blit(rotated, rect_rot.topleft)
+    
+    
 
         pygame.display.flip() #Actualisation de l'affichage
 
