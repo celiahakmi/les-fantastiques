@@ -21,14 +21,15 @@ def main():
     y = float(input("Position initiale y du robot : "))
     angle = float(input("Angle initial du robot (en degrés) : "))
 
-robot = Robot(
-    x=x,
-    y=y,
-    largeur=2,
-    longueur=1,
-    angle=angle,
-    plateforme=plateforme
-)
+    robot = Robot(
+        x=x,
+        y=y,
+        theta_deg=angle,
+        width=2.0,
+        height=1.2,
+        wheel_base=2.0,
+        plateforme=plateforme
+    )
 
 # configuration de Pygame et la View
 pygame.init()
