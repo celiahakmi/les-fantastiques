@@ -20,11 +20,11 @@ class PygameView:
         h = int(self.plateforme.taille * self.TAILLE_PIXEL)
         self.fenetre = pygame.display.set_mode((int(plateforme.taille * TAILLE_PIXEL), int(plateforme.taille * TAILLE_PIXEL)))
         pygame.display.set_caption("Plateforme Continue")  # Nom de la fenêtre
-        self.horloge = pygame.time.Clock()
-
-
         self.horloge = pygame.time.Clock()  # Horloge pour contrôler le FPS (régulation du temps d'affichage)
 
+    def to_px(self, x, y):
+            return (int(x * self.TAILLE_PIXEL), int(y * self.TAILLE_PIXEL))
+        
     def dessiner(self):
         """fonction permettant de dessiner la plateforme dans la fenêtre Pygame en plusieurs étapes : 
             - Remplit le fond en blanc
