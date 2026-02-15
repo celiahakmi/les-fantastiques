@@ -13,8 +13,11 @@ class PygameView:
         self.plateforme = plateforme   # plateforme = notre plan continu avec la grille
         self.robot = robot 
         self.TAILLE_PIXEL = TAILLE_PIXEL  # Taille d'une case en pixels
+        
 
         # Création de la fenêtre Pygame
+        w = int(self.plateforme.taille * self.TAILLE_PIXEL)
+        h = int(self.plateforme.taille * self.TAILLE_PIXEL)
         self.fenetre = pygame.display.set_mode((int(plateforme.taille * TAILLE_PIXEL), int(plateforme.taille * TAILLE_PIXEL)))
         pygame.display.set_caption("Plateforme Continue")  # Nom de la fenêtre
 
