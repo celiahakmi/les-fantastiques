@@ -27,12 +27,11 @@ class Robot:
         self.target_vL = max(-self.vmax, min(self.vmax, float(vL)))
         self.target_vR = max(-self.vmax, min(self.vmax, float(vR)))
         
-    def contourner(self):
-        """Change la direction du robot de manière aléatoire"""
-        angles_possibles = [45, 90, 135, 180, 225, 270]
-        nouvel_angle = random.choice(angles_possibles)
-        self.tourner(nouvel_angle)
-    
+    def _approach(self, cur, target, max_delta):
+        if target > cur:
+            return min(target, cur + max_delta)
+        return max(target, cur - max_delta)
+        
     def avancer(self, distance):
         """Fait avancer le robot dans la direction que l'on veut"""
         
