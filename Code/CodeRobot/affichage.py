@@ -81,7 +81,13 @@ class PygameView:
      # placer le rectangle tourné au centre
         rect_rot = rotated.get_rect(center=(cx, cy))
         self.fenetre.blit(rotated, rect_rot.topleft)
-    
+   
+    # Flèche direction rouge depuis le centre
+        L = 1.2  # longueur en unités monde
+        x2 = center_x + L * math.cos(self.robot.theta)
+        y2 = center_y + L * math.sin(self.robot.theta)
+        x2p, y2p = self.to_px(x2, y2)
+        pygame.draw.line(self.fenetre, (255, 0, 0), (cx, cy), (x2p, y2p), 3)
     
 
         pygame.display.flip() #Actualisation de l'affichage
