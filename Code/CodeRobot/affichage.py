@@ -88,6 +88,13 @@ class PygameView:
         y2 = center_y + L * math.sin(self.robot.theta)
         x2p, y2p = self.to_px(x2, y2)
         pygame.draw.line(self.fenetre, (255, 0, 0), (cx, cy), (x2p, y2p), 3)
+
+    if self.robot.range is not None:
+            xr = center_x + self.robot.range * math.cos(self.robot.theta)
+            yr = center_y + self.robot.range * math.sin(self.robot.theta)
+            xrp, yrp = self.to_px(xr, yr)
+            pygame.draw.line(self.fenetre, (0, 0, 0), (cx, cy), (xrp, yrp), 2)
+            pygame.draw.circle(self.fenetre, (0, 0, 0), (xrp, yrp), 4)
     
 
         pygame.display.flip() #Actualisation de l'affichage
