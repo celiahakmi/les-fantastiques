@@ -1,13 +1,13 @@
 import math
 
 class Robot:
-    def __init__(self, x, y, theta_deg,
-                 width, height,
-                 wheel_base,
+    def __init__(self, x: float, y: float, theta_deg: float,
+                 width: float, height: float,
+                 wheel_base:float,
                  plateforme,
-                 vmax=4.0,
-                 amax=10.0):
-        """ Modélisation du robot :
+                 vmax: float =4.0,
+                 amax: float =10.0):
+        """ Initialisation du robot :
             - coordonnées x et y 
             - theta_deg : orientation en degré
             - largeur et hauteur : dimension du robot
@@ -29,19 +29,28 @@ class Robot:
 
         self.vmax = float(vmax)
         self.amax = float(amax)
-
-        self.vL = 0.0
-        self.vR = 0.0
-        self.target_vL = 0.0
-        self.target_vR = 0.0
+        # vitesses actuelles des roues
+        self.vL: float = 0.0
+        self.vR: float = 0.0
+        # vitesses cibles    
+        self.target_vL: float= 0.0
+        self.target_vR: float = 0.0
 
         self.range = None
 
-    def set_wheel_targets(self, vL, vR):
+    def set_wheel_targets(self, vL: float, vR: float):
+        """ définit les vitesses cibles des roues
+            vl : vitesse cible roue gauche
+            vr : vitesse cible roue droite 
+        """
         self.target_vL = max(-self.vmax, min(self.vmax, float(vL)))
         self.target_vR = max(-self.vmax, min(self.vmax, float(vR)))
 
-    def _approach(self, cur, target, max_delta):
+    def _approach(self, cur: float, target: float, max_delta: float):
+        """ 
+            - cur = valeur actuelle
+            - target = valeur cible 
+            - max_delta = variation maximale autorisé"""
         if target > cur:
             return min(target, cur + max_delta)
         return max(target, cur - max_delta)
