@@ -55,9 +55,12 @@ class Robot:
             return min(target, cur + max_delta)
         return max(target, cur - max_delta)
 
-    def scan_distance(self, max_range=10.0):
+    def scan_distance(self, max_range: float=10.0):
+        """capteur de distance à l'avant du robot sous la forme d'un rayon
+            max range : portée maximale du capteur"""
         center_x = self.x + self.width / 2.0
         center_y = self.y + self.height / 2.0
+        #marge : rayon du cercle englobant le rectangle
         marge = 0.5 * math.sqrt(self.width**2 + self.height**2)
 
         self.range = self.plateforme.distance_jusqua_obstacle(
@@ -68,7 +71,8 @@ class Robot:
         )
         return self.range
 
-    def step(self, dt):
+    def step(self, dt: float):
+        """ la fonction permet de mettre à jour l'état du robot sur un pas de temps (dt)"""
         dt = min(dt, 0.05)
 
         # accélération limitée
@@ -88,11 +92,11 @@ class Robot:
             new_theta = self.theta + omega * sub_dt
             new_x = self.x + v * math.cos(self.theta) * sub_dt
             new_y = self.y + v * math.sin(self.theta) * sub_dt
-
+            #gestion des collision 
             if not self.plateforme.collision_rectangle(new_x, new_y, self.width, self.height):
                 self.x, self.y, self.theta = new_x, new_y, new_theta
             else:
-                # stop net
+                # stop net si collision
                 self.vL = 0.0
                 self.vR = 0.0
                 break
