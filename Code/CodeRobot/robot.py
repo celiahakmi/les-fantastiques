@@ -56,7 +56,18 @@ class Robot:
         n = max(1, int(dist / step_max) + 1)
         sub_dt = dt / n
 
+    for _ in range(n):
+            new_theta = self.theta + omega * sub_dt
+            new_x = self.x + v * math.cos(self.theta) * sub_dt
+            new_y = self.y + v * math.sin(self.theta) * sub_dt
 
+            if not self.plateforme.collision_rectangle(new_x, new_y, self.width, self.height):
+                self.x, self.y, self.theta = new_x, new_y, new_theta
+            else:
+                self.vL = 0.0
+                self.vR = 0.0
+                break
+    
        
         
     
