@@ -66,10 +66,10 @@ class PygameView:
         # Création d'une surface pour le robot
         center_x = self.robot.x + self.robot.width / 2
         center_y = self.robot.y + self.robot.height / 2
-        
         cx, cy = self.to_px(center_x, center_y)
-        surface = pygame.Surface((self.robot.largeur * self.TAILLE_PIXEL, self.robot.longueur * self.TAILLE_PIXEL), pygame.SRCALPHA) # Ajout de SRCALPHA pour la transparence
-        surface.fill((0, 0, 255))  # rectangle bleu (0, 0, 255 = formabt RGB : bleu)
+
+        surf_w = int(self.robot.width * self.TAILLE_PIXEL)
+        surf_h = int(self.robot.height * self.TAILLE_PIXEL)
 
         # Rotation selon l'angle du robot
         rotated_surface = pygame.transform.rotate(surface, -self.robot.angle)
