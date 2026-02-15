@@ -3,20 +3,23 @@ from plateforme import Plateforme
 from robot import Robot 
 from affichage import PygameView
 
-#Création de la plateforme
-plateforme = Plateforme(taille=20)
 
-#Obstacles prédéfinis
-plateforme.ajouter_rectangle(16, 4, 3, 3)
-plateforme.ajouter_rectangle(2, 2, 2, 7)
-plateforme.ajouter_rectangle(16, 16, 5, 5)
+def main():
+    pygame.init()
+    #Création de la plateforme
+    plateforme = Plateforme(taille=20)
+    
+    #Obstacles prédéfinis
+    plateforme.ajouter_rectangle(16, 4, 3, 3)
+    plateforme.ajouter_rectangle(2, 2, 2, 7)
+    plateforme.ajouter_rectangle(16, 16, 5, 5)
 
 
-#Paramètre du robot
-# position minimale est x = 1.0 et y = 0.5
-x = float(input("Position initiale x du robot : "))
-y = float(input("Position initiale y du robot : "))
-angle = float(input("Angle initial du robot (en degrés) : "))
+    #Paramètre du robot
+    # position minimale est x = 1.0 et y = 0.5
+    x = float(input("Position initiale x du robot : "))
+    y = float(input("Position initiale y du robot : "))
+    angle = float(input("Angle initial du robot (en degrés) : "))
 
 robot = Robot(
     x=x,
