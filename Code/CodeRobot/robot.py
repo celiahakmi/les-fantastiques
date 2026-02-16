@@ -37,6 +37,7 @@ class Robot:
         self.target_vR: float = 0.0
 
         self.range = None
+        self.range_back=None
 
     def set_wheel_targets(self, vL: float, vR: float):
         """ définit les vitesses cibles des roues
@@ -70,6 +71,22 @@ class Robot:
             marge=marge
         )
         return self.range
+
+     def scan_distance_back(self, max_range: float=10.0):
+        """capteur de distance à l'arriere du robot"""
+        center_x = self.x + self.width / 2.0
+        center_y = self.y + self.height / 2.0
+        marge = 0.5 * math.sqrt(self.width**2 + self.height**2)
+        angle_back=self.theta + math.pi
+
+        self.range_back = self.plateforme.distance_jusqua_obstacle(
+            center_x, center_y, angle_back,
+            max_range=max_range,
+            step=0.02,
+            marge=marge
+        )
+        return self.range_back
+
 
     def step(self, dt: float):
         """ la fonction permet de mettre à jour l'état du robot sur un pas de temps (dt)"""
