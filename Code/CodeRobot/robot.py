@@ -55,7 +55,7 @@ class Robot:
             return min(target, cur + max_delta)
         return max(target, cur - max_delta)
 
-    def scan_distance(self, max_range: float=10.0):
+    def scan_distance_front(self, max_range: float=10.0):
         """capteur de distance à l'avant du robot sous la forme d'un rayon
             max range : portée maximale du capteur"""
         center_x = self.x + self.width / 2.0
