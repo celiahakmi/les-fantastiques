@@ -59,3 +59,9 @@ robot.y = 1.0
 robot.theta = 0 
 distance_scan = robot.scan_distance(max_range=10.0)
 print("Distance mesurée par le capteur : ", distance_scan)
+
+#Test de la fonction step
+#On vérifie que le robot avance correctement
+robot.set_wheel_targets(1.0, 1.0) 
+robot.step(0.1) 
+print("Position après step : x =", robot.x, ", y =", robot.y, ", theta =", robot.theta)
