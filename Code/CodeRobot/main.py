@@ -17,6 +17,10 @@ def main():
     y = float(input("Position y : "))
     angle = float(input("Angle (degrés) : "))
 
+    width= float(input("Largeur du robot:"))
+    height= float(input("Hauteur du robot:"))
+    wheel_base= float(input("Distance entre les roues:"))
+    
     robot = Robot(
         x=x,
         y=y,
