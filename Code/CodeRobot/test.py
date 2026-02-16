@@ -46,3 +46,8 @@ print("Position initiale : x =", robot.x, ", y =", robot.y, ", theta =", robot.t
 robot.set_wheel_targets(2.0, 3.0)
 print("Vitesse cible roue gauche :", robot.target_vL) #2.0
 print("Vitesse cible roue droite :", robot.target_vR) #3.0
+
+#Test de la fonction _approach
+#On vérifie que la valeur approche bien la cible sans dépasser max_delta
+print("Approach de 0 vers 5 avec delta 1 :", robot._approach(0, 5, 1)) #1
+print("Approach de 5 vers 0 avec delta 2 :", robot._approach(5, 0, 2)) #3
