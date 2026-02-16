@@ -5,5 +5,5 @@ from affichage import PygameView
 
 #Test plateforme
 plateforme = Plateforme(20)
-plateforme.initialiser_plan()
-plt.show()
+plateforme.ajouter_rectangle(2,2,3,3)
+print("Obstacles : ", plateforme.obstacles)
