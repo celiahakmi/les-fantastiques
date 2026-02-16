@@ -51,7 +51,8 @@ def main():
 
         keys = pygame.key.get_pressed()
 
-        d = robot.scan_distance()
+        d_front = robot.scan_distance_front()
+        d_back =robot.scan_distance_back()
 
         forward = 0
         turn = 0
@@ -68,14 +69,19 @@ def main():
         vL = forward * base_speed - turn * turn_speed
         vR = forward * base_speed + turn * turn_speed
 
-        if not brake and d <= d_stop:
+        if not brake and d_front <= d_stop:
             brake = True
-        elif brake and d >= d_go:
+        elif brake and d_front >= d_go:
             brake = False
 
         mean = (vL + vR) / 2
         diff = (vR - vL) / 2
+        
+        #empeche la marche arriere si obstacle derriere
+        if d_back <= d_stop and mean <0:
+            mean=0
 
+        
         if brake and mean > 0:
             mean = 0
             robot.vL = 0
