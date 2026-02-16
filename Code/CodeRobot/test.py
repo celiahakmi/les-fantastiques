@@ -51,3 +51,11 @@ print("Vitesse cible roue droite :", robot.target_vR) #3.0
 #On vérifie que la valeur approche bien la cible sans dépasser max_delta
 print("Approach de 0 vers 5 avec delta 1 :", robot._approach(0, 5, 1)) #1
 print("Approach de 5 vers 0 avec delta 2 :", robot._approach(5, 0, 2)) #3
+
+#Test de la fonction scan_distance
+#On vérifie que le capteur renvoie bien la bonne distance jusqu'au premier obstacle
+robot.x = 1.0
+robot.y = 1.0
+robot.theta = 0 
+distance_scan = robot.scan_distance(max_range=10.0)
+print("Distance mesurée par le capteur : ", distance_scan)
