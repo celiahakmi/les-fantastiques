@@ -78,12 +78,21 @@ class PygameView:
         x2p, y2p = self.to_px(x2, y2)
         pygame.draw.line(self.fenetre, (255, 0, 0), (cx, cy), (x2p, y2p), 3)
 
-        # Capteur distance
+        # Capteur avant
         if self.robot.range is not None:
             xr = center_x + self.robot.range * math.cos(self.robot.theta)
             yr = center_y + self.robot.range * math.sin(self.robot.theta)
             xrp, yrp = self.to_px(xr, yr)
             pygame.draw.line(self.fenetre, (0, 0, 0), (cx, cy), (xrp, yrp), 2)
             pygame.draw.circle(self.fenetre, (0, 0, 0), (xrp, yrp), 4)
+            
+        # Capteur arrière(couleur: violet)
+        if self.robot.range_back is not None:
+            xb = center_x + self.robot.range_back * math.cos(self.robot.theta + math.pi)
+            yb = center_y + self.robot.range_back * math.sin(self.robot.theta + math.pi)
+            xb_px, yb_px = self.to_px(xb, yb)
+            cx, cy = self.to_px(center_x, center_y)
+            pygame.draw.line(self.fenetre, (255, 0, 255), (cx, cy), (xb_px, yb_px), 2)
+            pygame.draw.circle(self.fenetre, (255, 0, 255), (xb_px, yb_px), 4)
 
         pygame.display.flip()  
