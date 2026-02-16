@@ -33,8 +33,8 @@ def main():
 
     view = PygameView(plateforme, robot, 40)
     #paramètre capteurs 
-    d_stop = 0.05
-    d_go = 0.08
+    d_stop = 1.2
+    d_go = 1.0
     brake = False
 
     base_speed = 3
