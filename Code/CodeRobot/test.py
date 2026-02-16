@@ -40,3 +40,9 @@ robot= Robot(
     plateforme=plateforme
 )
 print("Position initiale : x =", robot.x, ", y =", robot.y, ", theta =", robot.theta)
+
+#Test de la fonction set_wheel_targets
+#On vérifie que les vitesses sont bien appliquées
+robot.set_wheel_targets(2.0, 3.0)
+print("Vitesse cible roue gauche :", robot.target_vL) #2.0
+print("Vitesse cible roue droite :", robot.target_vR) #3.0
