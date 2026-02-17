@@ -131,9 +131,9 @@ class Robot:
         dist_verif= self.scan_distance_front(max_range=10.0)#vérifie la distance avant
 
         if dist_verif<distance_seuil:
-            vitesse_recul= -(distance_seuil-dist_verif)/ distance_seuil*self.vmax
-            vitesse_recul=max(vitesse_recul, -self.vmax)
-            self.set_wheel_targets(vitesse_recul,vitesse_recul)
+            vitesse_recul= -(distance_seuil-dist_verif)/ distance_seuil*self.vmax #calcul la vitesse de recul proportionnelle à l'obstacle
+            vitesse_recul=max(vitesse_recul, -self.vmax)#limite la vitesse de recul à la vitesse max
+            self.set_wheel_targets(vitesse_recul,vitesse_recul)#applique vitesse aux 2 roues
             return "reculer"
         return "rien"
     
