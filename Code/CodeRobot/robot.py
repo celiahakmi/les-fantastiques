@@ -144,11 +144,14 @@ class Robot:
         distance_droite = self.plateforme.distance_jusqua_obstacle_lateral(self.x, self.y, self.theta, side="right")
         distance_arriere = self.scan_distance_back(max_range=10.0)
         
+        vL, vR = self.vmax, self.vmax
+        reaction = "rien" 
+        
         if distance_gauche < distance_seuil:
-            return "mur gauche"
-        if distance_droite < distance_seuil:
-            return "mur droit"
-        if distance_arriere < distance_seuil:
-            return "mur arrière"
+            vitesse_gauche = -(distance_seuil - distance_gauche) / distance_seuil * self.vmax
+            vitesse_gauche = max(vitesse_gauche, -self.vmax)
+            vL = vitesse_gauche
+            reaction = "mur gauche"
 
-        return "rien"
+        self.set_wheel_targets(vL, vR)
+        return reaction
