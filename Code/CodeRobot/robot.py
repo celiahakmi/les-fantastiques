@@ -139,7 +139,7 @@ class Robot:
 
 
     def reaction_mur(self, distance_seuil:float=1.0):
-        
+        """la fonction permet au robot de réagir lorsqu'un mur est detecté """
         #distances entre le robot et le mur
         distance_gauche = self.plateforme.distance_jusqua_obstacle_lateral(self.x, self.y, self.theta, side="left")
         distance_droite = self.plateforme.distance_jusqua_obstacle_lateral(self.x, self.y, self.theta, side="right")
