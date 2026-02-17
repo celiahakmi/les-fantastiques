@@ -139,20 +139,23 @@ class Robot:
 
 
     def reaction_mur(self, distance_seuil:float=1.0):
-
+        
+        #distances entre le robot et le mur
         distance_gauche = self.plateforme.distance_jusqua_obstacle_lateral(self.x, self.y, self.theta, side="left")
         distance_droite = self.plateforme.distance_jusqua_obstacle_lateral(self.x, self.y, self.theta, side="right")
         distance_arriere = self.scan_distance_back(max_range=10.0)
         
-        vL, vR = self.vmax, self.vmax
+        vL, vR = self.vmax, self.vmax #on définit la vitesse par défaut
         reaction = "rien" 
-        
+
+        #pour le mur gauche
         if distance_gauche < distance_seuil:
             vitesse_gauche = -(distance_seuil - distance_gauche) / distance_seuil * self.vmax
             vitesse_gauche = max(vitesse_gauche, -self.vmax)
             vL = vitesse_gauche
             reaction = "mur gauche"
 
+        #pour le mur droit
         if distance_droite < distance_seuil:
             vitesse_droite = -(distance_seuil - distance_droite) / distance_seuil * self.vmax
             vitesse_droite = max(vitesse_droite, -self.vmax)
@@ -160,6 +163,7 @@ class Robot:
             if reaction == "rien":
                 reaction = "mur droit"
 
+        #pour le mur arrière
         if distance_arriere < distance_seuil:
             vitesse_recul = -(distance_seuil - distance_arriere) / distance_seuil * self.vmax
             vitesse_recul = max(vitesse_recul, -self.vmax)
