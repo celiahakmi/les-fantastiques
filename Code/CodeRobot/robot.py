@@ -72,7 +72,7 @@ class Robot:
         )
         return self.range
 
-     def scan_distance_back(self, max_range: float=10.0):
+    def scan_distance_back(self, max_range: float=10.0):
         """capteur de distance à l'arriere du robot"""
         center_x = self.x + self.width / 2.0
         center_y = self.y + self.height / 2.0
