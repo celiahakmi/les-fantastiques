@@ -61,6 +61,14 @@ def main():
                 angle_accumule = 0.0 
                 vL = 0.0
                 vR = 0.0
+        elif etat == "tourne":
+                omega = (2* turn_speed) / robot.L
+                #calcul de l'angle déjà tourné pendant la rotation
+                if angle_accumule < (math.pi / 2): #90 degrés
+                    #rotation sur place
+                    vL = -turn_speed #roue gauche en arrière
+                    vR = turn_speed # roue droite en avant
+                    angle_accumule += abs(omega * dt)
         robot.set_wheel_targets(vL, vR)
         robot.step(dt)
 
