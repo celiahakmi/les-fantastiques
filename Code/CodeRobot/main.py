@@ -48,7 +48,13 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-
+        if etat == "avance":
+            #distance parcourue depuis le début du coté
+            distance = math.sqrt( (robot.x - x_start)**2 + (robot.y - y_start)**2) #distance entre deux points
+            if distance < longueur_cote: 
+                #Avancer tout droit 
+                vL = base_speed
+                vR = base_speed
         robot.set_wheel_targets(vL, vR)
         robot.step(dt)
 
