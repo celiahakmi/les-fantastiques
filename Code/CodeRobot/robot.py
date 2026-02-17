@@ -136,4 +136,19 @@ class Robot:
             self.set_wheel_targets(vitesse_recul,vitesse_recul)#applique vitesse aux 2 roues
             return "reculer"
         return "rien"
-    
+
+
+    def reaction_mur(self, distance_seuil:float=1.0):
+
+        distance_gauche = self.plateforme.distance_jusqua_obstacle_lateral(self.x, self.y, self.theta, side="left")
+        distance_droite = self.plateforme.distance_jusqua_obstacle_lateral(self.x, self.y, self.theta, side="right")
+        distance_arriere = self.scan_distance_back(max_range=10.0)
+        
+        if distance_gauche < distance_seuil:
+            return "mur gauche"
+        if distance_droite < distance_seuil:
+            return "mur droit"
+        if distance_arriere < distance_seuil:
+            return "mur arrière"
+
+        return "rien"
