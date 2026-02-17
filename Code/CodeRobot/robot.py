@@ -61,11 +61,14 @@ class Robot:
             max range : portée maximale du capteur"""
         center_x = self.x + self.width / 2.0
         center_y = self.y + self.height / 2.0
-        #marge : rayon du cercle englobant le rectangle
         marge= min(self.width, self.height) * 0.2
 
+        #point de départ
+        debut_x= center_x+(self.width / 2.0) * math.cos(self.theta)
+        debut_y=center_y + (self.width / 2.0) * math.sin(self.theta)
+
         self.range = self.plateforme.distance_jusqua_obstacle(
-            center_x, center_y, self.theta,
+            debut_x, debut_y, self.theta,
             max_range=max_range,
             step=0.02,
             marge=marge
@@ -79,8 +82,12 @@ class Robot:
         marge= min(self.width, self.height) * 0.2
         angle_back=self.theta + math.pi
 
+        #point de départ
+        debut_x=center_x - (self.width / 2.0) * math.cos(self.theta)
+        debut_y = center_y - (self.width / 2.0) * math.sin(self.theta)
+
         self.range_back = self.plateforme.distance_jusqua_obstacle(
-            center_x, center_y, angle_back,
+            debut_x, debut_y, angle_back,
             max_range=max_range,
             step=0.02,
             marge=marge
