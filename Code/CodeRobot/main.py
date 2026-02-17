@@ -28,11 +28,17 @@ def main():
     )
 
     view = PygameView(plateforme, robot, 40)
-    #paramètre capteurs 
 
-
+    longueur_cote= 1.5
     base_speed = 3
     turn_speed = 2
+
+    etat = "avance" 
+    cote_compte = 0
+
+    x_start = robot.x
+    y_start = robot.y 
+    angle_accumule = 0.0
 
     running = True
     while running:
