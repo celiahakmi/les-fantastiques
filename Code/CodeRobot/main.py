@@ -51,7 +51,8 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-        
+        vL, vR = 0.0, 0.0
+
         if etat == "avance":
             #distance parcourue depuis le début du coté
             distance = math.sqrt( (robot.x - x_start)**2 + (robot.y - y_start)**2) #distance entre deux points
@@ -63,8 +64,6 @@ def main():
                 #Fin du côté -> début de la rotation du robot 
                 etat = "tourne" 
                 angle_accumule = 0.0 
-                vL = 0.0
-                vR = 0.0
         elif etat == "tourne":
                 omega = (2* turn_speed) / robot.L
                 #calcul de l'angle déjà tourné pendant la rotation
@@ -79,8 +78,7 @@ def main():
                     etat = "avance"
                     x_start = robot.x 
                     y_start = robot.y
-                    vL = 0.0
-                    vR = 0.0 
+                    
         if cote_compte >= 4:
             vL = 0.0
             vR = 0.0 
