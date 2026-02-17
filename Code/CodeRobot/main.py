@@ -12,6 +12,7 @@ def main():
     #obstacles
     plateforme.ajouter_rectangle(2, 2, 3, 7)
     plateforme.ajouter_rectangle(8, 14, 6, 2)
+    
     #paramètre initiaux 
     x = float(input("Position x : "))
     y = float(input("Position y : "))
@@ -40,14 +41,17 @@ def main():
     y_start = robot.y 
     angle_accumule = 0.0
 
+    # Chemin prédéfini
+    chemin = [(15, 5), (15, 15), (0, 0)]
+    idx_p = 0
+    
     running = True
     while running:
-
         dt = view.horloge.tick(60) / 1000
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+        
         if etat == "avance":
             #distance parcourue depuis le début du coté
             distance = math.sqrt( (robot.x - x_start)**2 + (robot.y - y_start)**2) #distance entre deux points
