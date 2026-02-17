@@ -101,9 +101,7 @@ def main():
             robot.set_wheel_targets(vL, vR)
             
         #Mise à jour du robot
-        robot.set_wheel_targets(vL, vR)
         robot.step(dt)
-
         view.dessiner()
 
     pygame.quit()
