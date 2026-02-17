@@ -64,6 +64,7 @@ def main():
                 #Fin du côté -> début de la rotation du robot 
                 etat = "tourne" 
                 angle_accumule = 0.0 
+                
         elif etat == "tourne":
                 omega = (2* turn_speed) / robot.L
                 #calcul de l'angle déjà tourné pendant la rotation
@@ -75,9 +76,12 @@ def main():
                 else : 
                     #fin de la rotation 
                     cote_compte +=1 
-                    etat = "avance"
-                    x_start = robot.x 
-                    y_start = robot.y
+                    if cote_compte < 4:
+                        etat = "avance"
+                        x_start = robot.x 
+                        y_start = robot.y
+                    else:
+                        etat = "chemin"
         #chemin 
         elif etat == "chemin" and idx_p < len(chemin):
             tx, ty = chemin[idx_p]
