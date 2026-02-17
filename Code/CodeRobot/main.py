@@ -92,7 +92,10 @@ def main():
                 vL = 2.0 - err * 3
                 vR = 2.0 + err * 3
 
-        
+        # Réaction face aux obstacles
+        if robot.reaction_obstacle(distance_seuil=1.5) == "rien":
+            robot.set_wheel_targets(vL, vR)
+            
         #Mise à jour du robot
         robot.set_wheel_targets(vL, vR)
         robot.step(dt)
