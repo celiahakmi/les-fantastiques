@@ -55,6 +55,12 @@ def main():
                 #Avancer tout droit 
                 vL = base_speed
                 vR = base_speed
+            else: 
+                #Fin du côté -> début de la rotation du robot 
+                etat = "tourne" 
+                angle_accumule = 0.0 
+                vL = 0.0
+                vR = 0.0
         robot.set_wheel_targets(vL, vR)
         robot.step(dt)
 
