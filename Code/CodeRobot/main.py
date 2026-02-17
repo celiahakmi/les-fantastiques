@@ -1,4 +1,5 @@
 import pygame
+import math
 from plateforme import Plateforme
 from robot import Robot
 from affichage import PygameView
@@ -30,8 +31,8 @@ def main():
     view = PygameView(plateforme, robot, 40)
 
     longueur_cote= 1.5
-    base_speed = 3
-    turn_speed = 2
+    base_speed = 2
+    turn_speed = 1
 
     etat = "avance" 
     cote_compte = 0
@@ -77,6 +78,10 @@ def main():
                     y_start = robot.y
                     vL = 0.0
                     vR = 0.0 
+        if cote_compte >= 4:
+            vL = 0.0
+            vR = 0.0 
+        #Mise à jour du robot
         robot.set_wheel_targets(vL, vR)
         robot.step(dt)
 
