@@ -131,8 +131,8 @@ class Robot:
         dist_verif= self.scan_distance_front(max_range=10.0)#vérifie la distance avant
 
         if dist_verif<distance_seuil:
-            self.set_wheel_targets(0.0,0.0)#le robot s'arrête
-            self.set_wheel_targets(-1.0,-1.0)#le robot recule
+            vitesse_recul=max(-self.vmax, -1.0*(distance_seuil - dist_verif))#permet un arrêt propostionnelle à la vitesse
+            self.set_wheel_targets(vitesse_recul,vitesse_recul)
             return "reculer"
         return "rien"
     
