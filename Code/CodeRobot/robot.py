@@ -160,5 +160,13 @@ class Robot:
             if reaction == "rien":
                 reaction = "mur droit"
 
+        if distance_arriere < distance_seuil:
+            vitesse_recul = -(distance_seuil - distance_arriere) / distance_seuil * self.vmax
+            vitesse_recul = max(vitesse_recul, -self.vmax)
+            vL = min(vL, vitesse_recul)
+            vR = min(vR, vitesse_recul)
+            if reaction == "rien":
+                reaction = "mur arrière"
+
         self.set_wheel_targets(vL, vR)
         return reaction
