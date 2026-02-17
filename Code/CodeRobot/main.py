@@ -78,10 +78,21 @@ def main():
                     etat = "avance"
                     x_start = robot.x 
                     y_start = robot.y
-                    
-        if cote_compte >= 4:
-            vL = 0.0
-            vR = 0.0 
+        #chemin 
+        elif etat == "chemin" and idx_p < len(chemin):
+            tx, ty = chemin[idx_p]
+            dx = tx - robot.x
+            dy = ty - robot.y
+            dist = math.sqrt(dx**2 + dy**2)
+            if dist < 0.5: 
+                idx_p += 1
+            else:
+                err = math.atan2(dy, dx) - robot.theta
+                err = (err + math.pi) % (2 * math.pi) - math.pi 
+                vL = 2.0 - err * 3
+                vR = 2.0 + err * 3
+
+        
         #Mise à jour du robot
         robot.set_wheel_targets(vL, vR)
         robot.step(dt)
