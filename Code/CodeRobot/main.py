@@ -42,7 +42,7 @@ def main():
     angle_accumule = 0.0
 
     # Chemin prédéfini
-    chemin = [(15, 5), (15, 15), (0, 0)]
+    chemin = [(15, 5), (15, 10), (0, 0)]
     idx_p = 0
     
     running = True
