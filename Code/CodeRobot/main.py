@@ -16,10 +16,6 @@ def main():
     x = float(input("Position x : "))
     y = float(input("Position y : "))
     angle = float(input("Angle (degrés) : "))
-
-    width= float(input("Largeur du robot:"))
-    height= float(input("Hauteur du robot:"))
-    wheel_base= float(input("Distance entre les roues:"))
     
     robot = Robot(
         x=x,
@@ -33,9 +29,7 @@ def main():
 
     view = PygameView(plateforme, robot, 40)
     #paramètre capteurs 
-    d_stop = 1.2
-    d_go = 1.0
-    brake = False
+
 
     base_speed = 3
     turn_speed = 2
@@ -48,47 +42,6 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-
-        keys = pygame.key.get_pressed()
-
-        d_front = robot.scan_distance_front()
-        d_back =robot.scan_distance_back()
-
-        forward = 0
-        turn = 0
-
-        if keys[pygame.K_UP]:
-            forward = 1
-        if keys[pygame.K_DOWN]:
-            forward = -1
-        if keys[pygame.K_LEFT]:
-            turn = 1
-        if keys[pygame.K_RIGHT]:
-            turn = -1
-
-        vL = forward * base_speed - turn * turn_speed
-        vR = forward * base_speed + turn * turn_speed
-
-        if not brake and d_front <= d_stop:
-            brake = True
-        elif brake and d_front >= d_go:
-            brake = False
-
-        mean = (vL + vR) / 2
-        diff = (vR - vL) / 2
-        
-        #empeche la marche arriere si obstacle derriere
-        if d_back <= d_stop and mean <0:
-            mean=0
-
-        
-        if brake and mean > 0:
-            mean = 0
-            robot.vL = 0
-            robot.vR = 0
-
-        vL = mean - diff
-        vR = mean + diff
 
         robot.set_wheel_targets(vL, vR)
         robot.step(dt)
