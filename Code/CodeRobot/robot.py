@@ -62,7 +62,7 @@ class Robot:
         center_x = self.x + self.width / 2.0
         center_y = self.y + self.height / 2.0
         #marge : rayon du cercle englobant le rectangle
-        marge = 0.5 * math.sqrt(self.width**2 + self.height**2)
+        marge= min(self.width, self.height) * 0.2
 
         self.range = self.plateforme.distance_jusqua_obstacle(
             center_x, center_y, self.theta,
@@ -76,7 +76,7 @@ class Robot:
         """capteur de distance à l'arriere du robot"""
         center_x = self.x + self.width / 2.0
         center_y = self.y + self.height / 2.0
-        marge = 0.5 * math.sqrt(self.width**2 + self.height**2)
+        marge= min(self.width, self.height) * 0.2
         angle_back=self.theta + math.pi
 
         self.range_back = self.plateforme.distance_jusqua_obstacle(
