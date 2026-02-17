@@ -69,6 +69,14 @@ def main():
                     vL = -turn_speed #roue gauche en arrière
                     vR = turn_speed # roue droite en avant
                     angle_accumule += abs(omega * dt)
+                else : 
+                    #fin de la rotation 
+                    cote_compte +=1 
+                    etat = "avance"
+                    x_start = robot.x 
+                    y_start = robot.y
+                    vL = 0.0
+                    vR = 0.0 
         robot.set_wheel_targets(vL, vR)
         robot.step(dt)
 
