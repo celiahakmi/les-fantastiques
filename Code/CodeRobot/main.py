@@ -11,7 +11,6 @@ def main():
     plateforme = Plateforme(20)
     #obstacles
     plateforme.ajouter_rectangle(2, 2, 3, 7)
-    plateforme.ajouter_rectangle(12, 4, 4, 3)
     plateforme.ajouter_rectangle(8, 14, 6, 2)
     #paramètre initiaux 
     x = float(input("Position x : "))
