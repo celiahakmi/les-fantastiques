@@ -124,3 +124,13 @@ class Robot:
                 self.vL = 0.0
                 self.vR = 0.0
                 break
+
+    def reaction_obstacle(self, distance_seuil: float=1.0):
+        """la fonction permet au robot de réagir si un obstacle est détecté à l'avant"""
+
+        dist_verif= self.scan_distance_front(max_range=10.0)#vérifie la distance avant
+
+        if dist_verif<distance_seuil:
+            self.set_wheel_targets(0.0,0.0)#le robot s'arrête
+        return "rien"
+    
