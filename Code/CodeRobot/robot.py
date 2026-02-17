@@ -132,5 +132,7 @@ class Robot:
 
         if dist_verif<distance_seuil:
             self.set_wheel_targets(0.0,0.0)#le robot s'arrête
+            self.set_wheel_targets(-1.0,-1.0)#le robot recule
+            return "reculer"
         return "rien"
     
