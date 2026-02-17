@@ -153,5 +153,12 @@ class Robot:
             vL = vitesse_gauche
             reaction = "mur gauche"
 
+        if distance_droite < distance_seuil:
+            vitesse_droite = -(distance_seuil - distance_droite) / distance_seuil * self.vmax
+            vitesse_droite = max(vitesse_droite, -self.vmax)
+            vR = vitesse_droite
+            if reaction == "rien":
+                reaction = "mur droit"
+
         self.set_wheel_targets(vL, vR)
         return reaction
