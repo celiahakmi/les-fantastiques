@@ -35,7 +35,7 @@ class Robot:
         #calcul et attribution du nouvel angle du robot après rotation
         self.theta = self.theta + ( v_ang * self.pas )
     def carré(self):
-        """ le robot se déplace en carré"""
+        """ le robot se déplace en carré """
         nbcoté = 0 
         long_coté = 2 
         etat = "avance"
