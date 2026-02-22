@@ -5,5 +5,5 @@ class Robot:
             - position 
             - orientation 
             - distance entre 2 roues (L)
-            - forme robot (largeur/longueur)"""
+            - forme robot (largeur/ longueur)"""
         
