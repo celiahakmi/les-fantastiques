@@ -43,15 +43,21 @@ class Robot:
         y0 = self.y
         while( nbcoté != 4):
             if (etat == "avance"):
+                self.vL = 1.0
+                self.vR = 1.0
                 self.avancer()
                 d = math.sqrt( (self.x - x0)**2 + (self.y - y0)**2)
-                if ( d == long_coté): 
-                    etat = "tourner"
+                if ( d >= long_coté): 
                     theta0 = self.theta
                     nbcoté += 1 
-            if (etat == "tourner"): 
+                    etat = "tourner"
+            if (etat == "tourner"):
+                self.vL = 1.0
+                self.vR = -1.0
                 self.tourner()
-                if ( self.theta - theta0 == (math.pi / 2)):
+                if ( self.theta - theta0 >= (math.pi / 2)):
+                    x0 = self.x
+                    y0 = self.y
                     etat = "avancer"
 
                     
