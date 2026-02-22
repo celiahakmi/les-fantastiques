@@ -1,7 +1,7 @@
 import math
 class Robot: 
     def __init__(self, x : float, y : float, theta : float, 
-                 L : float, larg : float, long : float ):
+                 L : float, larg : float, long : float):
         """ initialise le robot avec 
             - position 
             - orientation 
@@ -17,5 +17,15 @@ class Robot:
         #attribut variable du robot 
         self.vL: float = 0.0
         self.vR: float = 0.0
-        
+        self.pas: float = 0.1 
+    def avancer(self):
+        """ fait avancer le robot, conditions : vL= vR"""
+        v = ( self.vL + self.vR)/ 2 #calcul de la vitesse du robot
+        #calcul des déplacement de x et y pendant le pas 
+        delta_x = v * math.cos(self.theta) * self.pas
+        delta_y = v * math.sin(self.theta) * self.pas 
+        #calcul des nouvelles positions x et y du robot
+        self.x = self.x + delta_x
+        self.y = self.y + delta_y
+
 
