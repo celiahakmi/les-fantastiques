@@ -27,15 +27,31 @@ class Robot:
         #calcul des nouvelles positions x et y du robot
         self.x = self.x + delta_x
         self.y = self.y + delta_y
-    def tourner(self)
+    def tourner(self):
         """faire tourner le robot sur lui même 
             condition : les roues n'ont pas la même vitesse"""
         #calcul de la vitesse angulaire
         v_ang = ( self.vR - self.vL)/ self.L 
         #calcul et attribution du nouvel angle du robot après rotation
         self.theta = self.theta + ( v_ang * self.pas )
-    
-        
+    def carré(self):
+        """ le robot se déplace en carré"""
+        nbcoté = 0 
+        long_coté = 2 
+        etat = "avance"
+        x0 = self.x
+        y0 = self.y
+
+
+                    
+
+                
+
+            
+
+
+            
+
 
         
 
