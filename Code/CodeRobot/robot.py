@@ -49,6 +49,10 @@ class Robot:
                     etat = "tourner"
                     theta0 = self.theta
                     nbcoté += 1 
+            if (etat == "tourner"): 
+                self.tourner()
+                if ( self.theta - theta0 == (math.pi / 2)):
+                    etat = "avancer"
 
                     
 
