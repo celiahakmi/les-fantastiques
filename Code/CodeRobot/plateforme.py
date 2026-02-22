@@ -24,3 +24,26 @@ class Plateforme:
                 return False 
                 
         return True
+
+
+#Tests
+if __name__ == "__main__":
+    #Initialisation
+    p = Plateforme(10, 10)
+    print("Test 1: Création plateforme 10x10 : OK")
+
+    #Test ajout valide
+    res1 = p.init_obstacle(5, 5, 1, 1)
+    print(f"Test 2: Ajout obstacle (5, 5, 1, 1) valide : {res1 == True}")
+    print(f"Nombre d'obstacles : {len(p.obstacles)}")
+
+    #Test dépassement bordure (x + l > longueur)
+    res2 = p.init_obstacle(0, 10, 5, 10)
+    print(f"Test 3: Erreur dépassement bordure : {res2 == False}")
+
+    # 4. Test chevauchement (sur l'obstacle du Test 2)
+    res3 = p.init_obstacle(4, 4, 10, 10) # Chevauche le premier
+    print(f"Test 4: Erreur chevauchement : {res3 == False}")
+    
+    # Vérification finale du nombre d'obstacles (devrait être 1)
+    print(f"Total obstacles final : {len(p.obstacles)}")
