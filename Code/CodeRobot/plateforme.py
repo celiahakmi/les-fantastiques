@@ -9,6 +9,8 @@ class Plateforme:
         """Construire un rectancle où le sommet bas-gauche est de coordonées x,y, de hauteur h et de largeur l"""
         if self.est_valide(x, y, l, h):
             self.obstacles.append(("rect", float(x), float(y), float(h), float(l)))
+                return True 
+        return False  
 
     
     def est_valide(self, x: float, y: float, l: float, h: float):
