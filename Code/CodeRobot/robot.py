@@ -104,6 +104,18 @@ if __name__ == "__main__":
     print(f"theta inchangé : {abs(r.theta - theta0) < 1e-6}") 
     print()      
 
+    #test fonction tourner
+    r.vL = 1.0
+    r.vR = -1.0
+    x0, y0, theta0 = r.x, r.y, r.theta
+
+    r.tourner()
+
+    print("Test 3 : Tourner sur place")
+    print(f"x inchangé : {abs(r.x - x0) < 1e-6}")
+    print(f"y inchangé : {abs(r.y - y0) < 1e-6}")
+    print(f"theta a changé : {r.theta != theta0}")
+    print()
 
         
 
