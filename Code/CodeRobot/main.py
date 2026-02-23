@@ -49,35 +49,35 @@ def main():
             auto = False
             robot.vL = 1.0
             robot.vR = 1.0
-            plateforme.deplacer_si_possible(robot, plateforme, robot.avancer)
+            plateforme.deplacer_si_possible(robot, robot.avancer)
 
         elif keys[pygame.K_DOWN]:
             manuel = True
             auto = False
             robot.vL = -1.0
             robot.vR = -1.0
-            plateforme.deplacer_si_possible(robot, plateforme, robot.avancer)
+            plateforme.deplacer_si_possible(robot, robot.avancer)
 
         elif keys[pygame.K_LEFT]:
             manuel = True
             auto = False
             robot.vL = -1.0
             robot.vR = 1.0
-            plateforme.deplacer_si_possible(robot, plateforme, robot.tourner)
+            plateforme.deplacer_si_possible(robot, robot.tourner)
 
         elif keys[pygame.K_RIGHT]:
             manuel = True
             auto = False
             robot.vL = 1.0
             robot.vR = -1.0
-            plateforme.deplacer_si_possible(robot, plateforme, robot.tourner)
+            plateforme.deplacer_si_possible(robot, robot.tourner)
             
         # animé
         if auto and not manuel:
             if etat == "avance":
                 robot.vL = 1.0
                 robot.vR = 1.0
-                if plateforme.deplacer_si_possible(robot, plateforme, robot.avancer):
+                if plateforme.deplacer_si_possible(robot, robot.avancer):
                     if math.hypot(robot.x - x0, robot.y - y0) >= cote:
                         etat = "tourne"
                         angle = 0.0
@@ -88,7 +88,7 @@ def main():
                 # Rotation sur place
                 robot.vL = -1.0
                 robot.vR = 1.0
-                if plateforme.deplacer_si_possible(robot, plateforme, robot.tourner):
+                if plateforme.deplacer_si_possible(robot, robot.tourner):
                     # Calcul de la vitesse angulaire et accumulation de l’angle tourné
                     angle += abs((robot.vR - robot.vL) / robot.L) * robot.pas
                     # Si 90° atteint
