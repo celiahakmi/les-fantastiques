@@ -84,7 +84,40 @@ def main():
             robot.vL = 1.0
             robot.vR = -1.0
             deplacer(robot, plateforme, robot.tourner)
+            
+        # carré auto (animé)
+        if auto and not manuel:
+            if etat == "avance":
+                robot.vL = 1.0
+                robot.vR = 1.0
+                if deplacer(robot, plateforme, robot.avancer):
+                    if math.hypot(robot.x - x0, robot.y - y0) >= cote:
+                        etat = "tourne"
+                        angle = 0.0
+                else:
+                    auto = False
 
+            elif etat == "tourne":
+                robot.vL = -1.0
+                robot.vR = 1.0
+                if deplacer(robot, plateforme, robot.tourner):
+                    angle += abs((robot.vR - robot.vL) / robot.L) * robot.pas
+                    if angle >= math.pi / 2:
+                        nb += 1
+                        if nb == 4:
+                            auto = False
+                            robot.vL = 0.0
+                            robot.vR = 0.0
+                        else:
+                            etat = "avance"
+                            x0, y0 = robot.x, robot.y
+                else:
+                    auto = False
+
+      
+        vue.dessiner()
+        vue.horloge.tick(60)
+    pygame.quit()
 
 if __name__ == "__main__":
     main()
