@@ -15,15 +15,15 @@ def main():
     
     vue = PygameView(plateforme, robot, TAILLE_PIXEL=60)
 
-    # carré auto
-    auto = False
-    etat = "avance"
+    # carré automatique
+    auto = False # Mode automatique désactivé au départ
+    etat = "avance"  # le robot commence par avancer
     nb = 0
     cote = 2.0
     x0, y0 = robot.x, robot.y
     angle = 0.0
 
-    running = True
+    running = True   # Variable pour garder la boucle active
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -41,7 +41,7 @@ def main():
         keys = pygame.key.get_pressed()
         robot.vL = 0.0
         robot.vR = 0.0
-        manuel = False
+        manuel = False #Indique si on utilise le contrôle manuel
         
         # manuel
         if keys[pygame.K_UP]:
@@ -49,57 +49,62 @@ def main():
             auto = False
             robot.vL = 1.0
             robot.vR = 1.0
-            deplacer(robot, plateforme, robot.avancer)
+            plateforme.deplacer_si_possible(robot, plateforme, robot.avancer)
 
         elif keys[pygame.K_DOWN]:
             manuel = True
             auto = False
             robot.vL = -1.0
             robot.vR = -1.0
-            deplacer(robot, plateforme, robot.avancer)
+            plateforme.deplacer_si_possible(robot, plateforme, robot.avancer)
 
         elif keys[pygame.K_LEFT]:
             manuel = True
             auto = False
             robot.vL = -1.0
             robot.vR = 1.0
-            deplacer(robot, plateforme, robot.tourner)
+            plateforme.deplacer_si_possible(robot, plateforme, robot.tourner)
 
         elif keys[pygame.K_RIGHT]:
             manuel = True
             auto = False
             robot.vL = 1.0
             robot.vR = -1.0
-            deplacer(robot, plateforme, robot.tourner)
+            plateforme.deplacer_si_possible(robot, plateforme, robot.tourner)
             
-        # carré auto (animé)
+        # animé
         if auto and not manuel:
             if etat == "avance":
                 robot.vL = 1.0
                 robot.vR = 1.0
-                if deplacer(robot, plateforme, robot.avancer):
+                if plateforme.deplacer_si_possible(robot, plateforme, robot.avancer):
                     if math.hypot(robot.x - x0, robot.y - y0) >= cote:
                         etat = "tourne"
                         angle = 0.0
                 else:
-                    auto = False
+                    auto = False # Stop si collision
 
             elif etat == "tourne":
+                # Rotation sur place
                 robot.vL = -1.0
                 robot.vR = 1.0
-                if deplacer(robot, plateforme, robot.tourner):
+                if plateforme.deplacer_si_possible(robot, plateforme, robot.tourner):
+                    # Calcul de la vitesse angulaire et accumulation de l’angle tourné
                     angle += abs((robot.vR - robot.vL) / robot.L) * robot.pas
+                    # Si 90° atteint
                     if angle >= math.pi / 2:
-                        nb += 1
+                        nb += 1  #Un côté terminé
                         if nb == 4:
+                            # Carré terminé
                             auto = False
                             robot.vL = 0.0
                             robot.vR = 0.0
                         else:
+                            # Repartir pour le côté suivant
                             etat = "avance"
                             x0, y0 = robot.x, robot.y
                 else:
-                    auto = False
+                    auto = False # Stop si collision
 
       
         vue.dessiner()
