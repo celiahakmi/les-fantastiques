@@ -20,12 +20,43 @@ class Plateforme:
         
         for obs in self.obstacles:
             _, ox, oy, oh, ol = obs 
-            
             if (x < ox + ol and x + l > ox and
                 y < oy + oh and y + h > oy):
-                return False 
-                
+                return False     
         return True
+
+    
+    def collision_robot(self, robot):
+        """Renvoie True si le robot entre en collision avec un obstacle ou un mur"""
+
+        long = robot.long / 2
+        larg = robot.larg / 2
+
+        #4 coins: avant-droit, avant-gauche, arrière-gauche, arrière-droit
+        coins_relatifs = [(long, larg), (long, -larg), (-long, -larg), (-long, larg)]
+
+        coins_reels = []
+        for dx, dy in coins_relatifs:
+            #Rotation des points par rapport à l'angle theta
+            cx = robot.x + (dx * math.cos(robot.theta) - dy * math.sin(robot.theta))
+            cy = robot.y + (dx * math.sin(robot.theta) + dy * math.cos(robot.theta))
+            coins_reels.append((cx, cy))
+
+        #Vérifier si un des coins sort de la plateforme ou touche un obstacle
+        for cx, cy in coins_reels:
+            #sort de la plateforme 
+            if cx < 0 or cx > self.longueur or cy < 0 or cy > self.hauteur:
+                return True
+            
+            #collision avec obstacles 
+            for obs in self.obstacles:
+                _, ox, oy, ol, oh = obs
+                #Si le point (cx, cy) est à l'intérieur du rectangle de l'obstacle
+                if ox <= cx <= ox + ol and oy <= cy <= oy + oh:
+                    return True
+        return False
+
+
 
 
 #Tests
