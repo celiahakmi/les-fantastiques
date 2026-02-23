@@ -93,7 +93,16 @@ if __name__ == "__main__":
     print(f"L = {r.L} (attendu 2)")
     print()
 
-            
+    #test fonction avancer
+    r.vL = 1.0 
+    r.vR = 1.0 
+    x0, y0, theta0 = r.x, r.y, r.theta 
+    r.avancer() 
+    print("Test 2 : Avancer droit") 
+    print(f"x a changé : {r.x != x0}") 
+    print(f"y inchangé : {abs(r.y - y0) < 1e-6}") 
+    print(f"theta inchangé : {abs(r.theta - theta0) < 1e-6}") 
+    print()      
 
 
         
