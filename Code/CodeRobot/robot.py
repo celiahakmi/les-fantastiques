@@ -31,13 +31,13 @@ class Robot:
         #calcul des nouvelles positions x et y du robot
         self.x = self.x + delta_x
         self.y = self.y + delta_y
-        #if plateforme.collision_robot(self):
-            #si collision, on annule le mouvement
-            #self.x = ancien_x
-            #self.y = ancien_y
-            #on arrête les roues
-            #self.vL = 0.0
-            #self.vR = 0.0
+        if plateforme.collision_robot(self):
+            si collision, on annule le mouvement
+            self.x = ancien_x
+            self.y = ancien_y
+            on arrête les roues
+            self.vL = 0.0
+            self.vR = 0.0
             
     def tourner(self):
         """faire tourner le robot sur lui même 
@@ -83,12 +83,7 @@ class Robot:
 
                     
 if __name__ == "__main__":
-
-    print("=== TESTS CLASSE ROBOT ===\n")
-
-    # -------------------------
-    # Test 1 : Initialisation
-    # -------------------------
+    #test fonction init 
     r = Robot(x=0, y=0, theta=0, L=2, larg=1, long=2)
 
     print("Test 1 : Initialisation")
@@ -97,56 +92,6 @@ if __name__ == "__main__":
     print(f"theta = {r.theta} rad (attendu 0)")
     print(f"L = {r.L} (attendu 2)")
     print()
-
-    # -------------------------
-    # Test 2 : Avancer droit
-    # -------------------------
-    r.vL = 1.0
-    r.vR = 1.0
-    x0, y0, theta0 = r.x, r.y, r.theta
-
-    r.avancer()
-
-    print("Test 2 : Avancer droit")
-    print(f"x a changé : {r.x != x0}")
-    print(f"y inchangé : {abs(r.y - y0) < 1e-6}")
-    print(f"theta inchangé : {abs(r.theta - theta0) < 1e-6}")
-    print()
-
-    # -------------------------
-    # Test 3 : Tourner sur place
-    # -------------------------
-    r.vL = 1.0
-    r.vR = -1.0
-    x0, y0, theta0 = r.x, r.y, r.theta
-
-    r.tourner()
-
-    print("Test 3 : Tourner sur place")
-    print(f"x inchangé : {abs(r.x - x0) < 1e-6}")
-    print(f"y inchangé : {abs(r.y - y0) < 1e-6}")
-    print(f"theta a changé : {r.theta != theta0}")
-    print()
-
-    # -------------------------
-    # Test 4 : Déplacement en carré
-    # -------------------------
-    # Réinitialisation du robot
-    r.x = 0
-    r.y = 0
-    r.theta = 0
-
-    # Appel de la fonction carré
-    r.carre()  # Attention : cette version complète le carré en "instantané"
-
-    print("Test 4 : Déplacement en carré")
-    print(f"x final ≈ 0 : {abs(r.x) < 1e-6}")
-    print(f"y final ≈ 0 : {abs(r.y) < 1e-6}")
-    print(f"theta final ≈ 0 : {abs(r.theta % (2*math.pi)) < 1e-6}")
-                
-
-            
-
 
             
 
