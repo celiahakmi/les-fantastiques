@@ -55,6 +55,35 @@ def main():
         robot.vL = 0.0
         robot.vR = 0.0
         manuel = False
+        
+        # manuel
+        if keys[pygame.K_UP]:
+            manuel = True
+            auto = False
+            robot.vL = 1.0
+            robot.vR = 1.0
+            deplacer(robot, plateforme, robot.avancer)
+
+        elif keys[pygame.K_DOWN]:
+            manuel = True
+            auto = False
+            robot.vL = -1.0
+            robot.vR = -1.0
+            deplacer(robot, plateforme, robot.avancer)
+
+        elif keys[pygame.K_LEFT]:
+            manuel = True
+            auto = False
+            robot.vL = -1.0
+            robot.vR = 1.0
+            deplacer(robot, plateforme, robot.tourner)
+
+        elif keys[pygame.K_RIGHT]:
+            manuel = True
+            auto = False
+            robot.vL = 1.0
+            robot.vR = -1.0
+            deplacer(robot, plateforme, robot.tourner)
 
 
 if __name__ == "__main__":
