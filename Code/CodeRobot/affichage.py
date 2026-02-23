@@ -53,5 +53,17 @@ class PygameView:
                 int(hauteur * self.TAILLE_PIXEL),
             )
             pygame.draw.rect(self.fenetre, (135, 233, 144), rect)
+
+        # Fleche rouge pour indiquer la direction  
+            L_fleche = max(self.robot.long, 0.2)
+            x2 = self.robot.x + L_fleche * math.cos(self.robot.theta)
+            y2 = self.robot.y + L_fleche * math.sin(self.robot.theta)
+            x2p, y2p = self.to_px(x2, y2)
+            pygame.draw.line(self.fenetre, (255, 0, 0), (cx, cy), (x2p, y2p), 2)
+            
+            
+            
+            pygame.display.flip()
+
+           
        
-   
