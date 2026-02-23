@@ -54,8 +54,11 @@ class Robot:
         y0 = self.y
         theta0 = self.theta
         angle_acc = 0.0
+        max_iter = 10000
+        n_iter = 0
 
-        while nbcote < 4:
+        while nbcote < 4 and n_iter < max_iter:
+            n_iter += 1
             if etat == "avance":
                 self.vL = 1.0
                 self.vR = 1.0
@@ -80,6 +83,8 @@ class Robot:
                     etat = "avance"
                     x0 = self.x
                     y0 = self.y
+        self.vL = 0.0
+        self.vR = 0.0
 
                     
 if __name__ == "__main__":
@@ -108,7 +113,6 @@ if __name__ == "__main__":
     r.vL = 1.0
     r.vR = -1.0
     x0, y0, theta0 = r.x, r.y, r.theta
-
     r.tourner()
 
     print("Test 3 : Tourner sur place")
@@ -121,7 +125,6 @@ if __name__ == "__main__":
     r.x = 0
     r.y = 0
     r.theta = 0
-
     r.carre()  
 
     print("Test 4 : Déplacement en carré")
