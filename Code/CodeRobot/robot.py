@@ -31,13 +31,7 @@ class Robot:
         #calcul des nouvelles positions x et y du robot
         self.x = self.x + delta_x
         self.y = self.y + delta_y
-        if plateforme.collision_robot(self):
-            si collision, on annule le mouvement
-            self.x = ancien_x
-            self.y = ancien_y
-            on arrête les roues
-            self.vL = 0.0
-            self.vR = 0.0
+        
             
     def tourner(self):
         """faire tourner le robot sur lui même 
