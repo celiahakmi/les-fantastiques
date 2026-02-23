@@ -58,6 +58,17 @@ class Plateforme:
                     return True
         return False
 
+    //si il y a une collision on remet le robot a son ancienne position on reinitialise les vitesse et on retourne false
+    def deplacer_si_possible(robot, plateforme, action):
+    x, y, t = robot.x, robot.y, robot.theta
+    action()
+    if plateforme.collision_robot(robot):
+        robot.x, robot.y, robot.theta = x, y, t
+        robot.vL = 0.0
+        robot.vR = 0.0
+        return False
+    return True
+
 
 #Tests
 if __name__ == "__main__":
