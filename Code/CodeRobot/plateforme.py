@@ -52,7 +52,7 @@ class Plateforme:
             
             #collision avec obstacles 
             for obs in self.obstacles:
-                _, ox, oy, ol, oh = obs
+                _, ox, oy, oh, ol = obs
                 #Si le point (cx, cy) est à l'intérieur du rectangle de l'obstacle
                 if ox <= cx <= ox + ol and oy <= cy <= oy + oh:
                     return True
