@@ -1,3 +1,4 @@
+from robot import Robot
 class Plateforme:
     def __init__(self, longueur: float, hauteur: float):
         self.longueur = longueur #affilié à x
@@ -57,26 +58,33 @@ class Plateforme:
         return False
 
 
-
-
 #Tests
 if __name__ == "__main__":
     #Initialisation
     p = Plateforme(10, 10)
-    print("Test 1: Création plateforme 10x10 : OK")
+    print("Test 1: création plateforme 10x10")
 
     #Test ajout valide
     res1 = p.init_obstacle(5, 5, 1, 1)
-    print(f"Test 2: Ajout obstacle (5, 5, 1, 1) valide : {res1 == True}")
+    print(f"Test 2: ajout obstacle (5, 5, 1, 1) valide : {res1 == True}")
     print(f"Nombre d'obstacles : {len(p.obstacles)}")
 
     #Test dépassement bordure (x + l > longueur)
     res2 = p.init_obstacle(0, 10, 5, 10)
-    print(f"Test 3: Erreur dépassement bordure : {res2 == False}")
+    print(f"Test 3: erreur dépassement bordure : {res2 == False}")
 
-    # 4. Test chevauchement (sur l'obstacle du Test 2)
+    #Test chevauchement (sur l'obstacle du Test 2)
     res3 = p.init_obstacle(4, 4, 10, 10) # Chevauche le premier
-    print(f"Test 4: Erreur chevauchement : {res3 == False}")
-    
-    # Vérification finale du nombre d'obstacles (devrait être 1)
-    print(f"Total obstacles final : {len(p.obstacles)}")
+    print(f"Test 4: erreur chevauchement : {res3 == False}")
+
+    # Test 5: Robot dans le coin
+    r_coin = Robot(0.5, 0.5, 0, 1.0, 1.0, 1.0)
+    print(f"Test 5: coin bas-gauche : {'True' if not p.collision_robot(r_coin) else 'False'}")
+
+    # Test 6: Robot qui dépasse
+    r_depasse = Robot(1, 1, 0, 1.0, 1.0, 1.0)
+    print(f"Test 6: dépasse bord : {'True' if p.collision_robot(r_depasse) else 'False'}")
+
+    # Test 7: Robot qui touche l'obstacle
+    r_obstacle = Robot(5.5, 5, 0, 1.0, 1.0, 1.0)
+    print(f"Test 7: touche obstacle : {'True' if p.collision_robot(r_obstacle) else 'False'}")
