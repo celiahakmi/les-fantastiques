@@ -45,7 +45,7 @@ class PygameView:
         for obs in self.plateforme.obstacles:
             if obs[0] != "rect":
                 continue
-            _, x, y, largeur, hauteur = obs
+            _, x, y, hauteur, largeur = obs
             rect = pygame.Rect(
                 int(x * self.TAILLE_PIXEL),
                 int(y * self.TAILLE_PIXEL),
