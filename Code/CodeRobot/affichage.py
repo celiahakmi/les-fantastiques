@@ -32,5 +32,14 @@ class PygameView:
                 (x, 0),
                 (x, int(self.plateforme.hauteur * self.TAILLE_PIXEL)),
             )
+        # Grille horizontale
+        for j in range(int(self.plateforme.hauteur) + 1):
+            y = j * self.TAILLE_PIXEL
+            pygame.draw.line(
+                self.fenetre,
+                (220, 220, 220),
+                (0, y),
+                (int(self.plateforme.longueur * self.TAILLE_PIXEL), y),
+            )
        
    
