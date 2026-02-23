@@ -19,6 +19,18 @@ class PygameView:
 
         def to_px(self, x, y):
             return (int(x * self.TAILLE_PIXEL), int(y * self.TAILLE_PIXEL))
+        
+        def dessiner(self):
+        self.fenetre.fill((255, 255, 255))
 
+        # Grille verticale
+        for i in range(int(self.plateforme.longueur) + 1):
+            x = i * self.TAILLE_PIXEL
+            pygame.draw.line(
+                self.fenetre,
+                (220, 220, 220),
+                (x, 0),
+                (x, int(self.plateforme.hauteur * self.TAILLE_PIXEL)),
+            )
        
    
