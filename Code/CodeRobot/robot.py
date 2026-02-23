@@ -117,5 +117,15 @@ if __name__ == "__main__":
     print(f"theta a changé : {r.theta != theta0}")
     print()
 
-        
+    #test fonction carré
+    r.x = 0
+    r.y = 0
+    r.theta = 0
+
+    r.carre()  
+
+    print("Test 4 : Déplacement en carré")
+    print(f"x final ≈ 0 : {abs(r.x) < 1e-6}")
+    print(f"y final ≈ 0 : {abs(r.y) < 1e-6}")
+    print(f"theta final ≈ 0 : {abs(r.theta % (2*math.pi)) < 1e-6}")
 
