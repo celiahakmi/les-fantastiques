@@ -4,10 +4,8 @@ from affichage import PygameView
 from plateforme import Plateforme
 from robot import Robot
 
+#si il y a une collision on remet le robot a son ancienne position on reinitialise les vitesse et on retourne false 
 
-
-
-//si il y a une collision on remet le robot a son ancienne position on reinitialise les vitesse et on retourne false 
 def deplacer_si_possible(robot, plateforme, action):
     x, y, t = robot.x, robot.y, robot.theta
     action()
