@@ -26,7 +26,16 @@ def main():
 
     robot = Robot(1, 1, 0, L=0.5, larg=0.5, long=0.7)
     
-    
+    vue = PygameView(plateforme, robot, TAILLE_PIXEL=60)
+
+    # carré auto
+    auto = False
+    etat = "avance"
+    nb = 0
+    cote = 2.0
+    x0, y0 = robot.x, robot.y
+    angle = 0.0
+
 
 if __name__ == "__main__":
     main()
