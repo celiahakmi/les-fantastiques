@@ -36,6 +36,26 @@ def main():
     x0, y0 = robot.x, robot.y
     angle = 0.0
 
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    running = False
+                elif event.key == pygame.K_SPACE:
+                    auto = True
+                    etat = "avance"
+                    nb = 0
+                    x0, y0 = robot.x, robot.y
+                    angle = 0.0
+
+        keys = pygame.key.get_pressed()
+        robot.vL = 0.0
+        robot.vR = 0.0
+        manuel = False
+
 
 if __name__ == "__main__":
     main()
