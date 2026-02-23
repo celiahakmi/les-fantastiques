@@ -17,10 +17,10 @@ class PygameView:
         pygame.display.set_caption("Simulation robot diff-drive")
         self.horloge = pygame.time.Clock()
 
-        def to_px(self, x, y):
-            return (int(x * self.TAILLE_PIXEL), int(y * self.TAILLE_PIXEL))
+    def to_px(self, x, y):
+        return (int(x * self.TAILLE_PIXEL), int(y * self.TAILLE_PIXEL))
         
-        def dessiner(self):
+    def dessiner(self):
         self.fenetre.fill((255, 255, 255))
 
         # Grille verticale
