@@ -41,5 +41,17 @@ class PygameView:
                 (0, y),
                 (int(self.plateforme.longueur * self.TAILLE_PIXEL), y),
             )
+        # Obstacles
+        for obs in self.plateforme.obstacles:
+            if obs[0] != "rect":
+                continue
+            _, x, y, largeur, hauteur = obs
+            rect = pygame.Rect(
+                int(x * self.TAILLE_PIXEL),
+                int(y * self.TAILLE_PIXEL),
+                int(largeur * self.TAILLE_PIXEL),
+                int(hauteur * self.TAILLE_PIXEL),
+            )
+            pygame.draw.rect(self.fenetre, (135, 233, 144), rect)
        
    
