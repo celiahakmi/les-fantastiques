@@ -1,5 +1,5 @@
 from .robot import Robot
 from .plateforme import Plateforme
-from .affichage import affichage
+from .affichage import PygameView
 
-__all__ = ["Robot", "Plateforme", "affichage"]
+__all__ = ["Robot", "Plateforme", "PygameView"]
