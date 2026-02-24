@@ -22,8 +22,6 @@ class Robot:
         self.pas: float = 0.1 
                      
     def avancer(self):
-        """ fait avancer le robot, condition : vL= vR"""
-        v = ( self.vL + self.vR)/ 2 #calcul de la vitesse du robot
         """ fait avancer le robot, condition : vL=vR"""
         v = (self.vL + self.vR)/ 2 #calcul de la vitesse du robot
         #calcul des déplacement de x et y pendant le pas 
