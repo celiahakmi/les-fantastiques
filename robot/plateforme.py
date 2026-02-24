@@ -1,5 +1,5 @@
 import math
-from robot import Robot 
+from .robot import Robot 
 
 class Plateforme:
     def __init__(self, longueur: float, hauteur: float):
