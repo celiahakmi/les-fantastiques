@@ -8,7 +8,7 @@ from affichage import PygameView
 def main():
     
     p = Plateforme(10, 10)
-    p.init_obstacle(2, 2, 2, 1)
+    p.init_obstacle(7, 6, 2, 1)
     p.init_obstacle(5, 5, 1, 1)
 
     r = Robot(5, 2, 0, 0.5, 0.5, 0.7, p)
