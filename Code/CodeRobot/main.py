@@ -1,14 +1,20 @@
-from plateforme import Plateforme
+import pygame
+import math
 from robot import Robot
+from plateforme2 import Plateforme
+from affichage import PygameView
+
 
 def main():
-    
-    plateforme = Plateforme(10, 10)
-    plateforme.init_obstacle(2, 2, 2, 1)
-    plateforme.init_obstacle(5, 5, 1, 1)
 
-    robot = Robot(1, 1, 0, L=0.5, larg=0.5, long=0.7)
-      view = PygameView(p, r, TAILLE_PIXEL=50)
+    p = Plateforme(10, 10)
+    p.init_obstacle(5, 5, 2, 2)
+    p.init_obstacle(1, 1, 1, 2)
+    
+
+    r = Robot(6, 7, 0, 1.0, 0.8, 1.2,plateforme=p)
+    
+    view = PygameView(p, r, TAILLE_PIXEL=50)
 
     nbcote = 0
     long_cote = 2
@@ -44,8 +50,8 @@ def main():
                 r.vL = -1.0
                 r.vR = 1.0
 
-                angle = (r.vR - r.vL) / r.L
-                angle_acc += abs(angle * r.pas)
+                omega = (r.vR - r.vL) / r.L
+                angle_acc += abs(omega * r.pas)
 
                 if angle_acc < math.pi / 2:
                     r.tourner()
