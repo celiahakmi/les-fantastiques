@@ -35,19 +35,19 @@ def main():
                 running = False
 #carré
         if etat == "avance":
-            r.vL = 0.1
-            r.vR = 0.1
+            r.vL = 0.3
+            r.vR = 0.3
             d = math.sqrt((r.x - x0)**2 + (r.y - y0)**2)
             if d < long_cote:
-                r.avancer()
+                p.deplacer_si_possible(r, r.avancer)
             else:
                 etat = "tourner"
                 angle_acc = 0.0
 
         elif etat == "tourner":
-            r.vL =-0.1
-            r.vR = 0.1
-            r.tourner()
+            r.vL =-0.2
+            r.vR = 0.2
+            p.deplacer_si_possible(r, r.tourner)
             angle = (r.vR - r.vL) / r.L
             angle_acc += abs(angle * r.pas)
 
@@ -87,14 +87,16 @@ def main():
                 if abs(erreur)>0.1:
                     r.vL=-0.1
                     r.vR=0.1
-                    r.tourner()
+                    if not p.deplacer_si_possible(r, r.tourner):
+                        r.vL=0
+                        r.vR=0
                 else:
                     r.vL=0.1
                     r.vR=0.1
-                    r.avancer()
-        elif etat=="chemin":
-            r.vL=0
-            r.vR=0
+                    if not p.deplacer_si_possible(r, r.avancer):
+                        r.vL=0
+                        r.vR=0
+        
             
         view.dessiner()
 
