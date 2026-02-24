@@ -23,7 +23,7 @@ def main():
     running = True
 
     while running:
-        view.horloge.tick(30)
+        view.horloge.tick(60)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -32,8 +32,8 @@ def main():
         if nbcote < 4:
 
             if etat == "avance":
-                r.vL = 1.0
-                r.vR = 1.0
+                r.vL = 0.1
+                r.vR = 0.1
 
                 d = math.sqrt((r.x - x0)**2 + (r.y - y0)**2)
 
@@ -45,7 +45,7 @@ def main():
 
             elif etat == "tourner":
                 r.vL = 0
-                r.vR = 1
+                r.vR = 0.1
 
                 angle = (r.vR - r.vL) / r.L
                 angle_acc += abs(angle * r.pas)
