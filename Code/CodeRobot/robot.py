@@ -47,6 +47,8 @@ class Robot:
     def tourner(self):
         """faire tourner le robot sur lui même 
             condition : les roues n'ont pas la même vitesse"""
+        #sauvegarde de l'ancien angle
+        ancien_theta = self.theta
         #calcul de la vitesse angulaire
         v_ang = ( self.vR - self.vL)/ self.L 
         #calcul et attribution du nouvel angle du robot après rotation
