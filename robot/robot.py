@@ -98,6 +98,19 @@ class Robot:
 
              
 if __name__ == "__main__":
+    
+    #Création de cette classe minimale pour les tests
+    class Plateforme:
+        def __init__(self, largeur, hauteur):
+            self.largeur = largeur
+            self.hauteur = hauteur
+        
+        def collision_robot(self, robot):
+            # Une vérification simple des limites du terrain
+            if abs(robot.x) > self.largeur or abs(robot.y) > self.hauteur:
+                return True
+            return False
+    
 
     #test fonction init 
     p = Plateforme(20, 20)
@@ -143,3 +156,4 @@ if __name__ == "__main__":
     print(f"x final ≈ 0 : {abs(r.x) < 1e-6}")
     print(f"y final ≈ 0 : {abs(r.y) < 1e-6}")
     print(f"theta final ≈ 0 : {abs(r.theta % (2*math.pi)) < 1e-6}")
+
