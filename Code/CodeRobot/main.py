@@ -61,40 +61,38 @@ def main():
                 else:
                     etat="chemin"
 
-
-        else:
-            etat="chemin" 
-
         #chemin
         taille_chemin= len(chemin)
 
         if etat=="chemin" and idx_p<taille_chemin:
-            tx,ty=chemin[idx_p]
-            dx=tx-r.x
-            dy=ty-r.y
-            distance=math.sqrt(dx**2+dy**2)
-
-            if distance<0.1:
-                idx_p+=1
+            if r.reaction_obstacle(1.0)!="rien":
                 r.vL=0
                 r.vR=0
+            else:
+                tx,ty=chemin[idx_p]
+                dx=tx-r.x
+                dy=ty-r.y
+                distance=math.sqrt(dx**2+dy**2)
 
-            else: #angle vers le point
-                angle_cible=math.atan2(dy,dx) 
-                erreur=angle_cible-r.theta
-                erreur=(erreur +math.pi)%(2*math.pi)-math.pi
+                if distance<0.1:
+                    idx_p+=1
+                    r.vL=0
+                    r.vR=0
 
-                if abs(erreur)>0.1:
-                    r.vL=-0.1
-                    r.vR=0.1
-                    r.tourner()
-                else:
-                    r.vL=0.1
-                    r.vR=0.1
-                    r.avancer()
-        elif etat=="chemin":
-            r.vL=0
-            r.vR=0
+                else: #angle vers le point
+                    angle_cible=math.atan2(dy,dx) 
+                    erreur=angle_cible-r.theta
+                    erreur=(erreur +math.pi)%(2*math.pi)-math.pi
+
+                    if abs(erreur)>0.1:
+                        r.vL=-0.1
+                        r.vR=0.1
+                        r.tourner()
+                    else:
+                        r.vL=0.1
+                        r.vR=0.1
+                        r.avancer()
+        
             
         view.dessiner()
 
