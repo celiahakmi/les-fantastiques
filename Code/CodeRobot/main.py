@@ -22,6 +22,7 @@ def main():
     angle_acc = 0.0
     chemin = [(8, 2), (8, 8), (2, 8)]
     idx_p = 0 #index du point courant
+    etat="avance"
     
     running = True
 
