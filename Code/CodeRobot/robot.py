@@ -2,7 +2,7 @@ import math
 
 class Robot: 
     def __init__(self, x : float, y : float, theta : float, 
-                 L : float, larg : float, long : float):
+        L : float, larg : float, long : float,plateforme: Plateforme):
         """ initialise le robot avec 
             - position 
             - orientation 
@@ -15,6 +15,7 @@ class Robot:
         self.L = float(L)
         self.larg = float(larg)
         self.long = float(long)
+        self.plateforme=plateforme
         #attribut variable du robot 
         self.vL: float = 0.0
         self.vR: float = 0.0
@@ -34,7 +35,7 @@ class Robot:
         #calcul des nouvelles positions x et y du robot
         self.x = self.x + delta_x
         self.y = self.y + delta_y
-        if plateforme.collision_robot(self):
+        if self.plateforme.collision_robot(self):
             #si collision, on annule le mouvement
             self.x = ancien_x
             self.y = ancien_y
@@ -50,6 +51,11 @@ class Robot:
         v_ang = ( self.vR - self.vL)/ self.L 
         #calcul et attribution du nouvel angle du robot après rotation
         self.theta = self.theta + ( v_ang * self.pas )
+        if self.plateforme.collision_robot(self):
+            self.theta = ancien_theta
+            self.vL = 0.0
+            self.vR = 0.0
+       
     def carre(self):
         nbcote = 0
         long_cote = 2
