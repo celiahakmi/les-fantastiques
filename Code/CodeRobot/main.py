@@ -1,3 +1,4 @@
+
 import pygame
 import math
 from plateforme import Plateforme
@@ -62,6 +63,20 @@ def main():
 
         else:
             etat="chemin" 
+
+        #chemin
+        taille_chemin= len(chemin)
+        
+        if etat=="chemin" and idx_p<taille_chemin:
+            tx,ty=chemin[idx_p]
+            dx=tx-r.x
+            dy=ty-r.y
+            distance=math.sqrt(dx**2+dy**2)
+
+            if distance<0.1:
+                idx_p+=1
+                r.vL=0
+                r.vR=0
 
         view.dessiner()
 
