@@ -19,7 +19,9 @@ def main():
     x0 = r.x
     y0 = r.y
     angle_acc = 0.0
-
+    chemin = [(8, 2), (8, 8), (2, 8)]
+    idx_p = 0 #index du point courant
+    
     running = True
 
     while running:
