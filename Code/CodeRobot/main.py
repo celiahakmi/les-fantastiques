@@ -61,8 +61,7 @@ def main():
                     y0 = r.y
 
         else:
-            r.vL = 0
-            r.vR = 0
+            etat="chemin" 
 
         view.dessiner()
 
