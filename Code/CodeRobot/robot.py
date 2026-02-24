@@ -19,7 +19,10 @@ class Robot:
         self.vL: float = 0.0
         self.vR: float = 0.0
         self.pas: float = 0.1 
+                     
     def avancer(self):
+        """ fait avancer le robot, condition : vL= vR"""
+        v = ( self.vL + self.vR)/ 2 #calcul de la vitesse du robot
         """ fait avancer le robot, condition : vL=vR"""
         v = (self.vL + self.vR)/ 2 #calcul de la vitesse du robot
         #calcul des déplacement de x et y pendant le pas 
@@ -31,6 +34,13 @@ class Robot:
         #calcul des nouvelles positions x et y du robot
         self.x = self.x + delta_x
         self.y = self.y + delta_y
+        if plateforme.collision_robot(self):
+            #si collision, on annule le mouvement
+            self.x = ancien_x
+            self.y = ancien_y
+            #on arrête les roues
+            self.vL = 0.0
+            self.vR = 0.0
         
             
     def tourner(self):
