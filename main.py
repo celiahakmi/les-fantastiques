@@ -21,7 +21,7 @@ def main():
     y0 = r.y
     angle_acc = 0.0
 
-    chemin = [(8, 1), (8, 8), (2, 8)]
+    chemin = [(1, 8), (8, 8), (2, 8)]
     idx_p = 0 #index du point courant
     etat="avance"
     
