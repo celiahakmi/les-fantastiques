@@ -2,7 +2,7 @@
 import pygame
 import math
 from robot.plateforme import Plateforme
-from robot import Robot
+from robot.robot import Robot
 from robot.affichage import PygameView
 
 def main():
