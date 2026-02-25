@@ -21,8 +21,6 @@ class Robot:
         self.pas: float = 0.1 
                      
     def avancer(self):
-        """ fait avancer le robot, condition : vL= vR"""
-        v = ( self.vL + self.vR)/ 2 #calcul de la vitesse du robot
         """ fait avancer le robot, condition : vL=vR"""
         v = (self.vL + self.vR)/ 2 #calcul de la vitesse du robot
         #calcul des déplacement de x et y pendant le pas 
@@ -156,4 +154,5 @@ if __name__ == "__main__":
     print(f"x final ≈ 0 : {abs(r.x) < 1e-6}")
     print(f"y final ≈ 0 : {abs(r.y) < 1e-6}")
     print(f"theta final ≈ 0 : {abs(r.theta % (2*math.pi)) < 1e-6}")
+
 
