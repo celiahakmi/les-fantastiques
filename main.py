@@ -35,8 +35,8 @@ def main():
                 running = False
 #carré
         if etat == "avance":
-            r.vL = 0.3
-            r.vR = 0.3
+            r.vL = 0.2
+            r.vR = 0.2
             d = math.sqrt((r.x - x0)**2 + (r.y - y0)**2)
             if d < long_cote:
                 p.deplacer_si_possible(r, r.avancer)
@@ -45,8 +45,8 @@ def main():
                 angle_acc = 0.0
 
         elif etat == "tourner":
-            r.vL =-0.2
-            r.vR = 0.2
+            r.vL = 0
+            r.vR = 0.1
             p.deplacer_si_possible(r, r.tourner)
             angle = (r.vR - r.vL) / r.L
             angle_acc += abs(angle * r.pas)
@@ -85,7 +85,7 @@ def main():
                 erreur=(erreur +math.pi)%(2*math.pi)-math.pi
 
                 if abs(erreur)>0.1:
-                    r.vL=-0.1
+                    r.vL= 0
                     r.vR=0.1
                     if not p.deplacer_si_possible(r, r.tourner):
                         r.vL=0
