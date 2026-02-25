@@ -21,14 +21,14 @@ def main():
     y0 = r.y
     angle_acc = 0.0
 
-    chemin = [(8, 2), (8, 8), (2, 8)]
+    chemin = [(8, 1), (8, 8), (2, 8)]
     idx_p = 0 #index du point courant
     etat="avance"
     
     running = True
 
     while running:
-        view.horloge.tick(60)
+        view.horloge.tick(100)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
