@@ -47,7 +47,7 @@ class Tourner:
         self.angle_parcouru = 0.0
         self.theta_prec = 0.0
 
-     def start(self):
+    def start(self):
         """initialisation des variables"""
         self.angle_parcouru = 0.0
         self.theta_prec = self.robot.theta
