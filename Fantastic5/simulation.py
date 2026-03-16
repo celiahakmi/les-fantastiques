@@ -120,7 +120,9 @@ class Robot:
         
         return nouveau_x, nouveau_y, nouveau_theta
         
-        return nouveau_x, nouveau_y, nouveau_theta
-    
+
+    def appliquer_mouvement(self, nx : float, ny : float, nt : float):
+        """ Applique les nouvelles coordonnées """
+        self.x, self.y, self.theta = nx, ny, nt
 
              
