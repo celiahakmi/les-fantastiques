@@ -38,6 +38,19 @@ class AvancerDroit:
 
     def stop(self):
         return self.parcouru >= self.distance
+
+
+class Tourner:
+    def __init__(self, robot, angle_deg):
+        self.robot = robot
+        self.angle = math.radians(angle_deg)
+        self.angle_parcouru = 0.0
+        self.theta_prec = 0.0
+
+
+
+
+    
     
 
         
