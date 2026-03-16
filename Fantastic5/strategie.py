@@ -71,6 +71,10 @@ class Tourner:
         self.angle_parcouru = difftheta + self.angle_parcouru
         #maj ancien angle
         self.theta_prec = self.robot.theta
+
+    def stop(self):
+        """renvoie true si angle demandé atteint"""
+        return self.angle_parcouru >= self.angle
  
 
     
