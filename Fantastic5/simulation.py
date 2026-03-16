@@ -105,6 +105,23 @@ class Robot:
         self.x = self.x + v * math.cos(self.theta) * self.pas
         self.y = self.y + v * math.sin(self.theta) * self.pas
         self.theta = self.theta + w * self.pas
+        
 
+    def update(self):
+        """Calcule le prochain mouvement sans l'appliquer"""
+        # Calcul des vitesses angulaires
+        v_angG = self.vL / (self.rayon)
+        v_angD = self.vR / (self.rayon)
+        
+        # Calcul du déplacement 
+        vitesse_lineaire = (self.vL + self.vR) / 2
+        vitesse_angulaire = (self.vR - self.vL) / self.L
+        
+        nouveau_x = self.x + vitesse_lineaire * math.cos(self.theta) * self.pas
+        nouveau_y = self.y + vitesse_lineaire * math.sin(self.theta) * self.pas
+        nouveau_theta = self.theta + vitesse_angulaire * self.pas
+        
+        return nouveau_x, nouveau_y, nouveau_theta
+    
 
              
