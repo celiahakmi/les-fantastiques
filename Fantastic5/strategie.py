@@ -92,5 +92,25 @@ class TracerCarre:
         self.tourner_apres = False
         #on commence par avancer
         self.strategie = AvancerDroit(self.robot, self.cote)
-        self.strategie.start()   
+        self.strategie.start()  
+
+    def step(self):
+        if self.stop():
+            return
+        self.strategie.step()
+        
+        if self.strategie.stop():
+            if not self.tourner_apres:
+                #apres avoir avancer on tourne de 90 degres
+                self.strategie = Tourner(self.robot, 90)
+                self.tourner_apres = True
+            else:
+                #sinon on incremente le nb de cotes
+                self.nb_cotes += 1
+                #on recommence 
+                if self.nb_cotes < 4:
+                    self.strategie = AvancerDroit(self.robot, self.cote)
+                    self.tourner_prochain = False
+
+            self.strategie.start()
     
