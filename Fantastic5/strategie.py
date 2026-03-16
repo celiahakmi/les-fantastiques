@@ -56,10 +56,22 @@ class Tourner:
         self.robot.vL = -1.0
         self.robot.vR = 1.0
 
-    
+    def step(self):
+        """execute un pas de la stratégie"""
+        if self.stop():
+            self.robot.vL = 0.0
+            self.robot.vR = 0.0
+            return
 
+        self.robot.deplacer()
 
+        #on calcule la variation d'angle dpuis le dernier pas
+        difftheta = abs(self.robot.theta - self.theta_prec)
 
+        self.angle_parcouru = difftheta + self.angle_parcouru
+        #maj ancien angle
+        self.theta_prec = self.robot.theta
+ 
 
     
     
