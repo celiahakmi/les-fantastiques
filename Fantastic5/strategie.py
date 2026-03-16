@@ -35,6 +35,9 @@ class AvancerDroit:
         # on met à jour les coordonnées pour le prochain calcul
         self.x_prec = self.robot.x
         self.y_prec = self.robot.y
+
+    def stop(self):
+        return self.parcouru >= self.distance
     
 
         
