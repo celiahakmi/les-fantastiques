@@ -135,7 +135,7 @@ class Robot:
                 # distance parcourue sur le côté
                 d = math.sqrt((self.x - x0)**2 + (self.y - y0)**2)
                 if d < long_cote:
-                    self.avancer()
+                    self.deplacer()
                 else:
                     etat = "tourner"
                     angle_acc = 0.0
@@ -147,7 +147,7 @@ class Robot:
                 omega = (self.vR - self.vL) / self.L
                 angle_acc += abs(omega * self.pas)
                 if angle_acc < math.pi / 2:
-                    self.tourner()
+                    self.deplacer()
                 else:
                     nbcote += 1
                     etat = "avance"
