@@ -28,5 +28,14 @@ class AvancerDroit:
         # sinon on déplace le robot
         self.robot.deplacer()
 
+        # on calcule la distance qu'on vient de parcourir sur ce pas
+        distance_du_pas = math.sqrt((self.robot.x - self.x_prec)**2 + (self.robot.y - self.y_prec)**2)
+        self.parcouru += distance_du_pas
+        
+        # on met à jour les coordonnées pour le prochain calcul
+        self.x_prec = self.robot.x
+        self.y_prec = self.robot.y
+    
+
         
     
