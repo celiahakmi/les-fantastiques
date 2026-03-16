@@ -78,7 +78,13 @@ class Tourner:
  
 
     
-    
+class TracerCarre:
+    def __init__(self, robot, cote):
+        self.robot = robot
+        self.cote = cote
+        self.nb_cotes = 0         
+        self.strategie = None   #sous-strategie actuelle
+        self.tourner_apres = False  
 
         
     
