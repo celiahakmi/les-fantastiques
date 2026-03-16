@@ -113,4 +113,7 @@ class TracerCarre:
                     self.tourner_prochain = False
 
             self.strategie.start()
-    
+            
+    def stop(self):
+        #on s'arrete lorsqu'on a tracé nos 4 cotes
+        return self.nb_cotes >= 4
