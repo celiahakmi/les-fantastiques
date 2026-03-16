@@ -108,18 +108,17 @@ class Robot:
         
 
     def update(self):
-        """Calcule le prochain mouvement sans l'appliquer"""
-        # Calcul des vitesses angulaires
-        v_angG = self.vL / (self.rayon)
-        v_angD = self.vR / (self.rayon)
-        
-        # Calcul du déplacement 
-        vitesse_lineaire = (self.vL + self.vR) / 2
+        """Calcule le prochain mouvement théorique sans l'appliquer"""
+        # Calcul du déplacement basé sur vL, vR et L (l'entraxe)
+        vitesse_lineaire = (self.vL + self.vR) / 2.0
         vitesse_angulaire = (self.vR - self.vL) / self.L
         
+        # Prédiction des nouvelles coordonnées
         nouveau_x = self.x + vitesse_lineaire * math.cos(self.theta) * self.pas
         nouveau_y = self.y + vitesse_lineaire * math.sin(self.theta) * self.pas
         nouveau_theta = self.theta + vitesse_angulaire * self.pas
+        
+        return nouveau_x, nouveau_y, nouveau_theta
         
         return nouveau_x, nouveau_y, nouveau_theta
     
