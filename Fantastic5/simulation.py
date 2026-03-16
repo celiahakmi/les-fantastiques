@@ -105,46 +105,6 @@ class Robot:
         self.x = self.x + v * math.cos(self.theta) * self.pas
         self.y = self.y + v * math.sin(self.theta) * self.pas
         self.theta = self.theta + w * self.pas
-       
-    def carre(self):
-        nbcote = 0
-        long_cote = 2
-        etat = "avance"
-        x0 = self.x
-        y0 = self.y
-        theta0 = self.theta
-        angle_acc = 0.0
-        max_iter = 10000
-        n_iter = 0
-
-        while nbcote < 4 and n_iter < max_iter:
-            n_iter += 1
-            if etat == "avance":
-                self.vL = 1.0
-                self.vR = 1.0
-                # distance parcourue sur le côté
-                d = math.sqrt((self.x - x0)**2 + (self.y - y0)**2)
-                if d < long_cote:
-                    self.deplacer()
-                else:
-                    etat = "tourner"
-                    angle_acc = 0.0
-                    theta0 = self.theta
-
-            elif etat == "tourner":
-                self.vL = -1.0
-                self.vR = 1.0
-                omega = (self.vR - self.vL) / self.L
-                angle_acc += abs(omega * self.pas)
-                if angle_acc < math.pi / 2:
-                    self.deplacer()
-                else:
-                    nbcote += 1
-                    etat = "avance"
-                    x0 = self.x
-                    y0 = self.y
-        self.vL = 0.0
-        self.vR = 0.0
 
 
              
