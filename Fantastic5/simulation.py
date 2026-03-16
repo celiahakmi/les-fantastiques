@@ -106,8 +106,15 @@ class Robot:
         self.y = self.y + v * math.sin(self.theta) * self.pas
         self.theta = self.theta + w * self.pas
 
-          
+        if self.plateforme.collision_robot(self):
+            # Si collision on annule tout le mouvement
+            self.x = ancien_x
+            self.y = ancien_y
+            self.theta = ancien_theta
             
+            #stop les moteurs
+            self.vL = 0.0
+            self.vR = 0.0 
        
     def carre(self):
         nbcote = 0
