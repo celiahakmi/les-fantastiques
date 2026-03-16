@@ -86,5 +86,11 @@ class TracerCarre:
         self.strategie = None   #sous-strategie actuelle
         self.tourner_apres = False  
 
-        
+    def start(self):
+        """initialisation des variables"""
+        self.nb_cotes = 0
+        self.tourner_apres = False
+        #on commence par avancer
+        self.strategie = AvancerDroit(self.robot, self.cote)
+        self.strategie.start()   
     
