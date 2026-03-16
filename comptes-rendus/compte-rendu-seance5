@@ -1,0 +1,3 @@
+#Compte-rendu de la séance 5 
+Lors de la séance 5 nous avons présenté notre démonstration qui consistait à déplacer le robot sans l'utilisation du clavier, dans un plan continu. Le robot devait s'arrêter lors d'une collision avec un obstacle/mur. Nous avons également changé la structure du proje tt  passant de scripts à des modules. Nous avons convenu que pour la séance prochaine, nous devrions  introduire les statégies : start, stop, step, update, fusionner les fonctions avancer et tourner, utiliser les stratégies pour faire déplacer le robot en carré et enfin  remodeler la structure du projet avec des modules et sous modules plus précis. 
+
