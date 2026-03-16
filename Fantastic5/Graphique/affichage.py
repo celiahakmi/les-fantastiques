@@ -3,7 +3,7 @@ import pygame
 
 
 class PygameView:
-    def __init__(self, plateforme, robot, TAILLE_PIXEL=40):
+    def __init__(self, plateforme, robot, TAILLE_PIXEL: int =40):
         self.plateforme = plateforme
         self.robot = robot
         self.TAILLE_PIXEL = int(TAILLE_PIXEL)
@@ -17,7 +17,7 @@ class PygameView:
         pygame.display.set_caption("Simulation robot diff-drive")
         self.horloge = pygame.time.Clock()
 
-    def to_px(self, x, y):
+    def to_px(self, x: float, y : float):
         return (int(x * self.TAILLE_PIXEL), int(y * self.TAILLE_PIXEL))
         
     def dessiner(self):
