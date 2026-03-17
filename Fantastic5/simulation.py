@@ -78,25 +78,6 @@ class Robot:
         self.vR: float = 0.0
         self.pas: float = 0.1 
                      
-    
-    def deplacer(self):
-        #Sauvegarde de l'ancienne position
-        ancien_x = self.x
-        ancien_y = self.y
-        ancien_theta = self.theta
-
-        #Calcul des vitesses globale et angulaire
-        v = (self.vL + self.vR) / 2.0
-        w = (self.vR - self.vL) / self.L
-
-        #Mise à jour de la position et de l'orientation
-        self.x = self.x + v * math.cos(self.theta) * self.pas
-        self.y = self.y + v * math.sin(self.theta) * self.pas
-        self.theta = self.theta + w * self.pas
-        
-        if self.plateforme.collision_robot(self):
-            self.vL = 0.0
-            self.vR = 0.0
 
     def update(self):
         """Calcule le prochain mouvement sans l'appliquer"""
