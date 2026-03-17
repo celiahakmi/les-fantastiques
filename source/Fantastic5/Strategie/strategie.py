@@ -60,8 +60,8 @@ class Tourner:
     def step(self):
         """execute un pas de la stratégie"""
         if self.stop():
-            self.robot.vL = 0.0
-            self.robot.vR = 0.0
+            self.robot.vL = -1.0
+            self.robot.vR = 1.0
             return
 
         self.robot.vL = -1.0
