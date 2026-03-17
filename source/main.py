@@ -12,9 +12,19 @@ def main():
     r = Robot(5, 2, 0, 0.5, 0.5, 0.7, p)
     view = PygameView(p, r, 50)
 
-    # instanciation d'une stratégie
-    strat = TracerCarre(r,2.0)
-    strat.start()
+    distance_cote = 2.0
+    angle_rotation = 90
+
+    actions_carre = [
+        AvancerDroit(r, distance_cote),
+        Tourner(r, angle_rotation),
+        AvancerDroit(r, distance_cote),
+        Tourner(r, angle_rotation),
+        AvancerDroit(r, distance_cote),
+        Tourner(r, angle_rotation),
+        AvancerDroit(r, distance_cote),
+        Tourner(r, angle_rotation)
+    ]
 
     running = True
 
