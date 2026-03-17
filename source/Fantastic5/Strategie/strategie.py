@@ -85,5 +85,17 @@ class StrategieSequentielle:
     def __init__(self, strats):
         self.strats = strats
         self.cur = -1
+    def start(self):
+        self.cur = -1
+
+    def step(self):
+        if self.stop():
+            return
+            
+        if self.cur < 0 or self.strats[self.cur].stop():
+            self.cur += 1
+            self.strats[self.cur].start()
+            
+        
 
     
