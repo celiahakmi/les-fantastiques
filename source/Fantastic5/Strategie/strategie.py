@@ -28,8 +28,6 @@ class AvancerDroit:
         self.robot.vL=1.0
         self.robot.vR=1.0
 
-        # sinon on déplace le robot
-        self.robot.update()
 
         # on calcule la distance qu'on vient de parcourir sur ce pas
         distance_du_pas = math.sqrt((self.robot.x - self.x_prec)**2 + (self.robot.y - self.y_prec)**2)
@@ -69,7 +67,6 @@ class Tourner:
         self.robot.vL = -1.0
         self.robot.vR = 1.0
 
-        self.robot.update()
 
         #on calcule la variation d'angle dpuis le dernier pas
         difftheta = abs(self.robot.theta - self.theta_prec)
