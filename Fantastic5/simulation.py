@@ -99,21 +99,28 @@ class Robot:
             self.vR = 0.0
 
     def update(self):
-        """Calcule le prochain mouvement théorique sans l'appliquer"""
-        # Calcul du déplacement basé sur vL, vR et L (l'entraxe)
+        """Calcule le prochain mouvement sans l'appliquer"""
+        #Sauvegarde de la position actuelle au cas où on doive annuler
+        ancien_x, ancien_y, ancien_theta = self.x, self.y, self.theta
+
+        # Calcul des vitesses 
         vitesse_lineaire = (self.vL + self.vR) / 2.0
         vitesse_angulaire = (self.vR - self.vL) / self.L
-        
-        # Prédiction des nouvelles coordonnées
-        nouveau_x = self.x + vitesse_lineaire * math.cos(self.theta) * self.pas
-        nouveau_y = self.y + vitesse_lineaire * math.sin(self.theta) * self.pas
-        nouveau_theta = self.theta + vitesse_angulaire * self.pas
-        
-        return nouveau_x, nouveau_y, nouveau_theta
-        
 
-    def appliquer_mouvement(self, nx : float, ny : float, nt : float):
-        """ Applique les nouvelles coordonnées """
-        self.x, self.y, self.theta = nx, ny, nt
+        # Calcul de la position 
+        self.x += vitesse_lineaire  * math.cos(self.theta) * self.pas
+        self.y += vitesse_lineaire  * math.sin(self.theta) * self.pas
+        self.theta += vitesse_angulaire * self.pas
+
+        # Vérification de la collision via la plateforme
+        if self.plateforme.collision_robot(self):
+            # Collision détectée 
+            print("Oups, le robot s'est congné")
+            self.vL = 0.0
+            self.vR = 0.0
+            return False 
+            
+        return True 
+   
 
              
