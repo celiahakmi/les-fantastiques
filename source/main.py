@@ -32,7 +32,7 @@ def main():
             r.vL, r.vR = 0, 0 # On s'arrête si la stratégie est finie
 
 
-        # calcule du futur théorique (via ta nouvelle fonction dans Robot)
+        # maj position robot
         r.update()
 
         # validation ou annulation de la plateforme
