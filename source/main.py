@@ -23,11 +23,10 @@ def main():
         AvancerDroit(r, distance_cote),
         Tourner(r, angle_rotation),
         AvancerDroit(r, distance_cote),
-        Tourner(r, angle_rotation) ]
-   
-    # on instancie la stratégie séquentielle avec la liste
+        Tourner(r, angle_rotation)
+    ]
+    
     strat = StrategieSequentielle(actions_carre)
-    strat.start()
     
     running = True
 
