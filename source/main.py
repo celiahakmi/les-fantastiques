@@ -1,7 +1,7 @@
 import pygame
 import math
 from Fantastic5.simulation import Plateforme, Robot
-from Fantastic5.strategie import AvancerDroit, Tourner, TracerCarre
+from Fantastic5.strategie import AvancerDroit, Tourner, StrategieSequentielle
 from Fantastic5.Graphique.affichage import PygameView
 
 def main():
