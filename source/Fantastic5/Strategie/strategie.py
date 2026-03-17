@@ -113,7 +113,7 @@ class TracerCarre:
                 #on recommence 
                 if self.nb_cotes < 4:
                     self.strategie = AvancerDroit(self.robot, self.cote)
-                    self.tourner_prochain = False
+                    self.tourner_apres = False
 
             self.strategie.start()
             
