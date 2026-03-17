@@ -69,7 +69,7 @@ class Tourner:
         self.robot.vL = -1.0
         self.robot.vR = 1.0
 
-        self.robot.deplacer()
+        self.robot.update()
 
         #on calcule la variation d'angle dpuis le dernier pas
         difftheta = abs(self.robot.theta - self.theta_prec)
