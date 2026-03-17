@@ -13,7 +13,7 @@ def main():
     view = PygameView(p, r, 50)
 
     # instanciation d'une stratégie
-    strat = AvancerDroit(r, 7.0) # avancer de 2m
+    strat = TracerCarre(r,2.0)
     strat.start()
 
     running = True
