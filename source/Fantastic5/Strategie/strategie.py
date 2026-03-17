@@ -66,6 +66,9 @@ class Tourner:
             self.robot.vR = 0.0
             return
 
+        self.robot.vL = -1.0
+        self.robot.vR = 1.0
+
         self.robot.deplacer()
 
         #on calcule la variation d'angle dpuis le dernier pas
