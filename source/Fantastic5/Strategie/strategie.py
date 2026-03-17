@@ -25,6 +25,9 @@ class AvancerDroit:
             self.robot.vR = 0.0
             return
 
+        self.robot.vL=1.0
+        self.robot.vR=1.0
+
         # sinon on déplace le robot
         self.robot.deplacer()
 
