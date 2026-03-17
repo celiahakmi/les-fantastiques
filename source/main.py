@@ -1,7 +1,7 @@
 import pygame
 import math
 from Fantastic5.simulation import Plateforme, Robot
-from Fantastic5.strategie import AvancerDroit, Tourner, StrategieSequentielle
+from Fantastic5.strategie import AvancerDroit, Tourner, TracerCarre
 from Fantastic5.Graphique.affichage import PygameView
 
 def main():
@@ -12,22 +12,10 @@ def main():
     r = Robot(5, 2, 0, 0.5, 0.5, 0.7, p)
     view = PygameView(p, r, 50)
 
-    distance_cote = 2.0
-    angle_rotation = 90
+    # instanciation d'une stratégie
+    strat = TracerCarre(r,2.0)
+    strat.start()
 
-    actions_carre = [
-        AvancerDroit(r, distance_cote),
-        Tourner(r, angle_rotation),
-        AvancerDroit(r, distance_cote),
-        Tourner(r, angle_rotation),
-        AvancerDroit(r, distance_cote),
-        Tourner(r, angle_rotation),
-        AvancerDroit(r, distance_cote),
-        Tourner(r, angle_rotation)
-    ]
-    
-    strat = StrategieSequentielle(actions_carre)
-    
     running = True
 
     while running:
