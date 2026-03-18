@@ -14,8 +14,8 @@ class AvancerDroit:
         self.x_prec = self.robot.x
         self.y_prec = self.robot.y
         # vitesse moteurs pour aller tout droit
-        self.robot.vL = 1.0
-        self.robot.vR = 1.0
+        self.robot.vL = 0.1
+        self.robot.vR = 0.1
    
     def step(self):
         """on fait avancer le robot d'un pas et on calcule la distance"""
@@ -25,9 +25,9 @@ class AvancerDroit:
             self.robot.vR = 0.0
             return
 
-        self.robot.vL=1.0
-        self.robot.vR=1.0
-
+        self.robot.vL= 0.1
+        self.robot.vR= 0.1
+ 
 
         # on calcule la distance qu'on vient de parcourir sur ce pas
         distance_du_pas = math.sqrt((self.robot.x - self.x_prec)**2 + (self.robot.y - self.y_prec)**2)
@@ -55,7 +55,7 @@ class Tourner:
 
         #rotation sur place
         self.robot.vL = 0.0
-        self.robot.vR = 1.0
+        self.robot.vR = 0.1
 
     def step(self):
         """execute un pas de la stratégie"""
@@ -65,7 +65,7 @@ class Tourner:
             return
 
         self.robot.vL = 0.0
-        self.robot.vR = 1.0
+        self.robot.vR = 0.1
 
 
         #on calcule la variation d'angle dpuis le dernier pas
