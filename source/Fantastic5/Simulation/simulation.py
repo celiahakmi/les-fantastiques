@@ -58,6 +58,18 @@ class Plateforme:
                     return True
         return False
 
+    #si il y a une collision on remet le robot a son ancienne position on reinitialise les vitesse et on retourne false
+    def deplacer_si_possible(self, robot, action):
+        x, y, t = robot.x, robot.y, robot.theta
+        action()
+        if self.collision_robot(robot):
+            robot.x, robot.y, robot.theta = x, y, t
+            robot.vL = 0.0
+            robot.vR = 0.0
+            return False
+        return True
+
+
 class Robot: 
     def __init__(self, x : float, y : float, theta : float, L : float, larg : float, long : float,plateforme):
         """ initialise le robot avec 
@@ -97,11 +109,12 @@ class Robot:
         if self.plateforme.collision_robot(self):
             # Collision détectée 
             print("Oups, le robot s'est congné")
+            self.x, self.y, self.theta = ancien_x, ancien_y, ancien_theta
             self.vL = 0.0
             self.vR = 0.0
             return False 
             
         return True 
-   
-
-             
+       
+       
+       
