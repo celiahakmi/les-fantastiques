@@ -4,9 +4,10 @@ from Fantastic5.Graphique.affichage import PygameView
 from Fantastic5.Simulation.simulation import Plateforme, Robot
 from Fantastic5.Strategie.strategie import AvancerDroit, Tourner, TracerCarre
 
+
 def main():
     p = Plateforme(10, 10)
-    p.init_obstacle(1, 6, 2, 1)
+    p.init_obstacle(8, 3, 2, 1)
     p.init_obstacle(5, 5, 1, 1)
 
     r = Robot(5, 2, 0, 0.5, 0.5, 0.7, p)
@@ -19,7 +20,7 @@ def main():
     running = True
 
     while running:
-        view.horloge.tick(10)
+        view.horloge.tick(30)
 
         if not strat.stop():
             strat.step()
@@ -28,7 +29,7 @@ def main():
             if not avancer:
                 print("Carré terminé")
                 # On remplace la stratégie par une nouvelle
-                strat = AvancerDroit(r, 2.0) # Avance de 10m
+                strat = AvancerDroit(r, 10.0) # Avance de 10m
                 strat.start()
                 avancer = True 
             else:
