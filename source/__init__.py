@@ -1,5 +1,5 @@
-from .simulation import Robot, Plateforme
-from .strategie import AvancerDroit, Tourner,TracerCarre
 from .Graphique.affichage import PygameView
+from .Simulation.simulation import Plateforme, Robot
+from .Stratégie.strategie import AvancerDroit, Tourner, TracerCarre
 
-__all__ = ["Robot", "Plateforme", "AvancerDroit", "Tourner","TracerCarre", "PygameView"]
+__all__ = ["PygameView","Plateforme","Robot","AvancerDroit","Tourner","TracerCarre"]
