@@ -20,7 +20,7 @@ def main():
     running = True
 
     while running:
-        view.horloge.tick(30)
+        view.horloge.tick(300)
 
         if not strat.stop():
             strat.step()
