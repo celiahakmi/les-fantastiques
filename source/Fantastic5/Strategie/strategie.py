@@ -54,17 +54,17 @@ class Tourner:
         self.theta_prec = self.robot.theta
 
         #rotation sur place
-        self.robot.vL = -1.0
+        self.robot.vL = 0.0
         self.robot.vR = 1.0
 
     def step(self):
         """execute un pas de la stratégie"""
         if self.stop():
-            self.robot.vL = -1.0
+            self.robot.vL = 0.0
             self.robot.vR = 1.0
             return
 
-        self.robot.vL = -1.0
+        self.robot.vL = 0.0
         self.robot.vR = 1.0
 
 
@@ -78,9 +78,8 @@ class Tourner:
     def stop(self):
         """renvoie true si angle demandé atteint"""
         return self.angle_parcouru >= self.angle
- 
 
-    
+
 class TracerCarre:
     def __init__(self, robot, cote):
         self.robot = robot
