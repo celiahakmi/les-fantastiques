@@ -52,6 +52,16 @@ class TestTourner(unittest.TestCase):
         self.plateforme = Plateforme(10.0, 10.0)
         self.robot = Robot(5.0, 5.0, 0.0, 0.5, 0.5, 0.7, self.plateforme)
         self.strat = Tourner(self.robot, 90)
+    def test_start(self):
+        self.strat.start()
+        self.assertEqual(self.robot.vL, 0.0)
+        self.assertEqual(self.robot.vR, 0.1)
+    def test_stop(self):
+        self.strat.angle_parcouru = math.radians(90)
+        self.assertTrue(self.strat.stop())
+
+if __name__ == '__main__':
+    unittest.main()
     
 
 
