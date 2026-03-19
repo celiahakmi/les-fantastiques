@@ -3,3 +3,19 @@ import math
 
 from Fantastic5.Simulation.simulation import Plateforme, Robot
 from Fantastic5.Strategie.strategie import AvancerDroit, Tourner, TracerCarre
+
+#les unittests de la classe plateforme
+class TestPlateforme(unittest.TestCase):
+    def setUp(self):
+        self.plateforme = Plateforme(10.0, 10.0)
+
+    def test_est_valide(self):
+        # On teste à la fois un cas ( valide et invalide) 
+        self.assertTrue(self.plateforme.est_valide(5, 5, 1, 1))
+        self.assertFalse(self.plateforme.est_valide(15, 5, 1, 1))
+
+    def test_init_obstacle(self):
+        self.assertTrue(self.plateforme.init_obstacle(2, 2, 2, 2))
+        self.assertEqual(len(self.plateforme.obstacles), 1)
+
+#les unittests de la classe Robot
