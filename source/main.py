@@ -39,7 +39,7 @@ def main():
             if not r.update():
                 mouvement = False  
 
-        time.sleep(0.001)
+        time.sleep(0.01)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
