@@ -1,5 +1,6 @@
 import pygame
 import math
+import time
 from Fantastic5.Graphique.affichage import PygameView
 from Fantastic5.Simulation.simulation import Plateforme, Robot
 from Fantastic5.Strategie.strategie import AvancerDroit, Tourner, TracerCarre
@@ -35,9 +36,16 @@ def main():
             else:
                 # Si la deuxième stratégie est aussi finie
                 r.vL, r.vR = 0.0, 0.0
-
         r.update()
+        time.sleep(0.01)
+            
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+        
         view.dessiner()
+    pygame.quit()
 
 if __name__ == "__main__":
     main()
