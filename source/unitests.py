@@ -19,3 +19,13 @@ class TestPlateforme(unittest.TestCase):
         self.assertEqual(len(self.plateforme.obstacles), 1)
 
 #les unittests de la classe Robot
+class TestRobot(unittest.TestCase):
+    def setUp(self):
+        self.plateforme = Plateforme(10.0, 10.0)
+        self.robot = Robot(5.0, 5.0, 0.0, 0.5, 0.5, 0.7, self.plateforme)
+
+    def test_init(self):
+        self.assertEqual(self.robot.x, 5.0)
+        self.assertEqual(self.robot.theta, 0.0)
+        self.assertEqual(self.robot.vL, 0.0)
+        self.assertEqual(self.robot.vR, 0.0)
