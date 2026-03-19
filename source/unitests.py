@@ -29,3 +29,22 @@ class TestRobot(unittest.TestCase):
         self.assertEqual(self.robot.theta, 0.0)
         self.assertEqual(self.robot.vL, 0.0)
         self.assertEqual(self.robot.vR, 0.0)
+
+#les unittests pour les stratégies 
+
+class TestAvancerDroit(unittest.TestCase):
+    def setUp(self):
+        self.plateforme = Plateforme(10.0, 10.0)
+        self.robot = Robot(5.0, 5.0, 0.0, 0.5, 0.5, 0.7, self.plateforme)
+        self.strat = AvancerDroit(self.robot, 2.0)
+
+    def test_start(self):
+        self.strat.start()
+        self.assertEqual(self.robot.vL, 0.1)
+        self.assertEqual(self.robot.vR, 0.1)
+
+    def test_stop(self):
+        self.strat.parcouru = 2.0
+        self.assertTrue(self.strat.stop())
+
+
