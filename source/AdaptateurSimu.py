@@ -1,4 +1,4 @@
-class AdaptateurSimu(AdaptateurABC):
+class AdaptateurSimu(Adaptateur):
     def set_vitesse(self, v_lineaire, v_angulaire):
         # Calcul des vitesses de roues
         v_gauche = v_lineaire - (v_angulaire * self.robot.L / 2)
