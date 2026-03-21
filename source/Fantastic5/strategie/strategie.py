@@ -119,6 +119,37 @@ class TracerCarre:
     def stop(self):
         #on s'arrete lorsqu'on a tracé nos 4 cotes
         return self.nb_cotes >= 4
+
+
+class Choregraphie:
+    def __init__(self, robot, liste_actions):
+        self.robot = robot
+        self.actions = liste_actions
+        self.index = 0
+
+    def start(self):
+        """Initialise la chorégraphie"""
+        self.index = 0
+        if len(self.actions) > 0:
+            self.actions[self.index].start()
+
+    def step(self):
+        """Exécute l'action courante et passe à la suivante si elle est finie"""
+        if self.stop():
+            return
+
+        action_en_cours = self.actions[self.index]
+        action_en_cours.step()
+
+        if action_en_cours.stop():
+            self.index += 1
+            if not self.stop():
+                self.actions[self.index].start()
+
+    def stop(self):
+        """Vrai quand toutes les actions de la liste sont terminées"""
+        return self.index >= len(self.actions)
+
         
 
     
