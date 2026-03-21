@@ -12,9 +12,9 @@ def main():
 
     r = Robot(5, 2, 0, 0.5, 0.5, 0.7, p)
 
-    strat = TracerCarre(r, 2.0)
+    liste = [TracerCarre(r, 2.0), AvancerDroit(r, 5.0)]
+    strat = Choregraphie(r, liste)
     strat.start()
-    avancer = False
     view = PygameView(p, r, 50)
 
     running = True
