@@ -119,6 +119,11 @@ class Robot:
             if (test_x<0 or test_x> self.plateforme.longueur or test_y<0 or test_y >self.plateforme.hauteur):
                 return distance
                 
+            for obstacle in self.plateforme.obstacles:
+                _, obstacle_x, obstacle_y, obstacle_h, obstacle_l=obstacle
+                if obstacle_x <= test_x <= obstacle_x + obstacle_l and obstacle_y <=test_y <=obstacle_y +obstacle_h:
+                    return distance
+                
         return distance_max
        
        
