@@ -13,6 +13,7 @@ def main():
 
     running = True
     mouvement = True 
+    avancer= False
 
     while running:
         if mouvement: 
