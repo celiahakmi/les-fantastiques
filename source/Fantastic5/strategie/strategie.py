@@ -1,12 +1,12 @@
 import math
 
 class AvancerDroit:
-    def __init__(self, robot, distance):
+    def __init__(self, robot, distance: float):
         self.robot = robot
-        self.distance = distance
-        self.parcouru = 0.0
-        self.x_prec = 0.0
-        self.y_prec = 0.0
+        self.distance: float = distance
+        self.parcouru: float = 0.0
+        self.x_prec: float = 0.0
+        self.y_prec: float = 0.0
 
     def start(self):
         """Initialise les variables au moment de démarrer"""
@@ -30,7 +30,7 @@ class AvancerDroit:
  
 
         # on calcule la distance qu'on vient de parcourir sur ce pas
-        distance_du_pas = math.sqrt((self.robot.x - self.x_prec)**2 + (self.robot.y - self.y_prec)**2)
+        distance_du_pas: float = math.sqrt((self.robot.x - self.x_prec)**2 + (self.robot.y - self.y_prec)**2)
         self.parcouru += distance_du_pas
         
         # on met à jour les coordonnées pour le prochain calcul
@@ -42,11 +42,11 @@ class AvancerDroit:
 
 
 class Tourner:
-    def __init__(self, robot, angle_deg):
-        self.robot = robot
-        self.angle = math.radians(angle_deg)
-        self.angle_parcouru = 0.0
-        self.theta_prec = 0.0
+    def __init__(self, robot, angle_deg: float):
+        self.robot= robot
+        self.angle: float = math.radians(angle_deg)
+        self.angle_parcouru: float = 0.0
+        self.theta_prec: float = 0.0
 
     def start(self):
         """initialisation des variables"""
@@ -69,7 +69,7 @@ class Tourner:
 
 
         #on calcule la variation d'angle dpuis le dernier pas
-        difftheta = abs(self.robot.theta - self.theta_prec)
+        difftheta: float = abs(self.robot.theta - self.theta_prec)
 
         self.angle_parcouru = difftheta + self.angle_parcouru
         #maj ancien angle
@@ -81,12 +81,12 @@ class Tourner:
 
 
 class TracerCarre:
-    def __init__(self, robot, cote):
-        self.robot = robot
-        self.cote = cote
-        self.nb_cotes = 0         
+    def __init__(self, robot, cote: float):
+        self.robot= robot
+        self.cote: float = cote
+        self.nb_cotes: int = 0         
         self.strategie = None   #sous-strategie actuelle
-        self.tourner_apres = False  
+        self.tourner_apres: bool = False  
 
     def start(self):
         """initialisation des variables"""
@@ -122,10 +122,10 @@ class TracerCarre:
 
 
 class Choregraphie:
-    def __init__(self, robot, liste_actions):
-        self.robot = robot
-        self.actions = liste_actions
-        self.index = 0
+    def __init__(self, robot, liste_actions: list):
+        self.robot= robot
+        self.actions: list = liste_actions
+        self.index: int = 0
 
     def start(self):
         """Initialise la chorégraphie"""
