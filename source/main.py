@@ -1,9 +1,9 @@
 import pygame
 import math
 import time  
-from Fantastic5.Simulation.simulation import Plateforme, Robot
-from Fantastic5.Strategie.strategie import AvancerDroit, TracerCarre
-from Fantastic5.Graphique.affichage import PygameView
+from Fantastic5.simulation.simulation import Plateforme, Robot
+from Fantastic5.strategie.strategie import AvancerDroit, TracerCarre, Choregraphie 
+from Fantastic5.graphique.affichage import PygameView
 
 def main():
     p = Plateforme(10, 10)
