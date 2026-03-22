@@ -47,11 +47,10 @@ class Tourner:
     def start(self):
         """initialisation des variables"""
         self.angle_parcouru = 0.0
-        self.theta_prec = self.robot.theta
+        self.theta_prec = self.adaptateur.robot.theta
 
         #rotation sur place
-        self.robot.vL = 0.0
-        self.robot.vR = 0.1
+        self.adaptateur.set_vitesse(0.0, 0.1)
 
     def step(self):
         """execute un pas de la stratégie"""
