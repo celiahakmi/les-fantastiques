@@ -15,7 +15,3 @@ class Adaptateur(ABC):
     def get_distance(self):
         """Retourne la distance avec l'obstacle le plus proche"""
         return self.robot.get_distance()
-
-    def get_orientation(self):
-        """Retourne l'orientation actuelle du robot"""
-        return self.robot.theta
