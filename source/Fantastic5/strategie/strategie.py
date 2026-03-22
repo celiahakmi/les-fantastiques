@@ -117,8 +117,8 @@ class TracerCarre:
 
 
 class Choregraphie:
-    def __init__(self, robot, liste_actions: list):
-        self.robot= robot
+    def __init__(self, adaptateur, liste_actions: list):
+        self.adaptateur= adaptateur
         self.actions: list = liste_actions
         self.index: int = 0
 
