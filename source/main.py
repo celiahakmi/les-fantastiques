@@ -1,20 +1,14 @@
 import pygame
 import math
 import time  
-from Fantastic5.simulation import Plateforme, Robot
-from Fantastic5.strategie import AvancerDroit, TracerCarre, Choregraphie 
-from Fantastic5.graphique import PygameView
+from Fantastic5 import initialisation_simulation
+from Fantastic5.graphique import PygameView 
+from Fantastic5.strategie import Tourner, AvancerDroit, Choregraphie, TracerCarre
+from Fantastic5.simulation import Robot, Plateforme 
 
 def main():
-    p = Plateforme(10, 10)
-    p.init_obstacle(8, 3, 2, 1)
-    p.init_obstacle(5, 5, 1, 1)
 
-    r = Robot(5, 2, 0, 0.5, 0.5, 0.7, p)
-
-    liste = [TracerCarre(r, 2.0), AvancerDroit(r, 5.0)]
-    strat = Choregraphie(r, liste)
-    strat.start()
+    p, r, strat = initialisation_simulation()
     view = PygameView(p, r, 50)
 
     running = True
