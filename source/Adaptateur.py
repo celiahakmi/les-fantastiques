@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 class Adaptateur(ABC):
     def __init__(self, robot):
-        self.robot = robot [cite: 412]
+        self.robot = robot 
 
     def set_vitesse(self, v_lineaire, v_angulaire):
         """Initialise les vitesses des roues"""
