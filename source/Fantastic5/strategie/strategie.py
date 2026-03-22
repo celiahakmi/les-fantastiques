@@ -76,8 +76,8 @@ class Tourner:
 
 
 class TracerCarre:
-    def __init__(self, robot, cote: float):
-        self.robot= robot
+    def __init__(self, adaptateur, cote: float):
+        self.adaptateur= adaptateur
         self.cote: float = cote
         self.nb_cotes: int = 0         
         self.strategie = None   #sous-strategie actuelle
@@ -88,7 +88,7 @@ class TracerCarre:
         self.nb_cotes = 0
         self.tourner_apres = False
         #on commence par avancer
-        self.strategie = AvancerDroit(self.robot, self.cote)
+        self.strategie = AvancerDroit(self.adaptateur, self.cote)
         self.strategie.start()  
 
     def step(self):
@@ -99,14 +99,14 @@ class TracerCarre:
         if self.strategie.stop():
             if not self.tourner_apres:
                 #apres avoir avancer on tourne de 90 degres
-                self.strategie = Tourner(self.robot, 90)
+                self.strategie = Tourner(self.adaptateur, 90)
                 self.tourner_apres = True
             else:
                 #sinon on incremente le nb de cotes
                 self.nb_cotes += 1
                 #on recommence 
                 if self.nb_cotes < 4:
-                    self.strategie = AvancerDroit(self.robot, self.cote)
+                    self.strategie = AvancerDroit(self.adaptateur, self.cote)
                     self.tourner_apres = False
 
             self.strategie.start()
