@@ -11,12 +11,11 @@ class AvancerDroit:
     def start(self):
         """Initialise les variables au moment de démarrer"""
         self.parcouru = 0.0
-        self.x_prec = self.robot.x
-        self.y_prec = self.robot.y
-        # vitesse moteurs pour aller tout droit
-        self.robot.vL = 0.1
-        self.robot.vR = 0.1
-   
+        #on passe par l'adaptateur pour récupérer x et y 
+        self.x_prec, self.y_prec = self.adaptateur.get_position()
+        #on appelle set_vitesse
+        self.adaptateur.set_vitesse(0.1, 0.0)
+          
     def step(self):
         """on fait avancer le robot d'un pas et on calcule la distance"""
         # si on a fini on coupe les moteurs et on s'arrête
