@@ -38,8 +38,8 @@ class AvancerDroit:
 
 
 class Tourner:
-    def __init__(self, robot, angle_deg: float):
-        self.robot= robot
+    def __init__(self, adaptateur , angle_deg: float):
+        self.adaptateur= adaptateur
         self.angle: float = math.radians(angle_deg)
         self.angle_parcouru: float = 0.0
         self.theta_prec: float = 0.0
