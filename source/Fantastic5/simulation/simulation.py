@@ -107,6 +107,18 @@ class Robot:
             return False 
             
         return True 
-       
+
+    def get_distance(self,distance_max=100.0,step=0.1):
+        """Retourne la distance jusqu'au premier obstacle rencontré"""
+        distance=0.0
+        while distance < distance_max: 
+            
+            test_x= self.x +distance *math.cos(self.theta)
+            test_y= self.y +distance *math.sin(self.theta)
+
+            if (test_x<0 or test_x> self.plateforme.longueur or test_y<0 or test_y >self.plateforme.hauteur):
+                return distance
+                
+        return distance_max
        
        
