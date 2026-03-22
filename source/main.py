@@ -8,7 +8,7 @@ from Fantastic5.simulation import Robot, Plateforme
 
 def main():
 
-    p, r, strat = initialisation_simulation()
+    p, r, strat, adp = initialisation_simulation()
     view = PygameView(p, r, 50)
 
     running = True
@@ -22,12 +22,12 @@ def main():
                 if not avancer:
                     print("Carré terminé ")
                     # On remplace la stratégie par une nouvelle
-                    strat = AvancerDroit(r, 10.0)  # avance de 10m
+                    strat = AvancerDroit(adp, 10.0)  # avance de 10m
                     strat.start()
                     avancer = True
                 else:
                     # Si la deuxième stratégie est aussi finie
-                    r.vL, r.vR = 0.0, 0.0
+                    adp.set_vitesse(0.0, 0.0)
 
             # On fige le robot s'il se cogne 
             if not r.update():
