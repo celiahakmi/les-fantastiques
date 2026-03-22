@@ -123,6 +123,7 @@ class Robot:
                 _, obstacle_x, obstacle_y, obstacle_h, obstacle_l=obstacle
                 if obstacle_x <= test_x <= obstacle_x + obstacle_l and obstacle_y <=test_y <=obstacle_y +obstacle_h:
                     return distance
+            distance+=step
                 
         return distance_max
        
