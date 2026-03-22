@@ -14,4 +14,4 @@ class Adaptateur(ABC):
 
     def get_distance(self):
         """Retourne la distance avec l'obstacle le plus proche"""
-        pass
+        return self.robot.get_distance()
