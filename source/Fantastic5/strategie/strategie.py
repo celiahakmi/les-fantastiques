@@ -20,21 +20,18 @@ class AvancerDroit:
         """on fait avancer le robot d'un pas et on calcule la distance"""
         # si on a fini on coupe les moteurs et on s'arrête
         if self.stop():
-            self.robot.vL = 0.0
-            self.robot.vR = 0.0
+            self.adaptateur.set_vitesse(0.0, 0.0)
             return
 
-        self.robot.vL= 0.1
-        self.robot.vR= 0.1
- 
-
+        self.adaptateur.set_vitesse(0.1, 0.0)
+        
         # on calcule la distance qu'on vient de parcourir sur ce pas
-        distance_du_pas: float = math.sqrt((self.robot.x - self.x_prec)**2 + (self.robot.y - self.y_prec)**2)
+        x,y= self.adaptateur.get_position()
+        distance_du_pas: float = math.sqrt((x - self.x_prec)**2 + (y - self.y_prec)**2)
         self.parcouru += distance_du_pas
         
         # on met à jour les coordonnées pour le prochain calcul
-        self.x_prec = self.robot.x
-        self.y_prec = self.robot.y
+        self.x_prec, self.y_prec = x, y
 
     def stop(self):
         return self.parcouru >= self.distance
