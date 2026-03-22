@@ -128,5 +128,8 @@ class Robot:
             distance+=step
                 
         return distance_max #si aucun obstacle/mur n'a été trouvé
+
+    def get_position(self):
+        return self.x, self.y, self.theta 
        
        
