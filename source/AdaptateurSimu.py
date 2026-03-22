@@ -14,4 +14,4 @@ class AdaptateurSimu(Adaptateur):
         return (self.robot.x, self.robot.y, self.robot.theta)
 
     def get_distance(self):
-            return self.robot.plateforme.distance_obstacle(self.robot)
+            return self.robot.get_distance()
