@@ -47,7 +47,7 @@ class Tourner:
     def start(self):
         """initialisation des variables"""
         self.angle_parcouru = 0.0
-        self.theta_prec = self.adaptateur.get_orientation()
+        _, _,self.theta_prec = self.adaptateur.get_position()
 
         #rotation sur place
         self.adaptateur.set_vitesse(0.0, 0.1)
