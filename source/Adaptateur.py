@@ -10,7 +10,7 @@ class Adaptateur(ABC):
 
     def get_position(self):
         """Retourne la position actuelle des roues ou du robot"""
-        pass
+        return self.robot.get_position()
 
     def get_distance(self):
         """Retourne la distance avec l'obstacle le plus proche"""
