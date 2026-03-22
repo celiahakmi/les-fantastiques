@@ -75,9 +75,6 @@ class PygameView:
             
         pygame.display.flip()
 
-if __name__ == "__main__":
-    print("Ceci n'est pas exécuter par import")
-    print("mais uniquement par python fichier.py")
 
            
        
