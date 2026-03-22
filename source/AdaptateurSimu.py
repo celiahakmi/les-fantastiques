@@ -11,7 +11,7 @@ class AdaptateurSimu(Adaptateur):
         self.robot.vR = v_droite
 
     def get_position(self):
-        return (self.robot.x, self.robot.y)
+        return (self.robot.x, self.robot.y, self.robot.theta)
 
     def get_distance(self):
             return self.robot.plateforme.distance_obstacle(self.robot)
