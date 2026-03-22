@@ -1,8 +1,8 @@
 import math
 
 class AvancerDroit:
-    def __init__(self, robot, distance: float):
-        self.robot = robot
+    def __init__(self, adaptateur, distance: float):
+        self.adaptateur = adaptateur
         self.distance: float = distance
         self.parcouru: float = 0.0
         self.x_prec: float = 0.0
