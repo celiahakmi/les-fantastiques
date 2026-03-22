@@ -114,8 +114,8 @@ class Robot:
         
         while distance < distance_max: 
             #calculs de la position du point testé
-            test_x= self.x +distance *math.cos(self.theta)
-            test_y= self.y +distance *math.sin(self.theta)
+            test_x:float= self.x +distance *math.cos(self.theta)
+            test_y:float= self.y +distance *math.sin(self.theta)
 
             #vérifie la collision avec le mur 
             if (test_x<0 or test_x> self.plateforme.longueur or test_y<0 or test_y >self.plateforme.hauteur):
