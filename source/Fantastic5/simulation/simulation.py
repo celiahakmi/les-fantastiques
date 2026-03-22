@@ -132,4 +132,5 @@ class Robot:
     def get_position(self):
         return self.x, self.y, self.theta 
        
-       
+    def get_vitesse(self):
+        return self.vL, self.vR
