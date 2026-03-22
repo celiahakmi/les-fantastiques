@@ -110,12 +110,14 @@ class Robot:
 
     def get_distance(self,distance_max=100.0,step=0.1):
         """Retourne la distance jusqu'au premier obstacle rencontré"""
-        distance=0.0
+        distance=0.0#point de départ
+        
         while distance < distance_max: 
-            
+            #calculs de la position du point testé
             test_x= self.x +distance *math.cos(self.theta)
             test_y= self.y +distance *math.sin(self.theta)
 
+            #vérifie la collision avec le mur 
             if (test_x<0 or test_x> self.plateforme.longueur or test_y<0 or test_y >self.plateforme.hauteur):
                 return distance
                 
