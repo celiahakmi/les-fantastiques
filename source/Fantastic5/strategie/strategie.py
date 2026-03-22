@@ -63,7 +63,7 @@ class Tourner:
 
         #on calcule la variation d'angle dpuis le dernier pas
         #on recupère le theta actuel 
-        theta_acc: float = self.adaptateur.get_orientation()
+        _,_,theta_acc: float= self.adaptateur.position()
         difftheta: float = abs( theta_acc - self.theta_prec)
 
         self.angle_parcouru = difftheta + self.angle_parcouru
