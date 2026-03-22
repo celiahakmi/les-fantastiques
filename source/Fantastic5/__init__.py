@@ -2,6 +2,8 @@ from .graphique import PygameView
 from .simulation import Plateforme, Robot 
 from .strategie import AvancerDroit, Tourner, TracerCarre, Choregraphie 
 
+from AdaptateurSimu import AdaptateurSimu
+
 __all__ = ["PygameView", "Plateforme", "Robot", "AvancerDroit", "Tourner", "TracerCarre", "Choregraphie", "initialisation_simulation"]
 
 def initialisation_simulation():
@@ -13,10 +15,13 @@ def initialisation_simulation():
     
     # Robot
     r = Robot(5, 2, 0, 0.5, 0.5, 0.7, p)
+
+    #adaptateur
+    adp = AdaptateurSimu(r)
     
     # Stratégie
-    liste_actions = [TracerCarre(r, 2.0), AvancerDroit(r, 5.0)]
-    strat = Choregraphie(r, liste_actions)
+    liste_actions = [TracerCarre(adp, 2.0), AvancerDroit(adp, 5.0)]
+    strat = Choregraphie(adp, liste_actions)
     strat.start()
     
-    return p, r, strat
+    return p, r, strat,adp
