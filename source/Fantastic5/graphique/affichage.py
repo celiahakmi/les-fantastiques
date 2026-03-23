@@ -1,7 +1,6 @@
 import math
 import pygame
 
-<<<<<<< HEAD
 
 class PygameView:
     def __init__(self, plateforme, robot, TAILLE_PIXEL: int =40):
@@ -84,7 +83,7 @@ if __name__ == "__main__":
        
 
 
-=======
+
 
 class PygameView:
     def __init__(self, plateforme, robot, TAILLE_PIXEL: int =40):
@@ -164,4 +163,3 @@ class PygameView:
        
 
 
->>>>>>> 157c1bf8c437633e17fa47ed2734548745929d0d
