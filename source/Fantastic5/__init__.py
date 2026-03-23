@@ -2,7 +2,7 @@ from .graphique import PygameView
 from .simulation import Plateforme, Robot 
 from .strategie import AvancerDroit, Tourner, TracerCarre, Choregraphie 
 
-from AdaptateurSimu import AdaptateurSimu
+from .adaptateur import AdaptateurSimu
 
 __all__ = ["PygameView", "Plateforme", "Robot", "AvancerDroit", "Tourner", "TracerCarre", "Choregraphie", "initialisation_simulation"]
 
