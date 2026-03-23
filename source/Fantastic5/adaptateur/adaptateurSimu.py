@@ -1,3 +1,4 @@
+from .adaptateur import Adaptateur 
 class AdaptateurSimu(Adaptateur):
     def __init__(self, robot_simu):
         super().__init__(robot_simu) 
