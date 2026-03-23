@@ -1,6 +1,6 @@
 import math
 
-class AdaptateurReel(Adaptateur):
+class AdaptateurIRl(Adaptateur):
     def __init__(self, robot_reel):
         super().__init__(robot_reel)
         # On récupère les constantes physiques depuis l'API du robot
