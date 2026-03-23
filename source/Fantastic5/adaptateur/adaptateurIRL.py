@@ -1,4 +1,5 @@
 import math
+from .adaptateur import Adaptateur  
 
 class AdaptateurIRL(Adaptateur):
     def __init__(self, robot_reel):
