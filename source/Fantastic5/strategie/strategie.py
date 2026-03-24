@@ -24,8 +24,6 @@ class AvancerDroit:
         # on calcule la distance qu'on vient de parcourir sur ce pas
         self.parcouru+=self.adaptateur.get_distance_parcourue()
         
-        # on met à jour les coordonnées pour le prochain calcul
-        self.x_prec, self.y_prec = x, y
 
     def stop(self):
         return self.parcouru >= self.distance
