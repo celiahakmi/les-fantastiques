@@ -7,6 +7,7 @@ class AdaptateurIRL(Adaptateur):
         # On récupère les constantes physiques depuis l'API du robot
         self.L = self.robot.WHEEL_BASE_WIDTH 
         self.diametre = self.robot.WHEEL_DIAMETER
+        self.precL, self.precR= self.robot.get_motor_position()
 
     def set_vitesse(self, v_lineaire, v_angulaire):
         # 1Calcul des vitesses des roues
