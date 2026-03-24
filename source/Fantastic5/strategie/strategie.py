@@ -48,8 +48,7 @@ class Tourner:
 
         self.adaptateur.set_vitesse(0.0, 0.1)
 
-        # on calcule la variation d'angle depuis le dernier pas
-        # on recupère le theta actuel 
+        #récupération de l'angle du pas
         self.angle_parcouru+= abs(self.adaptateur.get_angle_parcouru())
 
     def stop(self):
