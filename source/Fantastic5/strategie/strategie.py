@@ -5,14 +5,10 @@ class AvancerDroit:
         self.adaptateur = adaptateur
         self.distance: float = distance
         self.parcouru: float = 0.0
-        self.x_prec: float = 0.0
-        self.y_prec: float = 0.0
 
     def start(self):
         """Initialise les variables au moment de démarrer"""
         self.parcouru = 0.0
-        # on passe par l'adaptateur pour récupérer x et y 
-        self.adaptateur.set_vitesse(0.1,0.0)
         # on appelle set_vitesse
         self.adaptateur.set_vitesse(0.1, 0.0)
           
