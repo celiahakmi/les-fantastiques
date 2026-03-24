@@ -18,12 +18,6 @@ class AdaptateurSimu(Adaptateur):
     def get_distance(self):
         return self.robot.get_distance()
 
-    def get_angle_parcouru(self):
-        theta = self.robot.theta
-        delta_theta = theta - self.theta_prec
-        self.theta_prec = theta
-        return delta_theta
-    
     def get_distance_parcourue(self):
         x = self.robot.x
         y = self.robot.y
@@ -39,3 +33,11 @@ class AdaptateurSimu(Adaptateur):
         self.y_prec = y
     
         return distance
+
+    def get_angle_parcouru(self):
+        theta = self.robot.theta
+        delta_theta = theta - self.theta_prec
+        self.theta_prec = theta
+        return delta_theta
+    
+    
