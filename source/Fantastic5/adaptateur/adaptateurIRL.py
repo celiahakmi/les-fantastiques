@@ -27,3 +27,20 @@ class AdaptateurIRL(Adaptateur):
         # Méthode déjà existante dans l'API
         return self.robot.get_distance()
 
+    def get_distance_parcourue(self):
+        angleL, angleR = self.robot.get_motor_position()
+    
+        deltaL = angleL - self.precL
+        deltaR = angleR - self.precR
+    
+        self.precL= angleL
+        self.precR = angleR
+    
+        # conversion en mm
+        distL= deltaL * self.robot.WHEEL_CIRCUMFERENCE / 360
+        distR = deltaR * self.robot.WHEEL_CIRCUMFERENCE / 360
+    
+        # moyenne
+        return (distL + distR) / 2
+    
+    
