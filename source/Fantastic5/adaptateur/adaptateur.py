@@ -15,7 +15,7 @@ class Adaptateur(ABC):
     def get_distance(self):
         """Retourne la distance avec l'obstacle le plus proche"""
         pass
-a
+
     def get_distance_parcourue(self):
         """Retourne la distance parcourue"""
         pass
