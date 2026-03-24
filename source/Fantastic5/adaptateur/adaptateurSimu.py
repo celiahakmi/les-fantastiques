@@ -1,7 +1,11 @@
+import math
 from .adaptateur import Adaptateur 
 class AdaptateurSimu(Adaptateur):
     def __init__(self, robot_simu):
-        super().__init__(robot_simu) 
+        super().__init__(robot_simu)
+        self.x_prec = robot_simu.x
+        self.y_prec = robot_simu.y
+        self.theta_prec = robot_simu.theta
     
     def set_vitesse(self, v_lineaire, v_angulaire):
         # Calcul des vitesses de roues
@@ -13,9 +17,25 @@ class AdaptateurSimu(Adaptateur):
 
     def get_angle_parcouru(self):
         theta = self.robot.theta
-        diff_theta = theta - self.old_theta
-        self.old_theta = theta
-    return diff_theta
+        delta_theta = theta - self.theta_prec
+        self.theta_prec = theta
+        return delta_theta
     
     def get_distance(self):
-            return self.robot.get_distance()
+        return self.robot.get_distance()
+    
+    def get_distance_parcourue(self):
+        x = self.robot.x
+        y = self.robot.y
+    
+        dx = x - self.x_prec
+        dy = y - self.y_prec
+    
+        # distance euclidienne
+        distance = math.sqrt(dx**2 + dy**2)
+    
+        # mise à jour
+        self.x_prec = x
+        self.y_prec = y
+    
+        return distance
