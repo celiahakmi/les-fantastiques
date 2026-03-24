@@ -11,8 +11,11 @@ class AdaptateurSimu(Adaptateur):
         self.robot.vL = v_gauche
         self.robot.vR = v_droite
 
-    def get_position(self):
-        return (self.robot.x, self.robot.y, self.robot.theta)
-
+    def get_angle_parcouru(self):
+        theta = self.robot.theta
+        diff_theta = theta - self.old_theta
+        self.old_theta = theta
+    return diff_theta
+    
     def get_distance(self):
             return self.robot.get_distance()
