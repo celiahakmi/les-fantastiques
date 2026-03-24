@@ -27,6 +27,3 @@ class AdaptateurIRL(Adaptateur):
         # Méthode déjà existante dans l'API
         return self.robot.get_distance()
 
-    def get_position(self):
-        # Méthode déjà existante dans l'API
-        return self.robot.get_motor_position()
