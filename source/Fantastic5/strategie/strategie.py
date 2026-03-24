@@ -26,8 +26,7 @@ class AvancerDroit:
         self.adaptateur.set_vitesse(0.1, 0.0)
         
         # on calcule la distance qu'on vient de parcourir sur ce pas
-        x, y, _ = self.adaptateur.get_position()
-        distance_du_pas: float = math.sqrt((x - self.x_prec)**2 + (y - self.y_prec)**2)
+        self.parcouru+=self.adaptateur.get_distance_parcourue()
         self.parcouru += distance_du_pas
         
         # on met à jour les coordonnées pour le prochain calcul
