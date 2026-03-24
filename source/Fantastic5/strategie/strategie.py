@@ -34,7 +34,6 @@ class Tourner:
         self.adaptateur= adaptateur
         self.angle: float = math.radians(angle_deg)
         self.angle_parcouru: float = 0.0
-        self.theta_prec: float = 0.0
 
     def start(self):
         """initialisation des variables"""
