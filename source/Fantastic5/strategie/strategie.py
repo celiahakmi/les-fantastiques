@@ -12,7 +12,7 @@ class AvancerDroit:
         """Initialise les variables au moment de démarrer"""
         self.parcouru = 0.0
         # on passe par l'adaptateur pour récupérer x et y 
-        self.x_prec, self.y_prec, _ = self.adaptateur.get_position()
+        self.adaptateur.set_vitesse(0.1,0.0)
         # on appelle set_vitesse
         self.adaptateur.set_vitesse(0.1, 0.0)
           
