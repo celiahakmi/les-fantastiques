@@ -50,12 +50,7 @@ class Tourner:
 
         # on calcule la variation d'angle depuis le dernier pas
         # on recupère le theta actuel 
-        _, _, theta_acc = self.adaptateur.get_position()
-        difftheta: float = abs(theta_acc - self.theta_prec)
-
-        self.angle_parcouru = difftheta + self.angle_parcouru
-        # maj ancien angle
-        self.theta_prec = theta_acc
+        self.angle_parcouru+= abs(self.adaptateur.get_angle_parcouru())
 
     def stop(self):
         """renvoie true si angle demandé atteint"""
