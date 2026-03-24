@@ -43,4 +43,16 @@ class AdaptateurIRL(Adaptateur):
         # moyenne
         return (distL + distR) / 2
     
+    def get_angle_parcouru(self):
+        angleL, angleR = self.robot.get_motor_position()
     
+        deltaL = angleL - self.precL
+        deltaR = angleR - self.precR
+    
+        self.precL = angleL
+        self.precR = angleR
+    
+        distL = deltaL * self.robot.WHEEL_CIRCUMFERENCE / 360
+        distR = deltaR * self.robot.WHEEL_CIRCUMFERENCE / 360
+    
+        return (distL - distR) / self.robot.WHEEL_BASE_WIDTH
