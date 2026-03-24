@@ -38,10 +38,7 @@ class Tourner:
     def start(self):
         """initialisation des variables"""
         self.angle_parcouru = 0.0
-        _, _, self.theta_prec = self.adaptateur.get_position()
-
-        # rotation sur place
-        self.adaptateur.set_vitesse(0.0, 0.1)
+        self.adaptateur.set_vitesse(0.0,0.1) #rotation sur place
 
     def step(self):
         """execute un pas de la stratégie"""
