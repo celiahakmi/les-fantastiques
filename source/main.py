@@ -1,48 +1,66 @@
-import pygame
-import math
 import time  
-from Fantastic5 import initialisation_simulation
-from Fantastic5.graphique import PygameView 
-from Fantastic5.strategie import Tourner, AvancerDroit, Choregraphie, TracerCarre
-from Fantastic5.simulation import Robot, Plateforme 
+from Fantastic5.simulation import Plateforme, Robot
+from Fantastic5.adaptateur import AdaptateurSimu, AdaptateurIRL
+from Fantastic5.strategie import AvancerDroit, TracerCarre, Tourner, Choregraphie
 
 def main():
+    
+    simu = True  
+    
+    if simu:
+        print("Mode simulation activé ")
+  
+        import pygame
+        from Fantastic5.graphique import PygameView 
+        
+        #le monde virtuel
+        p = Plateforme(10.0, 10.0)
+        p.init_obstacle(2.0, 2.0, 1.0, 1.0) 
+        r = Robot(5.0, 5.0, 0.0, 0.5, 0.5, 0.7, p)
+        
+        view = PygameView(p, r, 50)
+        adp = AdaptateurSimu(r)
+        
+    else:
+        print("Mode robot réel activé ")
+        # Ici on crée le vrai robot 
+        # r =
+        # adp = AdaptateurIRL(r)
+        pass 
 
-    p, r, strat, adp = initialisation_simulation()
-    view = PygameView(p, r, 50)
-
+    action1 = AvancerDroit(adp, 2.0)
+    action2 = Tourner(adp, 90)
+    strat_globale = Choregraphie(adp, [action1, action2])
+    
+    strat_globale.start()
+    
     running = True
-    mouvement = True 
-    avancer= False
 
     while running:
-        if mouvement: 
-            if not strat.stop():
-                strat.step()
-            else:
-                if not avancer:
-                    print("Carré terminé ")
-                    # On remplace la stratégie par une nouvelle
-                    strat = AvancerDroit(adp, 10.0)  # avance de 10m
-                    strat.start()
-                    avancer = True
-                else:
-                    # Si la deuxième stratégie est aussi finie
-                    adp.set_vitesse(0.0, 0.0)
+        
+        if not strat_globale.stop():
+            strat_globale.step()
+        else:
+            adp.set_vitesse(0.0, 0.0) 
+            if not simu:
+                running = False 
 
-            # On fige le robot s'il se cogne 
-            if not r.update():
-                mouvement = False  
+        if simu:      
+            if not r.update(): 
+                pass # Le robot a touché un mur
+                
+            view.dessiner()
 
+            # fermer la fenêtre 
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+                    
         time.sleep(0.01)
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-                
-        view.dessiner()
-
-    pygame.quit()
+    if simu:
+        import pygame
+        pygame.quit()
 
 if __name__ == "__main__":
     main()
