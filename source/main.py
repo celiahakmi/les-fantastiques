@@ -28,7 +28,10 @@ def main():
         # adp = AdaptateurIRL(r)
         pass 
 
-    strat_globale = TracerCarre(adp, 4.0)
+    
+    action1 = TracerCarre(adp, 2.0)
+    action2 = AvancerDroit(adp, 90)
+    strat_globale = Choregraphie(adp, [action1, action2])
     
     strat_globale.start()
     
