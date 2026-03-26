@@ -135,5 +135,13 @@ class ApprocherLeMur:
 def start(self):
         self.adaptateur.set_vitesse(0.0,0.0)
 
-    
+    def step(self):
+        distance= self.adaptateur.get_distance()
+        if distance>2:
+            self.adaptateur.set_vitesse(0.2,0.0)
+        elif distance>self.distance_securite:
+            self.adaptateur.set_vitesse(0.05,0.0)
+        else:
+            self.adaptateur.set_vitesse(0.0,0.0)
+
 
