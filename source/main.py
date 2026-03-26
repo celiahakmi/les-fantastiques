@@ -15,7 +15,7 @@ def main():
 
         from Fantastic5 import initialisation_simulation
         p,r,adp= initialisation_simulation()
-        view= PyagmeView(p,r,50)
+        view= PygameView(p,r,50)
         
         
         
