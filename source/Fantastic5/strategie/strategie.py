@@ -14,6 +14,10 @@ class AvancerDroit:
           
     def step(self):
         """on fait avancer le robot d'un pas et on calcule la distance"""
+        #si false, il y a une collision
+        if not self.adaptateur.robot.update():
+            self.adaptateur.set_vitesse(0.0,0.0)
+            return 
         # si on a fini on coupe les moteurs et on s'arrête
         if self.stop():
             self.adaptateur.set_vitesse(0.0, 0.0)
