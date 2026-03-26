@@ -27,6 +27,8 @@ def main():
     
     action1 = TracerCarre(adp, 2.0)
     action2 = AvancerDroit(adp, 90)
+    action3 = ApprocherLeMur(adp, distance_securite=0.5)
+    
     strat_globale = Choregraphie(adp, [action1, action2])
     
     strat_globale.start()
