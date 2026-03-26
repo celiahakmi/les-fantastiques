@@ -125,3 +125,12 @@ class Choregraphie:
     def stop(self):
         """Vrai quand toutes les actions de la liste sont terminées"""
         return self.index >= len(self.actions)
+
+
+class ApprocherLeMur:
+    def __init__(self, adaptateur, distance_securite=0.5):
+        self.adaptateur=adaptateur
+        self.distance_securite=distance_securite
+
+
+
