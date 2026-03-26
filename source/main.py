@@ -45,8 +45,10 @@ def main():
                 running = False 
 
         if simu:      
-            if not r.update(): 
-                pass # Le robot a touché un mur
+            collision= not r.update() #renvoie true si le robot s'est cogné
+            if collision:
+                adp.set_vitesse(0.0,0.0)#stop le roboy
+                continue
                 
             view.dessiner()
 
