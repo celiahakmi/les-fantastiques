@@ -132,7 +132,7 @@ class ApprocherLeMur:
         self.adaptateur=adaptateur
         self.distance_securite=distance_securite
 
-def start(self):
+    def start(self):
         self.adaptateur.set_vitesse(0.0,0.0)
 
     def step(self):
