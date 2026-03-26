@@ -19,9 +19,4 @@ def initialisation_simulation():
     #adaptateur
     adp = AdaptateurSimu(r)
     
-    # Stratégie
-    liste_actions = [TracerCarre(adp, 2.0), AvancerDroit(adp, 5.0)]
-    strat = Choregraphie(adp, liste_actions)
-    strat.start()
-    
     return p, r, strat,adp
