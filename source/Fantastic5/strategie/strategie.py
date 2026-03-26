@@ -133,9 +133,11 @@ class ApprocherLeMur:
         self.distance_securite:float==distance_securite
 
     def start(self):
+        """initialise la stratégie d'approcher le mur"""
         self.adaptateur.set_vitesse(0.0,0.0)
 
     def step(self):
+        """fait avancer le robot en ajustant la vitesse selon la distance au mur """
         distance= self.adaptateur.get_distance()
         if distance>2:
             self.adaptateur.set_vitesse(0.2,0.0)
