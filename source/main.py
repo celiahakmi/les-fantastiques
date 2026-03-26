@@ -1,6 +1,4 @@
 import time  
-from Fantastic5.simulation import Plateforme, Robot
-from Fantastic5.adaptateur import AdaptateurSimu, AdaptateurIRL
 from Fantastic5.strategie import AvancerDroit, TracerCarre, Tourner, Choregraphie
 from Fantastic5 import initialisation_simulation
 
