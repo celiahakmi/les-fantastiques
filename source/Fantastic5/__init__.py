@@ -19,4 +19,4 @@ def initialisation_simulation():
     #adaptateur
     adp = AdaptateurSimu(r)
     
-    return p, r, strat,adp
+    return p, r,adp
