@@ -144,4 +144,7 @@ class ApprocherLeMur:
         else:
             self.adaptateur.set_vitesse(0.0,0.0)
 
+    def stop(self):
+        return self.adaptateur.get_distance()<=self.distance_securite
+
 
