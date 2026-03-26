@@ -36,7 +36,12 @@ def main():
     running = True
 
     while running:
-        
+        #détecte les collisions
+        collision= not r.update() #False si collision détecté
+        if collision:
+             adp.set_vitesse(0.0,0.0)#stop le robot
+             continue
+            
         if not strat_globale.stop():
             strat_globale.step()
         else:
@@ -44,12 +49,8 @@ def main():
             if not simu:
                 running = False 
 
+        
         if simu:      
-            collision= not r.update() #renvoie true si le robot s'est cogné
-            if collision:
-                adp.set_vitesse(0.0,0.0)#stop le roboy
-                continue
-                
             view.dessiner()
 
             # fermer la fenêtre 
