@@ -130,7 +130,7 @@ class Choregraphie:
 class ApprocherLeMur:
     def __init__(self, adaptateur, distance_securite=0.5):
         self.adaptateur=adaptateur
-        self.distance_securite=distance_securite
+        self.distance_securite:float==distance_securite
 
     def start(self):
         self.adaptateur.set_vitesse(0.0,0.0)
