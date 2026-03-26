@@ -142,6 +142,10 @@ class ApprocherLeMur:
 
     def step(self):
         """fait avancer le robot en ajustant la vitesse selon la distance au mur """
+        #si false, il y a une collision
+        if not self.adaptateur.robot.update():
+            self.adaptateur.set_vitesse(0.0,0.0)
+            return 
         distance= self.adaptateur.get_distance()
         if distance>2:
             self.adaptateur.set_vitesse(0.2,0.0)
