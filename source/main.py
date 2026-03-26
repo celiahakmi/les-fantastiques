@@ -1,5 +1,5 @@
 import time  
-from Fantastic5.strategie import AvancerDroit, TracerCarre, Tourner, Choregraphie
+from Fantastic5.strategie import AvancerDroit, TracerCarre, Tourner, Choregraphie, ApprocherLeMur
 from Fantastic5 import initialisation_simulation
 
 def main():
