@@ -12,6 +12,9 @@ def main():
   
         import pygame
         from Fantastic5.graphique import PygameView 
+
+        from Fantastic5 import initialisation_simulation
+        p,r,adp= initialisation_simulation()
         
         
         
