@@ -13,13 +13,7 @@ def main():
         import pygame
         from Fantastic5.graphique import PygameView 
         
-        #le monde virtuel
-        p = Plateforme(10.0, 10.0)
-        p.init_obstacle(2.0, 2.0, 1.0, 1.0) 
-        r = Robot(5.0, 5.0, 0.0, 0.5, 0.5, 0.7, p)
         
-        view = PygameView(p, r, 50)
-        adp = AdaptateurSimu(r)
         
     else:
         print("Mode robot réel activé ")
