@@ -2,6 +2,7 @@ import time
 from Fantastic5.simulation import Plateforme, Robot
 from Fantastic5.adaptateur import AdaptateurSimu, AdaptateurIRL
 from Fantastic5.strategie import AvancerDroit, TracerCarre, Tourner, Choregraphie
+from Fantastic5 import initialisation_simulation
 
 def main():
     
@@ -13,7 +14,6 @@ def main():
         import pygame
         from Fantastic5.graphique import PygameView 
 
-        from Fantastic5 import initialisation_simulation
         p,r,adp= initialisation_simulation()
         view= PygameView(p,r,50)
         
