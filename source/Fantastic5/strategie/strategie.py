@@ -134,7 +134,7 @@ class Choregraphie:
 class ApprocherLeMur:
     def __init__(self, adaptateur, distance_securite=0.5):
         self.adaptateur=adaptateur
-        self.distance_securite:float==distance_securite
+        self.distance_securite: float = distance_securite
 
     def start(self):
         """initialise la stratégie d'approcher le mur"""
