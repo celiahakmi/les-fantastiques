@@ -154,5 +154,9 @@ class Boucle:
     def __init__(self, adaptateur, action):
         self.adaptateur = adaptateur 
         self.action = action 
+    def stat(self): 
+        """démarre la boucle"""
+        self.action.start()
+    
 
 
