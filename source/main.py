@@ -49,7 +49,8 @@ def main():
 
         if simu:      
             if not r.update(): 
-                pass # Le robot a touché un mur
+                print("Arrêt de la simulation (collision)")
+                running = False # Le robot a touché un mur/obstacle
 
             view.dessiner()
 
