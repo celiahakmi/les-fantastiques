@@ -154,9 +154,16 @@ class Boucle:
     def __init__(self, adaptateur, action):
         self.adaptateur = adaptateur 
         self.action = action 
-    def stat(self): 
+    def start(self): 
         """démarre la boucle"""
         self.action.start()
+    def step(self):
+        """Exécute l'action en boucle"""
+        self.action.step()
+        if self.action.stop(): 
+            self.action.start #la boucle s'effectue ici puisqu'on redémarre l'action 
+    
+
     
 
 
