@@ -149,5 +149,10 @@ class ApprocherLeMur:
     def stop(self):
         """True quand le robot est suffisamment proche du mur"""
         return self.adaptateur.get_distance()<=self.distance_securite
+    
+class Boucle: 
+    def __init__(self, adaptateur, action):
+        self.adaptateur = adaptateur 
+        self.action = action 
 
 
