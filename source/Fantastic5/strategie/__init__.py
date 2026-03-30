@@ -1,3 +1,3 @@
-from .strategie import AvancerDroit, Tourner, TracerCarre, Choregraphie, ApprocherLeMur
-__all__ = ["AvancerDroit", "Tourner", "TracerCarre", "Choregraphie", "ApprocherLeMur"]
+from .strategie import AvancerDroit, Tourner, Choregraphie, ApprocherLeMur
+__all__ = ["AvancerDroit", "Tourner", "Choregraphie", "ApprocherLeMur"]
 
