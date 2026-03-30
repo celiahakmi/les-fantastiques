@@ -128,11 +128,6 @@ class Accelerer:
 
     def stop(self):
         return self.parcouru >= self.distance
-   
-
-    def stop(self):
-        """True quand le robot est suffisamment proche du mur"""
-        return self.adaptateur.get_distance()<=self.distance_securite
     
         
 class Condition: 
