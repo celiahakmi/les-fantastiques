@@ -1,9 +1,9 @@
 from .graphique import PygameView 
 from .simulation import Plateforme, Robot 
-from .strategie import AvancerDroit, Tourner, TracerCarre, Choregraphie 
+from .strategie import AvancerDroit, Tourner, Choregraphie 
 
 
-__all__ = ["PygameView", "Plateforme", "Robot", "AvancerDroit", "Tourner", "TracerCarre", "Choregraphie", "initialisation_simulation"]
+__all__ = ["PygameView", "Plateforme", "Robot", "AvancerDroit", "Tourner", "Choregraphie", "initialisation_simulation"]
 
 def initialisation_simulation():
     """Création  d'une simulation avec des paramètres par défaut pour faire déplacer le robot en carré et le faire avancer dans un plan continu contenant des obstacles dans le main"""
