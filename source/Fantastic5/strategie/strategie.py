@@ -161,7 +161,7 @@ class Boucle:
         """Exécute l'action en boucle"""
         self.action.step()
         if self.action.stop(): 
-            self.action.start #la boucle s'effectue ici puisqu'on redémarre l'action 
+            self.action.start() #la boucle s'effectue ici puisqu'on redémarre l'action 
     def stop(self):
         """False pour que le robot ne puisse pas s'arrêter et continue la boucle"""
         return False
