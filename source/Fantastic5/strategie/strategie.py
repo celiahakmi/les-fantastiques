@@ -102,28 +102,38 @@ class Choregraphie:
         return self.index >= len(self.actions)
 
 
-class ApprocherLeMur:
-    def __init__(self, adaptateur, distance_securite=0.5):
-        self.adaptateur=adaptateur
-        self.distance_securite: float = distance_securite
+class Accelerer:
+    def __init__(self, adaptateur, distance: float, v_max: float, acceleration: float):
+        self.adaptateur = adaptateur
+        self.distance = distance
+        self.v_max = v_max
+        self.accel = acceleration 
+        self.v_actuelle = 0.0
+        self.parcouru = 0.0
 
     def start(self):
-        """initialise la stratégie d'approcher le mur"""
-        self.adaptateur.set_vitesse(0.0,0.0)
+        self.parcouru = 0.0
+        self.v_actuelle = 0.0 
 
     def step(self):
-        """fait avancer le robot en ajustant la vitesse selon la distance au mur """
-        distance= self.adaptateur.get_distance()
-        if distance>2:
-            self.adaptateur.set_vitesse(0.2,0.0)
-        elif distance>self.distance_securite:
-            self.adaptateur.set_vitesse(0.05,0.0)
-        else:
-            self.adaptateur.set_vitesse(0.0,0.0)
+        # On augmente la vitesse sans dépasser le max
+        if self.v_actuelle < self.v_max:
+            self.v_actuelle += self.accel
+        
+        # On applique la vitesse
+        self.adaptateur.set_vitesse(self.v_actuelle, 0.0)
+        
+        # On mesure le chemin fait
+        self.parcouru += self.adaptateur.get_distance_parcourue()
+
+    def stop(self):
+        return self.parcouru >= self.distance
+   
 
     def stop(self):
         """True quand le robot est suffisamment proche du mur"""
         return self.adaptateur.get_distance()<=self.distance_securite
+    
         
 class Condition: 
     def __init__(self, adaptateur, stratA, stratB, distance_securite: float) :
@@ -177,5 +187,3 @@ class Boucle:
     
 
     
-
-
