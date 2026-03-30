@@ -124,6 +124,40 @@ class ApprocherLeMur:
     def stop(self):
         """True quand le robot est suffisamment proche du mur"""
         return self.adaptateur.get_distance()<=self.distance_securite
+        
+class Condition: 
+    def __init__(self, adaptateur, stratA, stratB, distance_securite: float) :
+        self.adaptateur = adaptateur
+        self.strat_libre = stratA
+        self.strat_obstacle = stratB
+        self.securite = distance_securite
+        self.current_strat = None
+
+    def start(self):
+        """Initialisation"""
+        self.current_strat = None
+
+    def step(self):
+        """Choisit la stratégie en fonction du capteur à chaque pas"""
+        # On interroge le capteur via l'adaptateur
+        distance = self.adaptateur.get_distance() 
+
+        # Choix de la stratégie selon la condition 
+        if distance > self.securite:
+            nouvelle_strat = self.strat_libre
+        else:
+            nouvelle_strat = self.strat_obstacle
+
+        # Si on change, on demarre la nouvelle strat
+        if nouvelle_strat != self.current_strat:
+            self.current_strat = nouvelle_strat
+            self.current_strat.start() 
+
+        self.current_strat.step() 
+
+    def stop(self):
+        """ On met a false"""
+        return False
     
 class Boucle: 
     def __init__(self, adaptateur, action):
@@ -140,6 +174,7 @@ class Boucle:
     def stop(self):
         """False pour que le robot ne puisse pas s'arrêter et continue la boucle"""
         return False
+    
 
     
 
