@@ -27,15 +27,19 @@ def main():
         # adp = AdaptateurIRL(r)
         pass 
 
-    carre = [] #  liste vide
-    
-    # On utilise une boucle pour remplir la liste avec les 4 côtés
+    parcours = [] 
+    #carre
+    #boucle pour remplir la liste avec les 4 côtés
     for i in range(4):
-        carre.append(AvancerDroit(adp, 2)) # Avance de 4m
-        carre.append(Tourner(adp, 90))     # Tourne de 90°
+        parcours.append(AvancerDroit(adp, 2.0)) 
+        parcours.append(Tourner(adp, 90))       
         
-    strat_globale = Choregraphie(adp, carre)
+    #après le carre on fonce vers le mur et on s'arrête à 1m
+    parcours.append(ApprocherLeMur(adp, 1))
+    
+    strat_globale = Choregraphie(adp, parcours)
     strat_globale.start()
+
 
     running = True
 
