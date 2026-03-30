@@ -55,7 +55,21 @@ class Tourner:
         """renvoie true si angle demandé atteint"""
         return self.angle_parcouru >= self.angle
 
+class Arreter:
+    def __init__(self, adaptateur):
+        self.adaptateur = adaptateur
 
+    def start(self):
+        """Coupe les moteurs au démarrage"""
+        self.adaptateur.set_vitesse(0.0, 0.0)
+
+    def step(self):
+        """Arrêt à chaque pas de temps"""
+        self.adaptateur.set_vitesse(0.0, 0.0)
+
+    def stop(self):
+        """Ne s'arrête jamais"""
+        return False 
 
 
 class Choregraphie:
