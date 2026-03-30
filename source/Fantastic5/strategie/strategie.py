@@ -56,45 +56,6 @@ class Tourner:
         return self.angle_parcouru >= self.angle
 
 
-class TracerCarre:
-    def __init__(self, adaptateur, cote: float):
-        self.adaptateur= adaptateur
-        self.cote: float = cote
-        self.nb_cotes: int = 0         
-        self.strategie = None   # sous-strategie actuelle
-        self.tourner_apres: bool = False  
-
-    def start(self):
-        """initialisation des variables"""
-        self.nb_cotes = 0
-        self.tourner_apres = False
-        # on commence par avancer
-        self.strategie = AvancerDroit(self.adaptateur, self.cote)
-        self.strategie.start()  
-
-    def step(self):
-        if self.stop():
-            return
-        self.strategie.step()
-        
-        if self.strategie.stop():
-            if not self.tourner_apres:
-                # apres avoir avancer on tourne de 90 degres
-                self.strategie = Tourner(self.adaptateur, 90)
-                self.tourner_apres = True
-            else:
-                # sinon on incremente le nb de cotes
-                self.nb_cotes += 1
-                # on recommence 
-                if self.nb_cotes < 4:
-                    self.strategie = AvancerDroit(self.adaptateur, self.cote)
-                    self.tourner_apres = False
-
-            self.strategie.start()
-            
-    def stop(self):
-        # on s'arrete lorsqu'on a tracé nos 4 cotes
-        return self.nb_cotes >= 4
 
 
 class Choregraphie:
