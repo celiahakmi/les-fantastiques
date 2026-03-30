@@ -2,7 +2,7 @@ import time
 from Fantastic5 import initialisation_simulation 
 from Fantastic5.simulation import Plateforme, Robot
 from Fantastic5.adaptateur import AdaptateurSimu, AdaptateurIRL
-from Fantastic5.strategie import AvancerDroit, Tourner, Choregraphie
+from Fantastic5.strategie import AvancerDroit, ApprocherLeMur, Tourner, Choregraphie
 
 def main():
 
