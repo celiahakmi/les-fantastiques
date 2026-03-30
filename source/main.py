@@ -2,7 +2,7 @@ import time
 from Fantastic5 import initialisation_simulation 
 from Fantastic5.simulation import Plateforme, Robot
 from Fantastic5.adaptateur import AdaptateurSimu, AdaptateurIRL
-from Fantastic5.strategie import AvancerDroit, TracerCarre, Tourner, Choregraphie
+from Fantastic5.strategie import AvancerDroit, Tourner, Choregraphie
 
 def main():
 
@@ -27,12 +27,14 @@ def main():
         # adp = AdaptateurIRL(r)
         pass 
 
-    strat_globale = TracerCarre(adp, 4.0)
+    carre = [] #  liste vide
     
-    action1 = TracerCarre(adp, 2.0)
-    action2 = AvancerDroit(adp, 90)
-    strat_globale = Choregraphie(adp, [action1, action2])
-
+    # On utilise une boucle pour remplir la liste avec les 4 côtés
+    for i in range(4):
+        carre.append(AvancerDroit(adp, 2)) # Avance de 4m
+        carre.append(Tourner(adp, 90))     # Tourne de 90°
+        
+    strat_globale = Choregraphie(adp, carre)
     strat_globale.start()
 
     running = True
