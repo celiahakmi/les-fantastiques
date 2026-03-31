@@ -14,3 +14,13 @@ class Vue3D:
         self.sol = box(pos=vector(5.0, -0.1, 5.0), 
                        size=vector(10.0, 0.2, 10.0), 
                        color=color.gray(0.7))
+        
+        # dessin du Robot 
+        self.robot_dessin = box(pos=vector(robot.x, 0.5, robot.y),
+                                size=vector(1.0, 1.0, 1.0), 
+                                color=color.blue)
+        
+        # Le traot rouge
+        self.trait_robot = box(pos=vector(robot.x + 0.5, 0.5, robot.y), 
+                               size=vector(0.3, 0.3, 0.3), 
+                               color=color.red)
