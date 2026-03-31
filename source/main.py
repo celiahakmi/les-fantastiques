@@ -54,7 +54,7 @@ def main():
                 if event.type == pygame.QUIT:
                     running = False
                     
-        time.sleep(0.001)
+        time.sleep(0.01)
 
     if simu:
         import pygame
