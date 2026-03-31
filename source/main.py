@@ -26,8 +26,8 @@ def main():
         # adp = AdaptateurIRL(r)
         pass 
     
-    action1 = Choregraphie(adp, [AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90)])
-    action2 = Condition(adp, Accelerer(adp, 20.0, 5, 1), Arreter(adp), 1.0)
+    action1 = Choregraphie(adp, [AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90)])
+    action2 = Condition(adp, Accelerer(adp, 20.0, 0.5, 0.01), Arreter(adp), 1.0)
     strat_globale = Choregraphie(adp, [action1, action2])
     
     strat_globale.start()
@@ -54,7 +54,7 @@ def main():
                 if event.type == pygame.QUIT:
                     running = False
                     
-        time.sleep(0.00000000000001)
+        time.sleep(0.001)
 
     if simu:
         import pygame
