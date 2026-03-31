@@ -42,7 +42,9 @@ def main():
             if not simu:
                 running = False 
 
+        # on met à jour la physique et la 3D
         if simu:      
+            # Le robot calcule sa nouvelle position
             if not r.update(): 
                 print("Collision ou arrêt ")
                 running = False 
@@ -57,7 +59,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
 
