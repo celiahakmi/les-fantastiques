@@ -24,3 +24,14 @@ class Vue3D:
         self.trait_robot = box(pos=vector(robot.x + 0.5, 0.5, robot.y), 
                                size=vector(0.3, 0.3, 0.3), 
                                color=color.red)
+
+        def dessiner(self):
+        rate(100) #vitesse (pas plus de 100 tours par seconde)
+        
+        # coordonnées du vrai robot / pour bouger le cube bleu 
+        self.robot_dessin.pos = vector(self.robot_physique.x, 0.5, self.robot_physique.y)
+        
+        # mise à jour de la rotation
+        direction = vector(math.cos(self.robot_physique.theta), 0, math.sin(self.robot_physique.theta))
+        self.robot_dessin.axis = direction
+        
