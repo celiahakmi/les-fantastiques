@@ -20,12 +20,9 @@ class Vue3D:
                                 size=vector(1.0, 1.0, 1.0), 
                                 color=color.blue)
         
-        # Le traot rouge
-        self.trait_robot = box(pos=vector(robot.x + 0.5, 0.5, robot.y), 
-                               size=vector(0.3, 0.3, 0.3), 
-                               color=color.red)
+        
 
-        def dessiner(self):
+    def dessiner(self):
         rate(100) #vitesse (pas plus de 100 tours par seconde)
         
         # coordonnées du vrai robot / pour bouger le cube bleu 
