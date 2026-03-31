@@ -8,15 +8,13 @@ def main():
     simu = True  
     
     if simu:
-        print("Mode simulation activé ")
-  
-        import pygame
-        from Fantastic5.graphique import PygameView 
-        
-        #le monde virtuel
+        print("mode  3D activé ")
+        from Fantastic5.graphique import Vue3D 
+
         p, r = initialisation_simulation() 
         
-        view = PygameView(p, r, 50)
+        #  initialise la vue 3D
+        view = Vue3D(p, r)
         adp = AdaptateurSimu(r)
         
     else:
@@ -34,8 +32,8 @@ def main():
     
     running = True
 
+
     while running:
-        
         if not strat_globale.stop():
             strat_globale.step()
         else:
@@ -45,15 +43,11 @@ def main():
 
         if simu:      
             if not r.update(): 
-                pass # Le robot a touché un mur
-                
-            view.dessiner()
+                print("Collision ou arrêt ")
+                running = False 
 
-            # fermer la fenêtre 
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    running = False
-                    
+            view.dessiner() 
+            
         time.sleep(0.01)
 
     if simu:
@@ -62,3 +56,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+
