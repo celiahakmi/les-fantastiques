@@ -5,6 +5,7 @@ from Fantastic5.adaptateur import AdaptateurSimu
 from Fantastic5.strategie import AvancerDroit, Tourner
 
 class TestAvancerDroit(unittest.TestCase):
+    """tester la classe avancerDroit"""
     def setUp(self):
         self.plateforme = Plateforme(10.0, 10.0)
         self.robot = Robot(5.0, 5.0, 0.0, 0.5, 0.5, 0.7, self.plateforme)
