@@ -36,8 +36,8 @@ class Plateforme:
         coins_reels = []
         for dx, dy in coins_relatifs:
             # Rotation des points par rapport à l'angle theta
-            cx: float = robot.x + (dx * math.cos(robot.theta) - dy * math.sin(robot.theta))
-            cy: float = robot.y + (dx * math.sin(robot.theta) + dy * math.cos(robot.theta))
+            cx = robot.x + (dx * math.cos(robot.theta) - dy * math.sin(robot.theta))
+            cy = robot.y + (dx * math.sin(robot.theta) + dy * math.cos(robot.theta))
             coins_reels.append((cx, cy))
 
         # Vérifier si un des coins sort de la plateforme ou touche un obstacle
@@ -123,7 +123,7 @@ class Robot:
                     return distance
             distance += step
                 
-        return distance_max # si aucun (obstacle - mur) n'a été trouvé
+        return distance_max # si aucun (obstacle ou mur) n'a été trouvé
 
     def get_position(self):
         return self.x, self.y, self.theta 

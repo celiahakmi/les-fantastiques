@@ -165,20 +165,34 @@ class Condition:
         return False
     
 class Boucle: 
-    def __init__(self, adaptateur, action):
+    def __init__(self, adaptateur, action, nb_iterations: int):
         self.adaptateur = adaptateur 
         self.action = action 
+        self.nb_iterations = nb_iterations  # Le nombre total de tours à faire
+        self.compteur = 0                   # Le suivi des tours effectués
+
     def start(self): 
-        """démarre la boucle"""
+        """Démarre la boucle et réinitialise le compteur"""
+        self.compteur = 0
         self.action.start()
+
     def step(self):
-        """Exécute l'action en boucle"""
+        """Exécute l'action et incrémente le compteur à chaque fin d'action"""
+        if self.stop():
+            return
+
         self.action.step()
+        
+        # Si l'action vient de se terminer, on passe au tour suivant
         if self.action.stop(): 
-            self.action.start() #la boucle s'effectue ici puisqu'on redémarre l'action 
+            self.compteur += 1
+            # On ne redémarre l'action que s'il reste des tours à faire
+            if not self.stop():
+                self.action.start()
+
     def stop(self):
-        """False pour que le robot ne puisse pas s'arrêter et continue la boucle"""
-        return False
+        """S'arrête quand le compteur atteint le nombre d'itérations"""
+        return self.compteur >= self.nb_iterations
     
 
     
