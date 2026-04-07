@@ -26,12 +26,19 @@ def main():
         # adp = AdaptateurIRL(r)
         pass 
 
+    def condition_distance(adaptateur):
+        return adaptateur.get_distance() > 1.0
+    
     action1 = Choregraphie(adp, [AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90)])
-    action2 = Condition(adp, Accelerer(adp, 20.0, 0.5, 0.01), Arreter(adp), 1.0)
+    action2 = Condition(adp,condition_distance,Accelerer(adp, 20.0, 0.5, 0.01),Arreter(adp))
     strat_globale = Choregraphie(adp, [action1, action2])
-
     strat_globale.start()
-
+    # on peut utiliser la stratégie boucle ici en modifiant aussi le while running :
+    #action1 = Choregraphie(adp, [AvancerDroit(adp, 2), Tourner(adp, 90)])
+    #nbRepet = 4
+    #boucle_action = Boucle(adp, action1, n_repetitions=4)
+    #boucle_action.start()
+    
     running = True
 
     while running:
