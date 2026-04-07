@@ -15,6 +15,7 @@ def main():
 
         #le monde virtuel
         p, r = initialisation_simulation() 
+        
 
         view = PygameView(p, r, 50)
         adp = AdaptateurSimu(r)

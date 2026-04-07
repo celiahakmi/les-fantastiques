@@ -9,6 +9,7 @@ def initialisation_simulation():
     # Plateforme
     p = Plateforme(10.0, 10.0)
     p.init_obstacle(2.0, 2.0, 1.0, 1.0) 
+    p.init_ballon(3.0, 2.0, 1.0)
     #Robot 
     r = Robot(5.0, 5.0, 0.0, 0.5, 0.5, 0.7, p)
     

@@ -1,2 +1,2 @@
-from .simulation import Plateforme, Robot
-__all__ = ["Plateforme", "Robot"]
+from .simulation import Plateforme, Robot, Ballon 
+__all__ = ["Plateforme", "Robot", "Ballon"]

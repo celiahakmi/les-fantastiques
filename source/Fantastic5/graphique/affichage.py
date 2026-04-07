@@ -12,8 +12,11 @@ class PygameView:
 
         w: int = int(self.plateforme.longueur * self.TAILLE_PIXEL)
         h: int = int(self.plateforme.hauteur * self.TAILLE_PIXEL)
+        #crée la fenêtre pygame de taille w*h pixels
         self.fenetre: pygame.Surface = pygame.display.set_mode((w, h))
+        #titre en haut de la fenêtre
         pygame.display.set_caption("Simulation robot diff-drive")
+        #permet de controler le framerate -> limite la vitesse de simu
         self.horloge: pygame.time.Clock = pygame.time.Clock()
 
     def to_px(self, x: float, y : float):
@@ -25,7 +28,9 @@ class PygameView:
         # Grille verticale
         for i in range(int(self.plateforme.longueur) + 1):
             x: int = i * self.TAILLE_PIXEL
+            #crée les lignes verticales de la grille
             pygame.draw.line(
+                #couleur grise
                 self.fenetre,
                 (220, 220, 220),
                 (x, 0),
@@ -51,8 +56,13 @@ class PygameView:
                 int(largeur * self.TAILLE_PIXEL),
                 int(hauteur * self.TAILLE_PIXEL),
             )
+            #dessine le rectangle
             pygame.draw.rect(self.fenetre, (135, 233, 144), rect)
-            
+        # Ballons
+        for ballon in self.plateforme.ballons:
+            cx, cy = self.to_px(ballon.x, ballon.y)
+            rayon_px = int(ballon.rayon * self.TAILLE_PIXEL)
+            pygame.draw.circle(self.fenetre, (255, 165, 0), (cx, cy), rayon_px)  # orange   
         # Robot
         cx, cy = self.to_px(self.robot.x, self.robot.y)
         surf_w: int = max(1, int(self.robot.long * self.TAILLE_PIXEL))

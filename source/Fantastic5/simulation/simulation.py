@@ -2,9 +2,12 @@ import math
 
 class Plateforme:
     def __init__(self, longueur: float, hauteur: float):
+        """longueur et hauteur : dimensions de la plateforme
+           obstacles : liste des rectangles déjà placés sur la plateforme.  sous forme de tuple : ("rect", x, y, hauteur, largeur)  """
         self.longueur: float = longueur  # affilié à x
         self.hauteur: float= hauteur     # affilié à y
-        self.obstacles: list = []
+        self.obstacles: list = [] #liste des obstacles présents 
+        self.ballons: list = [] 
 
     def init_obstacle(self, x: float, y:float, h: float, l: float):
         """Construire un rectangle où le sommet bas-gauche est de coordonnées x,y, de hauteur h et de largeur l"""
@@ -12,12 +15,16 @@ class Plateforme:
             self.obstacles.append(("rect", x, y, h, l))
             return True 
         return False  
+    
+    def init_ballon(self, x: float, y: float, rayon: float):
+        self.ballons.append(Ballon(x, y, rayon))
 
     def est_valide(self, x: float, y: float, l: float, h: float):
         """Renvoie True si l'obstacle est valide """
+        #Vérifie que l’obstacle ne sort pas de la plateforme
         if x < 0 or y < 0 or (x+l) > self.longueur or (y+h) > self.hauteur:
             return False
-        
+        #Vérifie qu’il ne chevauche pas un autre obstacle
         for obs in self.obstacles:
             _, ox, oy, oh, ol = obs 
             if (x < ox + ol and x + l > ox and
@@ -77,7 +84,8 @@ class Robot:
         self.pas: float = 0.1 
 
     def update(self):
-        """Calcule le prochain mouvement sans l'appliquer"""
+        """Calcule le prochain mouvement sans l'appliquer
+        met à jour la position du robot après un petit pas de temps (pas), en utilisant les vitesses des roues"""
         # Sauvegarde de la position actuelle au cas ou on va annuler
         ancien_x: float = self.x
         ancien_y: float = self.y
@@ -96,7 +104,9 @@ class Robot:
         if self.plateforme.collision_robot(self):
             # Collision détectée 
             print("Oups, le robot s'est cogné")
+            #on retourne à l'ancienne position
             self.x, self.y, self.theta = ancien_x, ancien_y, ancien_theta
+            #vitesses à 0
             self.vL = 0.0
             self.vR = 0.0
             return False 
@@ -116,6 +126,12 @@ class Robot:
             if (test_x < 0 or test_x > self.plateforme.longueur or test_y < 0 or test_y > self.plateforme.hauteur):
                 return distance
             
+            for ballon in self.plateforme.ballons:
+                dx = test_x - ballon.x
+                dy = test_y - ballon.y
+                if math.sqrt(dx**2 + dy**2) <= ballon.rayon:
+                    return distance
+            
             # vérifie la collision avec les obstacles
             for obstacle in self.plateforme.obstacles:
                 _, obstacle_x, obstacle_y, obstacle_h, obstacle_l = obstacle
@@ -130,3 +146,9 @@ class Robot:
        
     def get_vitesse(self):
         return self.vL, self.vR
+
+class Ballon:
+    def __init__(self, x: float, y: float, rayon: float):
+        self.x = x
+        self.y = y
+        self.rayon = rayon

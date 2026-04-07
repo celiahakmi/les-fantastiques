@@ -9,7 +9,7 @@ class AvancerDroit:
     def start(self):
         """Initialise les variables au moment de démarrer"""
         self.parcouru = 0.0
-        # on appelle set_vitesse
+        # on appelle set_vitesse(vitesse avant, vitesse arrière)
         self.adaptateur.set_vitesse(0.1, 0.0)
           
     def step(self):
@@ -38,7 +38,7 @@ class Tourner:
     def start(self):
         """initialisation des variables"""
         self.angle_parcouru = 0.0
-        self.adaptateur.set_vitesse(0.0,0.1) #rotation sur place
+        self.adaptateur.set_vitesse(0.0,0.1) #rotation sur place à droite
 
     def step(self):
         """execute un pas de la stratégie"""
@@ -104,6 +104,7 @@ class Choregraphie:
 
 class Accelerer:
     def __init__(self, adaptateur, distance: float, v_max: float, acceleration: float):
+        """Faire avancer le robot avec accélération progressive jusqu’à une vitesse maximale."""
         self.adaptateur = adaptateur
         self.distance = distance
         self.v_max = v_max
@@ -179,6 +180,3 @@ class Boucle:
     def stop(self):
         """False pour que le robot ne puisse pas s'arrêter et continue la boucle"""
         return False
-    
-
-    
