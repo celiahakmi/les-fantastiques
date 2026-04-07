@@ -131,11 +131,11 @@ class Accelerer:
     
         
 class Condition: 
-    def __init__(self, adaptateur, stratA, stratB, distance_securite: float) :
+    def __init__(self, adaptateur, condition_func, stratA, stratB) :
         self.adaptateur = adaptateur
-        self.strat_libre = stratA
-        self.strat_obstacle = stratB
-        self.securite = distance_securite
+        self.condition = condition_func
+        self.stratA = stratA
+        self.stratB = stratB
         self.current_strat = None
 
     def start(self):
@@ -143,21 +143,18 @@ class Condition:
         self.current_strat = None
 
     def step(self):
-        """Choisit la stratégie en fonction du capteur à chaque pas"""
-        # On interroge le capteur via l'adaptateur
-        distance = self.adaptateur.get_distance() 
-
-        # Choix de la stratégie selon la condition 
-        if distance > self.securite:
-            nouvelle_strat = self.strat_libre
+        """Choisit la stratégieselon la condition"""
+        # évalue la condition 
+        if self.condition(self.adaptateur):
+            nouvelle_strat = self.stratA
         else:
-            nouvelle_strat = self.strat_obstacle
+            nouvelle_strat = self.stratB
 
         # Si on change, on demarre la nouvelle strat
         if nouvelle_strat != self.current_strat:
             self.current_strat = nouvelle_strat
             self.current_strat.start() 
-
+        #on éxecute la stratégie courante
         self.current_strat.step() 
 
     def stop(self):
@@ -165,20 +162,33 @@ class Condition:
         return False
     
 class Boucle: 
-    def __init__(self, adaptateur, action):
+    def __init__(self, adaptateur, action, nbRepet):
         self.adaptateur = adaptateur 
         self.action = action 
+        self.nbRepet = nbRepet
+        self.compteur = 0
+
     def start(self): 
         """démarre la boucle"""
-        self.action.start()
+        self.compteur = 0
+        self.action.start() #on commence la premiere répétition
+
     def step(self):
         """Exécute l'action en boucle"""
-        self.action.step()
+        #toutes les répétitions ont été faites :
+        if self.compteur >= self.nbRepet:
+            return
+        self.action.step() #exécute un pas de l'action
+        #si l'action est terminé
         if self.action.stop(): 
-            self.action.start() #la boucle s'effectue ici puisqu'on redémarre l'action 
+            self.compteur += 1 
+            #si la boucle n'est pas terminé on recommence l'action
+            if self.compteur < self.nbRepet:
+                self.action.start() 
+
     def stop(self):
         """False pour que le robot ne puisse pas s'arrêter et continue la boucle"""
-        return False
+        return self.compteur >= self.nbRepet
     
 
     
