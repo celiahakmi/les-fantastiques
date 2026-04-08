@@ -17,6 +17,7 @@ def main():
         p, r = initialisation_simulation() 
 
         view = PygameView(p, r, 50)
+        r.dessine(True)
         adp = AdaptateurSimu(r)
 
     else:

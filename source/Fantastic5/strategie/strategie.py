@@ -191,4 +191,4 @@ class Boucle:
         return self.compteur >= self.nbRepet
     
 
-    
+

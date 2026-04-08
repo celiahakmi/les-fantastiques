@@ -16,18 +16,17 @@ class PygameView:
         pygame.display.set_caption("Simulation robot diff-drive")
         self.horloge: pygame.time.Clock = pygame.time.Clock()
         self.trace_points: list[tuple[int, int]] = []
-        self.trace_couleur: tuple[int, int, int] = (0, 0, 0)
+        self.trace_couleur: tuple[int, int, int] = (0, 0, 255)
 
     def to_px(self, x: float, y : float):
         return (int(x * self.TAILLE_PIXEL), int(y * self.TAILLE_PIXEL))
-    
-    
+
     couleurs = {}
     def change_couleur(self, couleur):
-        couleurs = {(255, 0, 0),(0, 255, 0),(0, 0, 255),(0, 0, 0),(255, 255, 255),(255, 255, 0)}
+        couleurs = {(0, 0, 0),(125,135,50),(125,123,150),(134,125,189)}
 
         
-        
+
     def dessiner(self):
         self.fenetre.fill((255, 255, 255))
 
@@ -64,7 +63,8 @@ class PygameView:
                  
         # Robot
         cx, cy = self.to_px(self.robot.x, self.robot.y)
-        self.trace_points.append((cx, cy))
+        if self.robot.trace_active:
+            self.trace_points.append((cx, cy))
 
         if len(self.trace_points) >= 2:
             pygame.draw.lines(self.fenetre, self.trace_couleur, False, self.trace_points, 2)
@@ -86,4 +86,3 @@ class PygameView:
         pygame.draw.line(self.fenetre, (255, 0, 0), (cx, cy), (x2p, y2p), 2)
             
         pygame.display.flip()
-

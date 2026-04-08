@@ -75,6 +75,10 @@ class Robot:
         self.vL: float = 0.0
         self.vR: float = 0.0
         self.pas: float = 0.1 
+        self.trace_active: bool = False
+
+    def dessine(self, b: bool):
+        self.trace_active = b
 
     def update(self):
         """Calcule le prochain mouvement sans l'appliquer"""
