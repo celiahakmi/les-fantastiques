@@ -29,28 +29,32 @@ def main():
         pass 
     def condition_distance(adaptateur):
         return adaptateur.get_distance() > 1.0
-    action1 = Choregraphie(adp, [AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90)])
-    action2 = Condition(adp,condition_distance,Accelerer(adp, 20.0, 0.5, 0.01),Arreter(adp))
-    strat_globale = Choregraphie(adp, [action1, action2])
-
-    strat_globale.start()
+    action1 = Choregraphie(adp2, [AvancerDroit(adp2, 2), Tourner(adp2, 90), AvancerDroit(adp2, 2), Tourner(adp2, 90), AvancerDroit(adp2, 2), Tourner(adp2, 90), AvancerDroit(adp2, 2), Tourner(adp2, 90), AvancerDroit(adp2, 2), Tourner(adp2, 90)])
+    action2 = Choregraphie(adp,[Tourner(adp, 270),AvancerDroit(adp, 4), Tourner(adp, 180), AvancerDroit(adp, 4)])
+    
+    action1.start()
+    action2.start()
 
     running = True
 
     while running:
-
-        if not strat_globale.stop():
-   
-            strat_globale.step()
-         
+        if not action1.stop() :
+            action1.step()
+            
 
         else:
-            adp.set_vitesse(0.0, 0.0) 
+            adp2.set_vitesse(0.0, 0.0) 
             if not simu:
                 running = False 
+        if not action2.stop():
+            action2.step()
 
+        else : 
+            adp.set_vitesse(0.0,0.0)
+            if not simu:
+                running = False
         if simu:      
-            if not r1.update(): 
+            if not r2.update() or r1.update(): 
                 pass # Le robot a touché un mur
 
             view.dessiner()
