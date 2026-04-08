@@ -30,8 +30,8 @@ def main():
     def condition_distance(adaptateur):
         return adaptateur.get_distance() > 1.0
     
-    action1 = HexagoneColore(adp, view, 2.0)
-    action1.start()
+    action0 = HexagoneColore(adp, view, 2.0)
+    action0.start()
 
     action1 = Choregraphie(adp, [AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90)])
     action2 = Condition(adp,condition_distance,Accelerer(adp, 20.0, 0.5, 0.01),Arreter(adp))
