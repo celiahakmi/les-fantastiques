@@ -192,3 +192,20 @@ class Boucle:
     
 
     
+
+#q.1.5
+class Tracerhexagone:
+    def __init__(self,adaptateur,cote):
+        self.adaptateur=adaptateur
+        self.cote=cote
+        
+    def start(self):
+        self.cote=cote
+
+    def step(self):
+        action=Choregraphie(self.adaptateur,[AvancerDroit(self.adaptateur,self.cote),Tourner(self.adaptateur,60)])
+        boucle=Boucle(self.adaptateur,action,6)
+        boucle.start()
+
+    def stop(self):
+        return False

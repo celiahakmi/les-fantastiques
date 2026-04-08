@@ -14,10 +14,12 @@ def main():
         from Fantastic5.graphique import PygameView 
 
         #le monde virtuel
-        p, r = initialisation_simulation() 
+        #q2.1
+        p, r1,r2 = initialisation_simulation() 
 
-        view = PygameView(p, r, 50)
-        adp = AdaptateurSimu(r)
+        view = PygameView(p, r1,r2, 50)
+        adp = AdaptateurSimu(r1)
+        adp2 = AdaptateurSimu(r2)
 
     else:
         print("Mode robot réel activé ")
@@ -29,10 +31,21 @@ def main():
     def condition_distance(adaptateur):
         return adaptateur.get_distance() > 1.0
     
-    action1 = Choregraphie(adp, [AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90)])
-    action2 = Condition(adp,condition_distance,Accelerer(adp, 20.0, 0.5, 0.01),Arreter(adp))
-    strat_globale = Choregraphie(adp, [action1, action2])
+    strat_globale = Choregraphie(adp, [AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90)])
+    #pour q2.2 action2 = Condition(adp,condition_distance,Accelerer(adp, 20.0, 0.5, 0.01),Arreter(adp))
+    #strat_globale = Choregraphie(adp, [action1, action2])
     strat_globale.start()
+
+    action= Choregraphie(adp2, [AvancerDroit(adp2, 2),Tourner(adp2, 180),AvancerDroit(adp2, 2)])
+    action.start()
+   
+
+
+    #q1.5
+    #strat_hexa=Tracerhexagone(adp,3)
+    #strat_hexa.start()
+    #strat_hexa.step()
+
     # on peut utiliser la stratégie boucle ici en modifiant aussi le while running :
     #action1 = Choregraphie(adp, [AvancerDroit(adp, 2), Tourner(adp, 90)])
     #nbRepet = 4
@@ -44,14 +57,23 @@ def main():
     while running:
 
         if not strat_globale.stop():
-            strat_globale.step()
+            strat_globale.step() 
         else:
             adp.set_vitesse(0.0, 0.0) 
             if not simu:
                 running = False 
 
+        if  not action.stop():
+            action.step()
+        else:
+            adp2.set_vitesse(0.0, 0.0) 
+            if not simu:
+                running = False 
+
+
+
         if simu:      
-            if not r.update(): 
+            if not r1.update() or r2.update(): 
                 pass # Le robot a touché un mur
 
             view.dessiner()
