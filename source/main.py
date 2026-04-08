@@ -31,8 +31,10 @@ def main():
         return adaptateur.get_distance() > 1.0
     
     action1 = Choregraphie(adp, [AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90)])
-    action2 = Condition(adp,condition_distance,Accelerer(adp, 20.0, 0.5, 0.01),Arreter(adp))
-    strat_globale = Choregraphie(adp, [action1, action2])
+    action3 = Condition(adp,condition_distance,Accelerer(adp, 20.0, 0.5, 0.01),Arreter(adp))
+    #qst 1.5
+    action2= Choregraphie(adp,[AvancerDroit(adp,1),Tourner(adp,30),AvancerDroit(adp,1),Tourner(adp,90),AvancerDroit(adp,1),Tourner(adp,30),AvancerDroit(adp,1),Tourner(adp,90),AvancerDroit(adp,1),Tourner(adp,30),AvancerDroit(adp,1),Tourner(adp,90),AvancerDroit(adp,1),Tourner(adp,30)])
+    strat_globale = Choregraphie(adp, [action1, action2, action3])
     strat_globale.start()
     # on peut utiliser la stratégie boucle ici en modifiant aussi le while running :
     #action1 = Choregraphie(adp, [AvancerDroit(adp, 2), Tourner(adp, 90)])
