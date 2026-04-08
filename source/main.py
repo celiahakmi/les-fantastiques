@@ -1,7 +1,7 @@
 import time  
 from Fantastic5 import initialisation_simulation 
 from Fantastic5.adaptateur import AdaptateurSimu, AdaptateurIRL
-from Fantastic5.strategie import AvancerDroit, Tourner,Arreter, Accelerer, Choregraphie, Condition, Boucle,HexagoneColore
+from Fantastic5.strategie import AvancerDroit, Tourner,Arreter, Accelerer, Choregraphie, Condition, Boucle,HexagoneColore,SuivreBallon
 
 def main():
 
@@ -28,17 +28,22 @@ def main():
         pass 
 
     def condition_distance(adaptateur):
-        return adaptateur.get_distance() > 1.0
+       return adaptateur.get_distance() > 1.0
     
-    action0 = HexagoneColore(adp, view, 2.0)
-    action0.start()
     
+    strat_globale = HexagoneColore(adp, view, 2.0)
+    strat_globale.start()
+    
+    #exemple de changement de couleur en vert 
     view.change_couleur("b")
 
+    
 
     action1 = Choregraphie(adp, [AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90)])
     action2 = Condition(adp,condition_distance,Accelerer(adp, 20.0, 0.5, 0.01),Arreter(adp))
     strat_globale = Choregraphie(adp, [action1, action2])
+    strat_globale.start()
+    strat_globale = SuivreBallon(adp, 8.0, 8.0)
     strat_globale.start()
     # on peut utiliser la stratégie boucle ici en modifiant aussi le while running :
     #action1 = Choregraphie(adp, [AvancerDroit(adp, 2), Tourner(adp, 90)])

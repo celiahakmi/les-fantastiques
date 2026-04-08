@@ -234,3 +234,46 @@ class HexagoneColore:
 
     def stop(self):
         return self.stop()
+
+class SuivreBallon:
+    def __init__(self, adaptateur, ballon_x, ballon_y, seuil_distance=0.2):
+        self.adaptateur = adaptateur
+        self.ballon_x = ballon_x
+        self.ballon_y = ballon_y
+        self.seuil_distance = seuil_distance
+
+    def start(self):
+        pass
+
+    def step(self):
+        x, y, theta = self.adaptateur.robot.get_position()
+
+        dx = self.ballon_x - x
+        dy = self.ballon_y - y
+        distance = math.sqrt(dx**2 + dy**2)
+
+        if distance <= self.seuil_distance:
+            self.adaptateur.set_vitesse(0.0, 0.0)
+            return
+
+        angle_ballon = math.atan2(dy, dx)
+        angle = angle_ballon - theta
+
+        while angle > math.pi:
+            angle -= 2 * math.pi
+        while angle < -math.pi:
+            angle += 2 * math.pi
+
+        if abs(angle) > 0.1:
+            self.adaptateur.set_vitesse(0.0, 0.5 if angle > 0 else -0.5)
+        else:
+            self.adaptateur.set_vitesse(0.1, 0.0)
+
+    def stop(self):
+        x, y, _ = self.adaptateur.robot.get_position()
+        distance = math.sqrt((self.ballon_x - x)**2 + (self.ballon_y - y)**2)
+        return distance <= self.seuil_distance
+ 
+
+
+
