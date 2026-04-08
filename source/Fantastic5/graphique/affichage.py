@@ -65,11 +65,20 @@ class PygameView:
         rect_rot: pygame.Rect  = rotated.get_rect(center=(cx, cy))
         self.fenetre.blit(rotated, rect_rot.topleft)
         
+        #quesion 1.2
+        crayon:float=max(self.robot.long, 0.2)
+        x3:float= self.robot.x + crayon
+        y3:float= self.robot.y + crayon
+        x3p, y3p = self.to_px(x3, y3)
+        if self.robot.x!=0 and self.robot.y !=0:
+            pygame.draw.line(self.fenetre, (0,0,255),(cx,cy),(x3p,y3p),2)
+
         # Fleche rouge pour indiquer la direction  
         L_fleche: float = max(self.robot.long, 0.2)
         x2: float = self.robot.x + L_fleche * math.cos(self.robot.theta)
         y2: float = self.robot.y + L_fleche * math.sin(self.robot.theta)
         x2p, y2p = self.to_px(x2, y2)
         pygame.draw.line(self.fenetre, (255, 0, 0), (cx, cy), (x2p, y2p), 2)
+    
             
         pygame.display.flip()
