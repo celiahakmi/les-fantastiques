@@ -189,6 +189,3 @@ class Boucle:
     def stop(self):
         """False pour que le robot ne puisse pas s'arrêter et continue la boucle"""
         return self.compteur >= self.nbRepet
-    
-
-    

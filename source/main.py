@@ -1,5 +1,6 @@
 import time  
-from Fantastic5 import initialisation_simulation 
+from Fantastic5 import initialisation_simulation
+from Fantastic5.simulation import simulation_trois_obstacles #question 1.1
 from Fantastic5.adaptateur import AdaptateurSimu, AdaptateurIRL
 from Fantastic5.strategie import AvancerDroit, Tourner,Arreter, Accelerer, Choregraphie, Condition, Boucle
 
@@ -14,7 +15,7 @@ def main():
         from Fantastic5.graphique import PygameView 
 
         #le monde virtuel
-        p, r = initialisation_simulation() 
+        p, r = simulation_trois_obstacles() #question 1.1
 
         view = PygameView(p, r, 50)
         adp = AdaptateurSimu(r)
