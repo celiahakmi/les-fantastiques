@@ -7,7 +7,7 @@ class Plateforme:
         self.longueur: float = longueur  # affilié à x
         self.hauteur: float= hauteur     # affilié à y
         self.obstacles: list = [] #liste des obstacles présents 
-        self.ballons: list = [] 
+        self.ballons: list = [] #liste des ballons présents 
 
     def init_obstacle(self, x: float, y:float, h: float, l: float):
         """Construire un rectangle où le sommet bas-gauche est de coordonnées x,y, de hauteur h et de largeur l"""
@@ -60,7 +60,12 @@ class Plateforme:
                 if ox <= cx <= ox + ol and oy <= cy <= oy + oh:
                     return True
         return False
-
+    def collision_ballon(self, ballon):
+        bx : float = ballon.x + ballon.rayon
+        by : float = ballon.y + ballon.rayon
+        if  bx < 0 or bx > self.longueur or by < 0 or by > self.hauteur:
+            return True 
+    return False 
 
 class Robot: 
     def __init__(self, x : float, y : float, theta : float, L : float, larg : float, long : float, plateforme):
@@ -148,7 +153,37 @@ class Robot:
         return self.vL, self.vR
 
 class Ballon:
-    def __init__(self, x: float, y: float, rayon: float):
+    def __init__(self, x: float, y: float, theta : float, vitesse : float, rayon: float):
         self.x = x
         self.y = y
+        self.theta = theta
+        self.vitesse = vitesse
         self.rayon = rayon
+        self.pas: float = 0.1 
+        
+    def update():
+        ancien_x: float = self.x
+        ancien_y: float = self.y
+        ancien_theta: float = self.theta
+
+        # Calcul des vitesses 
+        vitesse_lineaire: float = self.vitesse 
+        vitesse_angulaire: float = self.vitesse 
+
+        # Calcul de la position 
+        self.x += vitesse_lineaire  * math.cos(self.theta) * self.pas
+        self.y += vitesse_lineaire  * math.sin(self.theta) * self.pas
+        self.theta += vitesse_angulaire * self.pas
+
+        # Vérification de la collision 
+        if self.plateforme.collision_robot(self):
+            # Collision détectée 
+            print("Oups, le robot s'est cogné")
+            #on retourne à l'ancienne position
+            self.x, self.y, self.theta = ancien_x, ancien_y, ancien_theta
+            #vitesses à 0
+            self.vL = 0.0
+            self.vR = 0.0
+            return False 
+            
+        return True 

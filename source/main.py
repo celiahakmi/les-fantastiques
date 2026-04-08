@@ -14,7 +14,7 @@ def main():
         from Fantastic5.graphique import PygameView 
 
         #le monde virtuel
-        p, r1, r2 = inititialisation_simulation_q2_1() 
+        p, r1, r2, = inititialisation_simulation_q2_1() 
         
 
         view = PygameView(p, r1, r2, 50)

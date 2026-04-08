@@ -1,5 +1,5 @@
 from .graphique import PygameView 
-from .simulation import Plateforme, Robot 
+from .simulation import Plateforme, Robot, Ballon 
 from .strategie import AvancerDroit, Tourner, Arreter, Choregraphie, Accelerer, Boucle, Condition 
 
 __all__ = ["PygameView", "Plateforme", "Robot", "AvancerDroit", "Tourner", "Arreter", "Choregraphie", "initialisation_simulation", "inititialisation_simulation_tmesolo", "inititialisation_simulation_q2_1", "Accelerer","Boucle","Condition"]
@@ -37,5 +37,6 @@ def inititialisation_simulation_q2_1():
     p.init_obstacle(4.5, 8.0, 1.0, 1.0) 
     r1 = Robot(9.0, 5.0, 0.0, 0.5, 0.5, 0.7, p)
     r2 = Robot(1.0, 5.0, 0.0, 0.5, 0.5, 0.7, p)
-    return p, r1, r2
+    b = Ballon(2.0, 3.0, 0.25)
+    return p, r1, r2, b
 

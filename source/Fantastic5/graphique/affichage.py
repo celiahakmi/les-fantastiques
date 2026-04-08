@@ -59,6 +59,7 @@ class PygameView:
             )
             #dessine le rectangle
             pygame.draw.rect(self.fenetre, (135, 233, 144), rect)
+ 
         # Robot 1 
         cx, cy = self.to_px(self.robot.x, self.robot.y)
         surf_w: int = max(1, int(self.robot.long * self.TAILLE_PIXEL))
@@ -97,3 +98,5 @@ class PygameView:
         pygame.draw.line(self.fenetre, (255, 0, 0), (cx2, cy2), (x3p, y3p), 2)
 
         pygame.display.flip()
+
+      
