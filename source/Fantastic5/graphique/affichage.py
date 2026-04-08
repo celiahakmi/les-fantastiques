@@ -69,7 +69,17 @@ class PygameView:
         rotated: pygame.Surface = pygame.transform.rotate(robot_surf, angle_deg)
         rect_rot: pygame.Rect  = rotated.get_rect(center=(cx, cy))
         self.fenetre.blit(rotated, rect_rot.topleft)
-
+        
+        
+        
+        # Fleche rouge pour indiquer la direction  
+        L_fleche: float = max(self.robot.long, 0.2)
+        x2: float = self.robot.x + L_fleche * math.cos(self.robot.theta)
+        y2: float = self.robot.y + L_fleche * math.sin(self.robot.theta)
+        x2p, y2p = self.to_px(x2, y2)
+        pygame.draw.line(self.fenetre, (255, 0, 0), (cx, cy), (x2p, y2p), 2)
+            
+        #Robot 2 
         cx2, cy2 = self.to_px(self.robot2.x, self.robot2.y)
         surf_w2: int = max(1, int(self.robot2.long * self.TAILLE_PIXEL))
         surf_h2: int = max(1, int(self.robot2.larg * self.TAILLE_PIXEL))
@@ -79,12 +89,11 @@ class PygameView:
         rotated: pygame.Surface = pygame.transform.rotate(robot2_surf, angle_deg)
         rect_rot: pygame.Rect  = rotated.get_rect(center=(cx2, cy2))
         self.fenetre.blit(rotated, rect_rot.topleft)
-        
-        # Fleche rouge pour indiquer la direction  
-        L_fleche: float = max(self.robot.long, 0.2)
-        x2: float = self.robot.x + L_fleche * math.cos(self.robot.theta)
-        y2: float = self.robot.y + L_fleche * math.sin(self.robot.theta)
-        x2p, y2p = self.to_px(x2, y2)
-        pygame.draw.line(self.fenetre, (255, 0, 0), (cx, cy), (x2p, y2p), 2)
-            
+
+        L_fleche3: float = max(self.robot2.long, 0.2)
+        x3: float = self.robot2.x + L_fleche3 * math.cos(self.robot2.theta)
+        y3: float = self.robot2.y + L_fleche3 * math.sin(self.robot2.theta)
+        x3p, y3p = self.to_px(x3, y3)
+        pygame.draw.line(self.fenetre, (255, 0, 0), (cx2, cy2), (x3p, y3p), 2)
+
         pygame.display.flip()
