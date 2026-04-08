@@ -2,9 +2,10 @@ import math
 import pygame
 
 class PygameView:
-    def __init__(self, plateforme, robot, TAILLE_PIXEL: int =40):
+    def __init__(self, plateforme, robot, robot2,  TAILLE_PIXEL: int =40):
         self.plateforme = plateforme
         self.robot = robot
+        self.robot2 = robot2
         self.TAILLE_PIXEL = int(TAILLE_PIXEL)
 
         if not pygame.get_init():
@@ -58,12 +59,7 @@ class PygameView:
             )
             #dessine le rectangle
             pygame.draw.rect(self.fenetre, (135, 233, 144), rect)
-        # Ballons
-        for ballon in self.plateforme.ballons:
-            cx, cy = self.to_px(ballon.x, ballon.y)
-            rayon_px = int(ballon.rayon * self.TAILLE_PIXEL)
-            pygame.draw.circle(self.fenetre, (255, 165, 0), (cx, cy), rayon_px)  # orange   
-        # Robot
+        # Robot 1 
         cx, cy = self.to_px(self.robot.x, self.robot.y)
         surf_w: int = max(1, int(self.robot.long * self.TAILLE_PIXEL))
         surf_h: int = max(1, int(self.robot.larg * self.TAILLE_PIXEL))
@@ -72,6 +68,16 @@ class PygameView:
         angle_deg: float = -math.degrees(self.robot.theta)
         rotated: pygame.Surface = pygame.transform.rotate(robot_surf, angle_deg)
         rect_rot: pygame.Rect  = rotated.get_rect(center=(cx, cy))
+        self.fenetre.blit(rotated, rect_rot.topleft)
+
+        cx2, cy2 = self.to_px(self.robot2.x, self.robot2.y)
+        surf_w2: int = max(1, int(self.robot2.long * self.TAILLE_PIXEL))
+        surf_h2: int = max(1, int(self.robot2.larg * self.TAILLE_PIXEL))
+        robot2_surf : pygame.Surface = pygame.Surface((surf_w2, surf_h2), pygame.SRCALPHA)
+        robot2_surf.fill((0, 0, 255))
+        angle_deg: float = -math.degrees(self.robot2.theta)
+        rotated: pygame.Surface = pygame.transform.rotate(robot2_surf, angle_deg)
+        rect_rot: pygame.Rect  = rotated.get_rect(center=(cx2, cy2))
         self.fenetre.blit(rotated, rect_rot.topleft)
         
         # Fleche rouge pour indiquer la direction  
