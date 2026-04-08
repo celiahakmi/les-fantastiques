@@ -1,5 +1,5 @@
 import time  
-from Fantastic5 import initialisation_simulation, inititialisation_simulation_tmesolo
+from Fantastic5 import initialisation_simulation, inititialisation_simulation_tmesolo, inititialisation_simulation_q2_1
 from Fantastic5.adaptateur import AdaptateurSimu, AdaptateurIRL
 from Fantastic5.strategie import AvancerDroit, Tourner,Arreter, Accelerer, Choregraphie, Condition, Boucle
 
@@ -14,11 +14,12 @@ def main():
         from Fantastic5.graphique import PygameView 
 
         #le monde virtuel
-        p, r = inititialisation_simulation_tmesolo() 
+        p, r1, r2 = inititialisation_simulation_q2_1() 
         
 
-        view = PygameView(p, r, 50)
-        adp = AdaptateurSimu(r)
+        view = PygameView(p, r1, r2, 50)
+        adp = AdaptateurSimu(r1)
+        adp2 = AdaptateurSimu(r2)
 
     else:
         print("Mode robot réel activé ")
@@ -32,26 +33,24 @@ def main():
     action2 = Condition(adp,condition_distance,Accelerer(adp, 20.0, 0.5, 0.01),Arreter(adp))
     strat_globale = Choregraphie(adp, [action1, action2])
 
-    # action_triangle = Choregraphie(adp, [AvancerDroit(adp, 2),Tourner(adp, 120),AvancerDroit(adp, 2),Tourner(adp, 120),AvancerDroit(adp, 2),Tourner(adp, 120)])
     strat_globale.start()
-    # on peut utiliser la stratégie boucle ici en modifiant aussi le while running :
-    #action1 = Choregraphie(adp, [AvancerDroit(adp, 2), Tourner(adp, 90)])
-    #nbRepet = 4
-    #boucle_action = Boucle(adp, action1, n_repetitions=4)
-    #boucle_action.start()
+
     running = True
 
     while running:
 
         if not strat_globale.stop():
+   
             strat_globale.step()
+         
+
         else:
             adp.set_vitesse(0.0, 0.0) 
             if not simu:
                 running = False 
 
         if simu:      
-            if not r.update(): 
+            if not r1.update(): 
                 pass # Le robot a touché un mur
 
             view.dessiner()
