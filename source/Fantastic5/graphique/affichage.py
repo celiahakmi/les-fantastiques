@@ -38,6 +38,7 @@ class PygameView:
         return (int(x * self.TAILLE_PIXEL), int(y * self.TAILLE_PIXEL))
 
     
+    
 
     def dessiner(self):
         self.fenetre.fill((255, 255, 255))
@@ -72,6 +73,11 @@ class PygameView:
                 int(hauteur * self.TAILLE_PIXEL),
             )
             pygame.draw.rect(self.fenetre, (135, 233, 144), rect)
+            
+            pygame.draw.circle(self.fenetre,
+            (255, 165, 0),
+            (int(ballon.x * self.TAILLE_PIXEL), int(ballon.y * self.TAILLE_PIXEL)),
+            int(ballon.rayon * self.TAILLE_PIXEL))
                  
         # Robot
         cx, cy = self.to_px(self.robot.x, self.robot.y)

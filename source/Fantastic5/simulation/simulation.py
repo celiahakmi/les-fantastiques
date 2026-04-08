@@ -134,3 +134,36 @@ class Robot:
        
     def get_vitesse(self):
         return self.vL, self.vR
+"""
+class Ballon:
+    def __init__(self, x, y, vx, vy, rayon, plateforme):
+        self.x = x
+        self.y = y
+        self.vx = vx
+        self.vy = vy
+        self.rayon = rayon
+        self.plateforme = plateforme
+        self.pas = 0.1
+
+    def update(self):
+        self.x += self.vx * self.pas
+        self.y += self.vy * self.pas
+
+        # rebond mur gauche / droite
+        if self.x - self.rayon < 0:
+            self.x = self.rayon
+            self.vx = -self.vx
+
+        if self.x + self.rayon > self.plateforme.longueur:
+            self.x = self.plateforme.longueur - self.rayon
+            self.vx = -self.vx
+
+        # rebond mur bas / haut
+        if self.y - self.rayon < 0:
+            self.y = self.rayon
+            self.vy = -self.vy
+
+        if self.y + self.rayon > self.plateforme.hauteur:
+            self.y = self.plateforme.hauteur - self.rayon
+            self.vy = -self.vy
+"""
