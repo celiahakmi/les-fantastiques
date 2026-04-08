@@ -1,7 +1,7 @@
 import time  
 from Fantastic5 import initialisation_simulation 
 from Fantastic5.adaptateur import AdaptateurSimu, AdaptateurIRL
-from Fantastic5.strategie import AvancerDroit, Tourner,Arreter, Accelerer, Choregraphie, Condition, Boucle
+from Fantastic5.strategie import AvancerDroit, Tourner,Arreter, Accelerer, Choregraphie, Condition, Boucle,HexagoneColore
 
 def main():
 
@@ -30,6 +30,9 @@ def main():
     def condition_distance(adaptateur):
         return adaptateur.get_distance() > 1.0
     
+    action1 = HexagoneColore(adp, view, 2.0)
+    action1.start()
+
     action1 = Choregraphie(adp, [AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90)])
     action2 = Condition(adp,condition_distance,Accelerer(adp, 20.0, 0.5, 0.01),Arreter(adp))
     strat_globale = Choregraphie(adp, [action1, action2])
@@ -62,8 +65,8 @@ def main():
                 if event.type == pygame.QUIT:
                     running = False
 
-        time.sleep(0.001)
         time.sleep(0.01)
+        time.sleep(0.011)
 
     if simu:
         import pygame

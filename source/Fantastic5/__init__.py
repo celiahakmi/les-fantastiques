@@ -1,6 +1,6 @@
 from .graphique import PygameView 
 from .simulation import Plateforme, Robot 
-from .strategie import AvancerDroit, Tourner, Arreter, Choregraphie, Accelerer, Boucle, Condition 
+from .strategie import AvancerDroit, Tourner, Arreter, Choregraphie, Accelerer, Boucle, Condition ,HexagoneColore
 
 __all__ = ["PygameView", "Plateforme", "Robot", "AvancerDroit", "Tourner", "Arreter", "Choregraphie", "initialisation_simulation", "Accelerer","Boucle","Condition"]
 

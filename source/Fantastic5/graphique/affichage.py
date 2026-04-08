@@ -25,8 +25,6 @@ class PygameView:
     def change_couleur(self, couleur):
         couleurs = {(0, 0, 0),(125,135,50),(125,123,150),(134,125,189)}
 
-        
-
     def dessiner(self):
         self.fenetre.fill((255, 255, 255))
 

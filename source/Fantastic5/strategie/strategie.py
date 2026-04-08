@@ -191,4 +191,46 @@ class Boucle:
         return self.compteur >= self.nbRepet
     
 
+class ChangerCouleur:
+    def __init__(self, vue, couleur):
+        self.vue = vue
+        self.couleur = couleur
+        self.termine = False
 
+    def start(self):
+        self.vue.change_couleur(self.couleur)
+        self.termine = True
+
+    def step(self):
+        pass
+
+    def stop(self):
+        return self.termine
+
+
+class HexagoneColore:
+    def __init__(self, adaptateur, vue, longueur_cote):
+        self.adaptateur = adaptateur
+        self.vue = vue
+        self.longueur_cote = longueur_cote
+        self.sequence = None
+
+    def start(self):
+        couleurs = ["rouge", "vert", "bleu", "jaune", "noir", "blanc"]
+        actions = []
+
+        for i in range(6):
+            actions.append(ChangerCouleur(self.vue, couleurs[i]))
+            actions.append(AvancerDroit(self.adaptateur, self.longueur_cote))
+            if i < 5:
+                actions.append(Tourner(self.adaptateur, 60))
+
+        self.sequence = Choregraphie(self.adaptateur, actions)
+        self.sequence.start()
+
+    def step(self):
+        if self.sequence is not None:
+            self.sequence.step()
+
+    def stop(self):
+        return self.stop()
