@@ -64,6 +64,18 @@ class PygameView:
         rotated: pygame.Surface = pygame.transform.rotate(robot_surf, angle_deg)
         rect_rot: pygame.Rect  = rotated.get_rect(center=(cx, cy))
         self.fenetre.blit(rotated, rect_rot.topleft)
+
+        #2.1
+        cx, cy= self.to_px(self.robot.x, self.robot.y)
+        surf_w: int = max(1, int(self.robot.long * self.TAILLE_PIXEL))
+        surf_h: int = max(1, int(self.robot.larg * self.TAILLE_PIXEL))
+        robot_surf : pygame.Surface = pygame.Surface((surf_w, surf_h), pygame.SRCALPHA)
+        robot_surf.fill((255, 0, 0)) #robot_surf.fill((255, 0, 0)) robot rouge
+        angle_deg: float = -math.degrees(self.robot.theta)
+        rotated: pygame.Surface = pygame.transform.rotate(robot_surf, angle_deg)
+        rect_rot: pygame.Rect  = rotated.get_rect(center=(cx, cy))
+        self.fenetre.blit(rotated, rect_rot.topleft)
+        
         
         #quesion 1.2
         crayon:float=max(self.robot.long, 0.2)

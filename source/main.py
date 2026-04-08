@@ -15,10 +15,10 @@ def main():
         from Fantastic5.graphique import PygameView 
 
         #le monde virtuel
-        p, r = simulation_trois_obstacles() #question 1.1
+        p, r, r2 = simulation_trois_obstacles() #question 1.1
 
-        view = PygameView(p, r, 50)
-        adp = AdaptateurSimu(r)
+        view = PygameView(p, r, r2, 50)
+        adp = AdaptateurSimu(r, r2)
 
     else:
         print("Mode robot réel activé ")
