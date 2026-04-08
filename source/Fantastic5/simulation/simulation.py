@@ -54,6 +54,137 @@ class Plateforme:
                     return True
         return False
 
+    def collision_robot2(self, robot2):
+        """Renvoie True si le robot entre en collision avec un obstacle ou un mur"""
+        long: float = robot2.long / 2
+        larg: float = robot2.larg / 2
+
+        # 4 coins: avant-droit, avant-gauche, arrière-gauche, arrière-droit
+        coins_relatifs = [(long, larg), (long, -larg), (-long, -larg), (-long, larg)]
+
+        coins_reels = []
+        for dx, dy in coins_relatifs:
+            # Rotation des points par rapport à l'angle theta
+            cx = robot2.x + (dx * math.cos(robot2.theta) - dy * math.sin(robot2.theta))
+            cy = robot2.y + (dx * math.sin(robot2.theta) + dy * math.cos(robot2.theta))
+            coins_reels.append((cx, cy))
+
+        # Vérifier si un des coins sort de la plateforme ou touche un obstacle
+        for cx, cy in coins_reels:
+            # sort de la plateforme 
+            if cx < 0 or cx > self.longueur or cy < 0 or cy > self.hauteur:
+                return True
+            
+            # collision avec obstacles 
+            for obs in self.obstacles:
+                _, ox, oy, oh, ol = obs
+                # Si le point (cx, cy) est à l'intérieur du rectangle de l'obstacle
+                if ox <= cx <= ox + ol and oy <= cy <= oy + oh:
+                    return True
+        return False
+    
+class Robot2: 
+    def __init__(self, x : float, y : float, theta : float, L : float, larg : float, long : float, plateforme):
+        """ initialise le robot avec 
+            - position 
+            - orientation 
+            - distance entre 2 roues (L)
+            - forme robot (largeur/ longueur)"""
+        # attribut fixe du robot
+        self.x2 : float = x
+        self.y2 : float = y
+        self.theta: float = math.radians(theta)
+        self.L : float = L 
+        self.larg2 : float = larg
+        self.long2 : float = long 
+        self.plateforme = plateforme
+        
+        # attribut variable du robot 
+        self.vL: float = 0.0
+        self.vR: float = 0.0
+        self.pas: float = 0.1 
+
+    def update(self):
+        """Calcule le prochain mouvement sans l'appliquer"""
+        # Sauvegarde de la position actuelle au cas ou on va annuler
+        ancien_x: float = self.x
+        ancien_y: float = self.y
+        ancien_theta: float = self.theta
+
+        # Calcul des vitesses 
+        vitesse_lineaire: float = (self.vL + self.vR) / 2.0
+        vitesse_angulaire: float = (self.vR - self.vL) / self.L
+
+        # Calcul de la position 
+        self.x += vitesse_lineaire  * math.cos(self.theta) * self.pas
+        self.y += vitesse_lineaire  * math.sin(self.theta) * self.pas
+        self.theta += vitesse_angulaire * self.pas
+
+        # Vérification de la collision 
+        if self.plateforme.collision_robot(self):
+            # Collision détectée 
+            print("Oups, le robot s'est cogné")
+            self.x, self.y, self.theta = ancien_x, ancien_y, ancien_theta
+            self.vL = 0.0
+            self.vR = 0.0
+            return False 
+            
+        return True
+
+    def se_diriger_vers(self, ballon):
+        """Ajuste vL et vR pour rejoindre l'objet ballon"""
+        # On extrait les coordonnées de l'objet ballon passé en paramètre
+        dx = ballon.x - self.x
+        dy = ballon.y - self.y
+        distance = math.sqrt(dx**2 + dy**2)
+
+        # Seuil d'arrêt (si on touche le ballon)
+        if distance < (self.long / 2 + ballon.rayon):
+            self.vL, self.vR = 0.0, 0.0
+            return True
+
+        # Calcul de l'angle vers le ballon
+        angle_cible = math.atan2(dy, dx)
+        erreur_angle = angle_cible - self.theta
+        erreur_angle = math.atan2(math.sin(erreur_angle), math.cos(erreur_angle))
+
+        # Loi de commande pour un robot diff-drive
+        kp_rot = 5.0  # Coefficient de rotation
+        v_croisiere = 2.0
+        
+        # On tourne proportionnellement à l'erreur
+        self.vL = v_croisiere - (kp_rot * erreur_angle)
+        self.vR = v_croisiere + (kp_rot * erreur_angle)
+
+        return False 
+
+    def get_distance(self, distance_max=100.0, step=0.1):
+        """Retourne la distance jusqu'au premier obstacle rencontré"""
+        distance = 0.0 # point de départ
+        
+        while distance < distance_max: 
+            # calculs de la position du point testé
+            test_x: float = self.x + distance * math.cos(self.theta)
+            test_y: float = self.y + distance * math.sin(self.theta)
+
+            # vérifie la collision avec le mur 
+            if (test_x < 0 or test_x > self.plateforme.longueur or test_y < 0 or test_y > self.plateforme.hauteur):
+                return distance
+            
+            # vérifie la collision avec les obstacles
+            for obstacle in self.plateforme.obstacles:
+                _, obstacle_x, obstacle_y, obstacle_h, obstacle_l = obstacle
+                if obstacle_x <= test_x <= obstacle_x + obstacle_l and obstacle_y <= test_y <= obstacle_y + obstacle_h:
+                    return distance
+            distance += step
+                
+        return distance_max # si aucun (obstacle ou mur) n'a été trouvé
+
+    def get_position(self):
+        return self.x, self.y, self.theta 
+       
+    def get_vitesse(self):
+        return self.vL, self.vR
 
 class Robot: 
     def __init__(self, x : float, y : float, theta : float, L : float, larg : float, long : float, plateforme):
@@ -101,7 +232,29 @@ class Robot:
             self.vR = 0.0
             return False 
             
-        return True 
+        return True
+
+    def se_diriger_vers(self, ballon):
+        """Ajuste vL et vR pour rejoindre l'objet ballon"""
+        dx = ballon.x - self.x
+        dy = ballon.y - self.y
+        distance = math.sqrt(dx**2 + dy**2)
+
+        if distance < (self.long / 2 + ballon.rayon):
+            self.vL, self.vR = 0.0, 0.0
+            return True
+
+        angle_cible = math.atan2(dy, dx)
+        erreur_angle = angle_cible - self.theta
+        erreur_angle = math.atan2(math.sin(erreur_angle), math.cos(erreur_angle))
+
+        rotation = 5.0  # Coefficient de rotation
+        vitesse = 2.0
+        
+        self.vL = vitesse - (rotation * erreur_angle)
+        self.vR = vitesse + (rotation * erreur_angle)
+
+        return False 
 
     def get_distance(self, distance_max=100.0, step=0.1):
         """Retourne la distance jusqu'au premier obstacle rencontré"""
@@ -130,3 +283,12 @@ class Robot:
        
     def get_vitesse(self):
         return self.vL, self.vR
+
+class Ballon:
+    def __init__(self, x: float, y: float, rayon: float = 0.2):
+        self.bx = x
+        self.by = y
+        self.rayon = rayon
+
+        self.v: float = 0.0
+        self.pas: float = 0.1 

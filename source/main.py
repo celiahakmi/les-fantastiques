@@ -1,7 +1,7 @@
 import time  
 from Fantastic5 import initialisation_simulation 
 from Fantastic5.adaptateur import AdaptateurSimu, AdaptateurIRL
-from Fantastic5.strategie import AvancerDroit, Tourner,Arreter, Accelerer, Choregraphie, Condition, Boucle
+from Fantastic5.strategie import AvancerDroit, Tourner,Arreter, Accelerer, Choregraphie, Condition, Boucle, Cercle
 
 def main():
 
@@ -14,9 +14,9 @@ def main():
         from Fantastic5.graphique import PygameView 
 
         #le monde virtuel
-        p, r = initialisation_simulation() 
+        p, r, r2 = initialisation_simulation() 
 
-        view = PygameView(p, r, 50)
+        view = PygameView(p, r, r2, 50)
         adp = AdaptateurSimu(r)
 
     else:
@@ -25,10 +25,11 @@ def main():
         # r =
         # adp = AdaptateurIRL(r)
         pass 
-
-    action1 = Choregraphie(adp, [AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90), AvancerDroit(adp, 2), Tourner(adp, 90)])
+    
+    action1 = Choregraphie(adp, [AvancerDroit(adp, 1), Tourner(adp, 90), AvancerDroit(adp, 1), Tourner(adp, 90), AvancerDroit(adp, 1), Tourner(adp, 90), AvancerDroit(adp, 1), Tourner(adp, 90), AvancerDroit(adp, 1), Tourner(adp, 90)])
     action2 = Condition(adp, Accelerer(adp, 20.0, 0.5, 0.01), Arreter(adp), 1.0)
-    strat_globale = Choregraphie(adp, [action1, action2])
+    action3 = Choregraphie(adp, [AvancerDroit(adp, 1), Tourner(adp, 60), AvancerDroit(adp, 1), Tourner(adp, 60), AvancerDroit(adp, 1), Tourner(adp, 60), AvancerDroit(adp, 1), Tourner(adp, 60), AvancerDroit(adp, 1), Tourner(adp, 60), AvancerDroit(adp, 1), Tourner(adp, 60)])
+    strat_globale = Choregraphie(adp, [action1, action3])
 
     strat_globale.start()
 

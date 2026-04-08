@@ -163,9 +163,10 @@ class Condition:
     def stop(self):
         """ On met a false"""
         return False
+
     
 class Boucle: 
-    def __init__(self, adaptateur, action, nb_iterations: int):
+    def __init__(self, adaptateur, action, nb_iterations):
         self.adaptateur = adaptateur 
         self.action = action 
         self.nb_iterations = nb_iterations  # Le nombre total de tours à faire
@@ -196,3 +197,28 @@ class Boucle:
     
 
     
+class Cercle:
+    def __init__(self, adaptateur, rayon, angle):
+        self.adaptateur = adaptateur
+        self.rayon = rayon
+        self.angle = math.radians(angle)
+        self.angleParcouru = 0.0
+
+        self.vLineaire = 0.1
+        self.vAngulaire = self.vLineaire / self.rayon
+
+    def start(self):
+        self.angleParcouru = 0.0
+        self.adaptateur.set_vitesse(self.vLineaire, self.vAngulaire)
+                               
+    def step(self):
+        if self.stop(): 
+            self.adaptateur.set_vitesse(0.0, 0.0)
+            return
+        
+        self.adaptateur.set_vitesse(self.vLineaire, self.vAngulaire)
+        self.angleParcouru += abs(self.adaptateur.get_angle_parcouru())
+    
+    def stop(self):
+        return self.angleParcouru >= self.angle
+
