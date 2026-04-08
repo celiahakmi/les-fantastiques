@@ -17,8 +17,10 @@ def main():
         #le monde virtuel
         p, r, r2 = simulation_trois_obstacles() #question 1.1
 
-        view = PygameView(p, r, r2, 50)
-        adp = AdaptateurSimu(r, r2)
+        view = PygameView(p, r, 50)
+        adp1 = AdaptateurSimu(r1)
+        adp2 = AdaptateurSimu(r2)
+
 
     else:
         print("Mode robot réel activé ")
