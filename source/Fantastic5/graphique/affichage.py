@@ -15,9 +15,18 @@ class PygameView:
         self.fenetre: pygame.Surface = pygame.display.set_mode((w, h))
         pygame.display.set_caption("Simulation robot diff-drive")
         self.horloge: pygame.time.Clock = pygame.time.Clock()
+        self.trace_points: list[tuple[int, int]] = []
+        self.trace_couleur: tuple[int, int, int] = (0, 0, 0)
 
     def to_px(self, x: float, y : float):
         return (int(x * self.TAILLE_PIXEL), int(y * self.TAILLE_PIXEL))
+    
+    
+    couleurs = {}
+    def change_couleur(self, couleur):
+        couleurs = {(255, 0, 0),(0, 255, 0),(0, 0, 255),(0, 0, 0),(255, 255, 255),(255, 255, 0)}
+
+        
         
     def dessiner(self):
         self.fenetre.fill((255, 255, 255))
@@ -52,9 +61,14 @@ class PygameView:
                 int(hauteur * self.TAILLE_PIXEL),
             )
             pygame.draw.rect(self.fenetre, (135, 233, 144), rect)
-            
+                 
         # Robot
         cx, cy = self.to_px(self.robot.x, self.robot.y)
+        self.trace_points.append((cx, cy))
+
+        if len(self.trace_points) >= 2:
+            pygame.draw.lines(self.fenetre, self.trace_couleur, False, self.trace_points, 2)
+
         surf_w: int = max(1, int(self.robot.long * self.TAILLE_PIXEL))
         surf_h: int = max(1, int(self.robot.larg * self.TAILLE_PIXEL))
         robot_surf : pygame.Surface = pygame.Surface((surf_w, surf_h), pygame.SRCALPHA)
@@ -72,3 +86,4 @@ class PygameView:
         pygame.draw.line(self.fenetre, (255, 0, 0), (cx, cy), (x2p, y2p), 2)
             
         pygame.display.flip()
+

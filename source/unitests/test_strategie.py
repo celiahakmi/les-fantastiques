@@ -41,6 +41,7 @@ class TestTourner(unittest.TestCase):
         self.strat.angle_parcouru = math.radians(90)
         self.assertTrue(self.strat.stop())
 
+
 if __name__ == '__main__':
     unittest.main()
 
