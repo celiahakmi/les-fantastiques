@@ -6,6 +6,9 @@ class PygameView:
         self.plateforme = plateforme
         self.robot = robot
         self.TAILLE_PIXEL = int(TAILLE_PIXEL)
+        self.trace_points = []
+        self.trace_couleur = (0, 0, 255)
+
 
         if not pygame.get_init():
             pygame.init()
@@ -17,13 +20,24 @@ class PygameView:
         self.horloge: pygame.time.Clock = pygame.time.Clock()
         self.trace_points: list[tuple[int, int]] = []
         self.trace_couleur: tuple[int, int, int] = (0, 0, 255)
+        
+    def change_couleur(self, couleur):
+            if couleur == "a":
+                self.trace_couleur = (255, 0, 0)
+            elif couleur == "b":
+                self.trace_couleur = (0, 255, 0)
+            elif couleur == "c":
+                self.trace_couleur = (0, 0, 255)
+            elif couleur == "d":
+                self.trace_couleur = (255, 255, 0)
+            elif couleur == "e":
+                self.trace_couleur = (0, 0, 0)
+
 
     def to_px(self, x: float, y : float):
         return (int(x * self.TAILLE_PIXEL), int(y * self.TAILLE_PIXEL))
 
-    couleurs = {}
-    def change_couleur(self, couleur):
-        couleurs = {(0, 0, 0),(125,135,50),(125,123,150),(134,125,189)}
+    
 
     def dessiner(self):
         self.fenetre.fill((255, 255, 255))
@@ -82,5 +96,7 @@ class PygameView:
         y2: float = self.robot.y + L_fleche * math.sin(self.robot.theta)
         x2p, y2p = self.to_px(x2, y2)
         pygame.draw.line(self.fenetre, (255, 0, 0), (cx, cy), (x2p, y2p), 2)
-            
+        
+        cx, cy = self.to_px(self.robot.x, self.robot.y)
+
         pygame.display.flip()
