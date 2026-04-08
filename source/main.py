@@ -1,5 +1,5 @@
 import time  
-from Fantastic5 import initialisation_simulation 
+from Fantastic5 import initialisation_simulation, inititialisation_simulation_tmesolo
 from Fantastic5.adaptateur import AdaptateurSimu, AdaptateurIRL
 from Fantastic5.strategie import AvancerDroit, Tourner,Arreter, Accelerer, Choregraphie, Condition, Boucle
 
@@ -14,7 +14,7 @@ def main():
         from Fantastic5.graphique import PygameView 
 
         #le monde virtuel
-        p, r = initialisation_simulation() 
+        p, r = inititialisation_simulation_tmesolo() 
         
 
         view = PygameView(p, r, 50)
@@ -32,6 +32,7 @@ def main():
     action2 = Condition(adp,condition_distance,Accelerer(adp, 20.0, 0.5, 0.01),Arreter(adp))
     strat_globale = Choregraphie(adp, [action1, action2])
 
+    # action_triangle = Choregraphie(adp, [AvancerDroit(adp, 2),Tourner(adp, 120),AvancerDroit(adp, 2),Tourner(adp, 120),AvancerDroit(adp, 2),Tourner(adp, 120)])
     strat_globale.start()
     # on peut utiliser la stratégie boucle ici en modifiant aussi le while running :
     #action1 = Choregraphie(adp, [AvancerDroit(adp, 2), Tourner(adp, 90)])
