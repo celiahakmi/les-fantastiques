@@ -1,3 +1,4 @@
 from .affichage import PygameView
-__all__ = ["PygameView"]
+from .affichage3d import Vue3D 
 
+__all__ = ["PygameView", "Vue3D"] 
