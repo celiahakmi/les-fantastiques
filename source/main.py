@@ -1,6 +1,5 @@
 import time  
 from Fantastic5 import initialisation_simulation 
-from Fantastic5.API import Robot2IN013
 from Fantastic5.adaptateur import AdaptateurSimu, AdaptateurIRL
 from Fantastic5.strategie import AvancerDroit, Tourner, Arreter, Accelerer, Choregraphie, Condition
 
@@ -13,6 +12,7 @@ def main():
         _, r, _ = initialisation_simulation()
         adp = AdaptateurSimu(r)
     else:
+        from Fantastic5.API.robotAPI import Robot2IN013
         print("Mode robot réel activé")
         r2 = Robot2IN013(nb_img=5, fps=25)
         adp = AdaptateurIRL(r2)
