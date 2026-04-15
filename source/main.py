@@ -8,7 +8,7 @@ def main():
     simu = True  
     
     if simu:
-        print("Mode simulation activé ")
+        print("Mode simulation activé  ")
   
         import pygame
         from Fantastic5.graphique import PygameView 
