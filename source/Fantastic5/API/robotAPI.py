@@ -58,7 +58,7 @@ class Robot2IN013:
         self._gpg.set_motor_limits(self._gpg.MOTOR_LEFT+self._gpg.MOTOR_RIGHT,0)
         self._recording = False
         self._thread = None
-        self.start_recording()
+        #self.start_recording()
   
 
     def stop(self):
