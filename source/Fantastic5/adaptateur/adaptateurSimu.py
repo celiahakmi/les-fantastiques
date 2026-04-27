@@ -40,4 +40,7 @@ class AdaptateurSimu(Adaptateur):
         self.theta_prec = theta
         return delta_theta
     
+    def get_position(self):
+        return self.robot.x, self.robot.y, self.robot.theta
+    
     
