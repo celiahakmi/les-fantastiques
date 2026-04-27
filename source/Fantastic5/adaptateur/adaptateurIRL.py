@@ -57,3 +57,6 @@ class AdaptateurIRL(Adaptateur):
         distR = deltaR * self.robot.WHEEL_CIRCUMFERENCE / 360
     
         return (distL - distR) / self.robot.WHEEL_BASE_WIDTH
+
+    def get_position(self):
+        return self.robot.get_motor_position()
