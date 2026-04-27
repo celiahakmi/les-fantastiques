@@ -116,6 +116,9 @@ class Accelerer:
         self.v_actuelle = 0.0 
 
     def step(self):
+        if self.stop():
+            self.adaptateur.set_vitesse(0.0, 0.0)
+            return     
         # On augmente la vitesse sans dépasser le max
         if self.v_actuelle < self.v_max:
             self.v_actuelle += self.accel
