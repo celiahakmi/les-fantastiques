@@ -4,66 +4,58 @@ from Fantastic5.adaptateur import AdaptateurSimu, AdaptateurIRL
 from Fantastic5.strategie import AvancerDroit, Tourner,Arreter, Accelerer, Choregraphie, Condition, Boucle
 
 def main():
+    simu = True  # on mets False pour le vrai robot
 
-    simu = False   
-    
     if simu:
-        print("Mode simulation activé ")
-        from Fantastic5.graphique import PygameView 
-        #le monde virtuel
-        p, r, _ = initialisation_simulation() 
+        print("Mode simulation activé")
+        import pygame
+        from Fantastic5.graphique import PygameView
 
-        view = PygameView(p, r, r2, 50)
-        adp = AdaptateurSimu(r)
-        p, r, _ = initialisation_simulation() 
-        #  initialise la vue 3D
-        view = PygameView(p, r, r2, 50)
+        p, r = initialisation_simulation()
+        view = PygameView(p, r, 50)
         adp = AdaptateurSimu(r)
 
     else:
+        print("Mode robot réel activé")
         from Fantastic5.API.robotAPI import Robot2IN013
-        _, _, r2 = initialisation_simulation() 
 
-        print("Mode robot réel activé ")
-        adp = AdaptateurIRL(r2)
-        pass 
+        robot_reel = Robot2IN013()
+        adp = AdaptateurIRL(robot_reel)
 
+    carre = Choregraphie(adp, [ AvancerDroit(adp, 2), Tourner(adp, 90),AvancerDroit(adp, 2), Tourner(adp, 90),AvancerDroit(adp, 2), Tourner(adp, 90),AvancerDroit(adp, 2), Tourner(adp, 90)])
     
-    action1 = Choregraphie(adp, [AvancerDroit(adp, 10), AvancerDroit(adp, 1)])
-    action2 = Condition(adp, Accelerer(adp, 20.0, 0.5, 0.01), Arreter(adp), 1.0)
-    action3 = Choregraphie(adp, [AvancerDroit(adp, 1), Tourner(adp, 60), AvancerDroit(adp, 1), Tourner(adp, 60), AvancerDroit(adp, 1), Tourner(adp, 60), AvancerDroit(adp, 1), Tourner(adp, 60), AvancerDroit(adp, 1), Tourner(adp, 60), AvancerDroit(adp, 1), Tourner(adp, 60)])
-    strat_globale = Choregraphie(adp, [action1])
+    seuil_obstacle = 0.5 if simu else 300
+
+    mur = Condition(adp, lambda adp: adp.get_distance() > seuil_obstacle, Accelerer(adp, 20.0, 0.5, 0.01),Arreter(adp))
+
+    strat_globale = Choregraphie(adp, [ carre, mur])
 
     strat_globale.start()
 
     running = True
 
     while running:
-
         if not strat_globale.stop():
             strat_globale.step()
         else:
-            adp.set_vitesse(0.0, 0.0) 
-            if not simu:
-                running = False 
+            adp.set_vitesse(0.0, 0.0)
+            running = False
 
-        if simu:      
-            if not r.update(): 
-                pass # Le robot a touché un mur
-
+        if simu:
+            r.update()
             view.dessiner()
 
-            # fermer la fenêtre 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
 
-        time.sleep(0.001)
         time.sleep(0.01)
 
+    adp.set_vitesse(0.0, 0.0)
+
     if simu:
-        import pygame
         pygame.quit()
+
 
 if __name__ == "__main__":
     main()
