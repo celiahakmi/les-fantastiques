@@ -1,7 +1,28 @@
 import math
+from abc import ABC, abstractmethod
 
-class AvancerDroit:
+class Strategie(ABC):
+    def __init__(self, nom: str):
+        self.nom = nom
+
+    @abstractmethod
+    def start(self):
+        """Initialisation de la stratégie"""
+        pass
+
+    @abstractmethod
+    def step(self):
+        """Exécution d'une étape de la stratégie"""
+        pass
+
+    @abstractmethod
+    def stop(self):
+        """Condition d'arrêt de la stratégie"""
+        pass
+
+class AvancerDroit(Strategie):
     def __init__(self, adaptateur, distance: float):
+        super().__init__("Avancer Droit") 
         self.adaptateur = adaptateur
         self.distance: float = distance
         self.parcouru: float = 0.0
@@ -29,8 +50,9 @@ class AvancerDroit:
         return self.parcouru >= self.distance
 
 
-class Tourner:
+class Tourner(Strategie):
     def __init__(self, adaptateur , angle_deg: float):
+        super().__init__("Tourner") 
         self.adaptateur= adaptateur
         self.angle: float = math.radians(angle_deg)
         self.angle_parcouru: float = 0.0
@@ -55,8 +77,9 @@ class Tourner:
         """renvoie true si angle demandé atteint"""
         return self.angle_parcouru >= self.angle
 
-class Arreter:
+class Arreter(Strategie):
     def __init__(self, adaptateur):
+        super().__init__("Arreter") 
         self.adaptateur = adaptateur
 
     def start(self):
@@ -72,8 +95,9 @@ class Arreter:
         return False 
 
 
-class Choregraphie:
+class Choregraphie(Strategie):
     def __init__(self, adaptateur, liste_actions: list):
+        super().__init__("Chorégraphie") 
         self.adaptateur= adaptateur
         self.actions: list = liste_actions
         self.index: int = 0
@@ -101,40 +125,10 @@ class Choregraphie:
         """Vrai quand toutes les actions de la liste sont terminées"""
         return self.index >= len(self.actions)
 
-
-class Accelerer:
-    def __init__(self, adaptateur, distance: float, v_max: float, acceleration: float):
-        self.adaptateur = adaptateur
-        self.distance = distance
-        self.v_max = v_max
-        self.accel = acceleration 
-        self.v_actuelle = 0.0
-        self.parcouru = 0.0
-
-    def start(self):
-        self.parcouru = 0.0
-        self.v_actuelle = 0.0 
-
-    def step(self):
-        if self.stop():
-            self.adaptateur.set_vitesse(0.0, 0.0)
-            return     
-        # On augmente la vitesse sans dépasser le max
-        if self.v_actuelle < self.v_max:
-            self.v_actuelle += self.accel
-        
-        # On applique la vitesse
-        self.adaptateur.set_vitesse(self.v_actuelle, 0.0)
-        
-        # On mesure le chemin fait
-        self.parcouru += self.adaptateur.get_distance_parcourue()
-
-    def stop(self):
-        return self.parcouru >= self.distance
-    
-        
-class Condition: 
+ 
+class Condition(Strategie): 
     def __init__(self, adaptateur, condition_func, stratA, stratB) :
+        super().__init__("Condition") 
         self.adaptateur = adaptateur
         self.condition = condition_func
         self.stratA = stratA
@@ -164,8 +158,9 @@ class Condition:
         """ On met a false"""
         return False
     
-class Boucle: 
+class Boucle(Strategie): 
     def __init__(self, adaptateur, action, nbRepet):
+        super().__init__("Boucle") 
         self.adaptateur = adaptateur 
         self.action = action 
         self.nbRepet = nbRepet
