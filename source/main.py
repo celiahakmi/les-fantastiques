@@ -1,10 +1,10 @@
 import time  
 from Fantastic5 import initialisation_simulation 
 from Fantastic5.adaptateur import AdaptateurSimu, AdaptateurIRL
-from Fantastic5.strategie import AvancerDroit, Tourner,Arreter, Accelerer, Choregraphie, Condition, Boucle
+from Fantastic5.strategie import AvancerDroit, Tourner, Arreter, Choregraphie, Condition
 
 def main():
-    simu = True  # on mets False pour le vrai robot
+    simu = True  # False pour robot réel
 
     if simu:
         print("Mode simulation activé")
@@ -22,13 +22,28 @@ def main():
         robot_reel = Robot2IN013()
         adp = AdaptateurIRL(robot_reel)
 
-    carre = Choregraphie(adp, [ AvancerDroit(adp, 2), Tourner(adp, 90),AvancerDroit(adp, 2), Tourner(adp, 90),AvancerDroit(adp, 2), Tourner(adp, 90),AvancerDroit(adp, 2), Tourner(adp, 90)])
-    
+    carre = Choregraphie(adp, [
+        AvancerDroit(adp, 2),
+        Tourner(adp, 90),
+        AvancerDroit(adp, 2),
+        Tourner(adp, 90),
+        AvancerDroit(adp, 2),
+        Tourner(adp, 90),
+        AvancerDroit(adp, 2),
+        Tourner(adp, 90)
+    ])
+
     seuil_obstacle = 0.5 if simu else 300
 
-    mur = Condition(adp, lambda adp: adp.get_distance() > seuil_obstacle, Accelerer(adp, 20.0, 0.5, 0.01),Arreter(adp))
+    mur = Condition(
+        adp,
+        lambda adp: adp.get_distance() > seuil_obstacle,
+        Arreter(adp),
+        Arreter(adp)
+    )
 
-    strat_globale = Choregraphie(adp, [ carre, mur])
+
+    strat_globale = Choregraphie(adp, [carre, mur])
 
     strat_globale.start()
 
