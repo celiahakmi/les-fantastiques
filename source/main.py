@@ -27,19 +27,30 @@ def main():
         adp = AdaptateurIRL(robot_reel)
 
     action1 = Choregraphie(adp, [
-        AvancerDroit(adp, 2),
+        AvancerDroit(adp, 1),
         Tourner(adp, 90),
-        AvancerDroit(adp, 2),
+        AvancerDroit(adp, 1),
         Tourner(adp, 90),
-        AvancerDroit(adp, 2),
+        AvancerDroit(adp, 1),
         Tourner(adp, 90),
-        AvancerDroit(adp, 2),
+        AvancerDroit(adp, 1),
         Tourner(adp, 90),
-        AvancerDroit(adp, 2),
-        Tourner(adp, 90)
+        AvancerDroit(adp, 1)
     ])
 
-    action2 = AvancerDroit(adp, 10)
+    action2 = Choregraphie(adp,[
+    AvancerDroit(adp, 4.5),    
+    Tourner(adp, 90),          
+    AvancerDroit(adp, 3.0),    
+    Tourner(adp, 90),          
+    AvancerDroit(adp, 4.0),    
+    Tourner(adp, 270),  
+    AvancerDroit(adp, 2.0),   
+    Tourner(adp, 270),         
+    AvancerDroit(adp, 2.5),  
+    Tourner(adp, 90),          
+    AvancerDroit(adp, 3.0)   
+])
 
     strat_globale = Choregraphie(adp, [action1, action2])
 
@@ -67,7 +78,7 @@ def main():
                 if event.type == pygame.QUIT:
                     running = False
 
-        time.sleep(0.01)
+        time.sleep(0.0000000000000001)
 
     if simu:
         import pygame

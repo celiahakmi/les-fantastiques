@@ -58,7 +58,7 @@ class Robot2IN013:
         self._gpg.set_motor_limits(self._gpg.MOTOR_LEFT+self._gpg.MOTOR_RIGHT,0)
         self._recording = False
         self._thread = None
-        self.start_recording()
+        #self.start_recording()
   
 
     def stop(self):
@@ -151,7 +151,7 @@ class Robot2IN013:
             print("Camera not found",e)
 
     def __getattr__(self,attr):
-        """ Méthodes héritées de GPG : 
+        """ Méthodes héritées de  GPG : 
         * set_led(self, led, red = 0, green = 0, blue = 0) 
             Allume une led.
             
@@ -161,5 +161,3 @@ class Robot2IN013:
             :blue: composante bleu (0-255)
         """
         return self._gpg.__getattribute__(attr)
-
-  
