@@ -51,14 +51,14 @@ class PygameView:
                 int(largeur * self.TAILLE_PIXEL),
                 int(hauteur * self.TAILLE_PIXEL),
             )
-            pygame.draw.rect(self.fenetre, (135, 233, 144), rect)
+            pygame.draw.rect(self.fenetre, (0, 0, 0), rect)
             
         # Robot
         cx, cy = self.to_px(self.robot.x, self.robot.y)
         surf_w: int = max(1, int(self.robot.long * self.TAILLE_PIXEL))
         surf_h: int = max(1, int(self.robot.larg * self.TAILLE_PIXEL))
         robot_surf : pygame.Surface = pygame.Surface((surf_w, surf_h), pygame.SRCALPHA)
-        robot_surf.fill((0, 0, 255))
+        robot_surf.fill((255, 182, 193))
         angle_deg: float = -math.degrees(self.robot.theta)
         rotated: pygame.Surface = pygame.transform.rotate(robot_surf, angle_deg)
         rect_rot: pygame.Rect  = rotated.get_rect(center=(cx, cy))
