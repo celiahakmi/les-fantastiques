@@ -1,8 +1,15 @@
-from .graphique import PygameView 
-from .simulation import Plateforme, Robot 
-from .strategie import AvancerDroit, Tourner, Arreter, Choregraphie, Boucle, Condition 
+from .simulation import Plateforme, Robot
+from .strategie import (Arreter,AvancerDroit,Boucle,Choregraphie,Condition,ContournerObstacle,Tourner,TournerArc,)
 
-__all__ = ["PygameView", "Plateforme", "Robot", "AvancerDroit", "Tourner", "Arreter", "Choregraphie", "initialisation_simulation", "Accelerer","Boucle","Condition"]
+__all__ = ["PygameView","Plateforme","Robot","AvancerDroit","Tourner","TournerArc","Arreter","Choregraphie","initialisation_simulation","Boucle","Condition","ContournerObstacle",]
+
+
+def __getattr__(name):
+    if name == "PygameView":
+        from .graphique import PygameView
+
+        return PygameView
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 def initialisation_simulation():
     """Création  d'une simulation avec des paramètres par défaut pour faire déplacer le robot en carré et le faire avancer dans un plan continu contenant des obstacles dans le main"""
