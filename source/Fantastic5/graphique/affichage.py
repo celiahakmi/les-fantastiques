@@ -18,6 +18,22 @@ class PygameView:
 
     def to_px(self, x: float, y : float):
         return (int(x * self.TAILLE_PIXEL), int(y * self.TAILLE_PIXEL))
+    
+    def coins_robot(self):
+        demi_long = self.robot.long / 2
+        demi_larg = self.robot.larg / 2
+        coins_relatifs = [
+            (demi_long, demi_larg),
+            (demi_long, -demi_larg),
+            (-demi_long, -demi_larg),
+            (-demi_long, demi_larg),]
+
+        coins = []
+        for dx, dy in coins_relatifs:
+            x = self.robot.x + (dx * math.cos(self.robot.theta) - dy * math.sin(self.robot.theta))
+            y = self.robot.y + (dx * math.sin(self.robot.theta) + dy * math.cos(self.robot.theta))
+            coins.append(self.to_px(x, y))
+        return coins
         
     def dessiner(self):
         self.fenetre.fill((255, 255, 255))
@@ -54,15 +70,10 @@ class PygameView:
             pygame.draw.rect(self.fenetre, (0, 0, 0), rect)
             
         # Robot
-        cx, cy = self.to_px(self.robot.x, self.robot.y)
-        surf_w: int = max(1, int(self.robot.long * self.TAILLE_PIXEL))
-        surf_h: int = max(1, int(self.robot.larg * self.TAILLE_PIXEL))
-        robot_surf : pygame.Surface = pygame.Surface((surf_w, surf_h), pygame.SRCALPHA)
-        robot_surf.fill((255, 182, 193))
-        angle_deg: float = -math.degrees(self.robot.theta)
-        rotated: pygame.Surface = pygame.transform.rotate(robot_surf, angle_deg)
-        rect_rot: pygame.Rect  = rotated.get_rect(center=(cx, cy))
-        self.fenetre.blit(rotated, rect_rot.topleft)
+         cx, cy = self.to_px(self.robot.x, self.robot.y)
+        coins = self.coins_robot()
+        pygame.draw.polygon(self.fenetre, (255, 182, 193), coins)
+        pygame.draw.polygon(self.fenetre, (200, 105, 140), coins, 2)
         
         # Fleche rouge pour indiquer la direction  
         L_fleche: float = max(self.robot.long, 0.2)
