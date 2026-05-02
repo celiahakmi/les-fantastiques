@@ -106,7 +106,8 @@ class Robot:
     def get_distance(self, distance_max=100.0, step=0.1):
         """Retourne la distance jusqu'au premier obstacle rencontré"""
         distance = 0.0 # point de départ
-        
+        direction = self.theta + angle_offset
+
         while distance < distance_max: 
             # calculs de la position du point testé
             test_x: float = self.x + distance * math.cos(self.theta)
