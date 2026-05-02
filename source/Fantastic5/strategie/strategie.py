@@ -71,7 +71,7 @@ class Tourner(Strategie):
         self.adaptateur.set_vitesse(0.0, 0.1)
 
         #récupération de l'angle du pas
-        self.angle_parcouru+= abs(self.adaptateur.get_angle_parcouru())
+        self.angle_parcouru += self.adaptateur.get_angle_parcouru()
 
     def stop(self):
         """renvoie true si angle demandé atteint"""
