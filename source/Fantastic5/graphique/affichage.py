@@ -70,7 +70,7 @@ class PygameView:
             pygame.draw.rect(self.fenetre, (0, 0, 0), rect)
             
         # Robot
-         cx, cy = self.to_px(self.robot.x, self.robot.y)
+        cx, cy = self.to_px(self.robot.x, self.robot.y)
         coins = self.coins_robot()
         pygame.draw.polygon(self.fenetre, (255, 182, 193), coins)
         pygame.draw.polygon(self.fenetre, (200, 105, 140), coins, 2)
