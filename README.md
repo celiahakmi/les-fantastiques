@@ -56,6 +56,16 @@ A savoir :
     - lancer le programme depuis le dossier "source"
     - vérifier la structure du projet et les noms des dossiers (respect de la casse)
 
+Remarques :
+
+- Le comportement d’évitement d’obstacle peut être amélioré en ajustant :
+    - les seuils de distance
+    - les vitesses de rotation
+
+- Le projet est conçu pour être extensible :
+    - possibilité d’ajouter de nouvelles stratégies
+    - possibilité d’améliorer l’intelligence du robot (navigation autonome)
+
 
 
 
