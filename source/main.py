@@ -21,7 +21,7 @@ def main():
 
     else:
         print("Mode robot réel activé")
-        from Fantastic5.API.robotAPI import Robot2IN013
+        from Fantastic5.api.robotAPI import Robot2IN013
 
         robot_reel = Robot2IN013()
         adp = AdaptateurIRL(robot_reel)
