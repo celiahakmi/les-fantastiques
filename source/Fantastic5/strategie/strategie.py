@@ -250,9 +250,9 @@ class ContournerObstacle(Strategie):
         vr = self.vitesse_rot
         actions = {
             "TOURNER_DROITE1": Tourner(adp, 90, vr),
-            "LONGER1":         LongerObstacleSurCote(adp, self.seuil_obstacle_cote, v),
+            "LONGER1":         LongerObstacle(adp, self.seuil_obstacle_cote, v),
             "TOURNER_GAUCHE1": Tourner(adp, -90, vr),
-            "PASSER_DEVANT":    LongerObstacleSurCote(adp, self.seuil_obstacle_cote, v),
+            "PASSER_DEVANT":    LongerObstacle(adp, self.seuil_obstacle_cote, v),
             "TOURNER_GAUCHE2": Tourner(adp, -90, vr),
             "REJOINDRE":        AvancerDroit(adp, self.dist_rejoindre),
             "TOURNER_DROITE2": Tourner(adp, 90, vr),
@@ -293,5 +293,20 @@ class ContournerObstacle(Strategie):
         return False 
 
 
+
+
+class LongerObstacle(Strategie):
+    def __init__(self, adaptateur, seuil_obstacle: float = 1.5,
+                 vitesse: float = 0.1, avance_min: float = 0.3):
+        super().__init__("LongerObstacle")
+        self.adaptateur = adaptateur
+        self.seuil = seuil_obstacle
+        self.vitesse = vitesse
+        self.avance_min = avance_min
+ 
+        self.parcouru = 0.0
+        self.obstacle_vu = False
+        self.fini = False
+ 
 
 
