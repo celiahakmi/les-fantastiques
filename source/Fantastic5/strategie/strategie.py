@@ -298,7 +298,7 @@ class ContournerObstacle(Strategie):
 class LongerObstacle(Strategie):
     def __init__(self, adaptateur, seuil_obstacle: float = 1.5,
                  vitesse: float = 0.1, avance_min: float = 0.3):
-        super().__init__("LongerObstacle")
+        super().__init__("LongerObstacleSurCote")
         self.adaptateur = adaptateur
         self.seuil = seuil_obstacle
         self.vitesse = vitesse
@@ -308,5 +308,16 @@ class LongerObstacle(Strategie):
         self.obstacle_vu = False
         self.fini = False
  
-
+    def start(self):
+        self._parcouru = 0.0
+        self._obstacle_vu = False
+        self._fini = False
+        self.adaptateur.set_vitesse(self.vitesse, 0.0)
+ 
+    def dist_gauche(self) -> float:
+        """Distance capteur orienté 90° sur la gauche du robot."""
+        robot = self.adaptateur.robot
+        return robot.get_distance(angle_offset=math.pi / 2)
+ 
+ 
 
