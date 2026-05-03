@@ -74,7 +74,7 @@ class Robot:
         # attribut variable du robot 
         self.vL: float = 0.0
         self.vR: float = 0.0
-        self.pas: float = 0.1 
+        self.pas: float = 0.1
 
     def update(self):
         """Calcule le prochain mouvement sans l'appliquer"""
@@ -95,7 +95,6 @@ class Robot:
         # Vérification de la collision 
         if self.plateforme.collision_robot(self):
             # Collision détectée 
-            print("Oups, le robot s'est cogné")
             self.x, self.y, self.theta = ancien_x, ancien_y, ancien_theta
             self.vL = 0.0
             self.vR = 0.0
