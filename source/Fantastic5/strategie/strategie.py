@@ -162,17 +162,24 @@ class Condition(Strategie):
         self.stratB.start()
 
     def step(self):
+        # Si on est déjà en train de contourner (stratA)
         if self.current_strat is self.stratA:
             if not self.stratA.stop():
                 self.stratA.step()
-            if not self.stratA.stop():
-                return
-            self.current_strat = self.stratB
+                return # On continue le contournement
+            else:
+                # Contournement fini, on reprend le parcours initial
+                self.current_strat = self.stratB
+                # On ne fait pas start() ici pour ne pas recommencer le parcours au début
+                # mais on peut appeler step() si besoin
 
+        # Si on est sur le parcours normal (stratB)
         if self.stratB.stop():
             return
 
+        # Vérification de la condition pour déclencher le contournement
         if self.condition(self.adaptateur):
+            print("Obstacle détecté ! Lancement du contournement.")
             self.stratA.start()
             self.current_strat = self.stratA
             self.stratA.step()

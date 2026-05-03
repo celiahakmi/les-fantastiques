@@ -12,8 +12,7 @@ class Adaptateur(ABC):
         """Retourne la position actuelle des roues ou du robot"""
         pass
 
-    def get_distance(self):
-        """Retourne la distance avec l'obstacle le plus proche"""
+    def get_distance(self, angle_offset=0.0): # Doit être identique ici
         pass
 
     def get_distance_parcourue(self):

@@ -16,12 +16,11 @@ def initialisation_simulation():
     # Plateforme
     p = Plateforme(10.0, 10.0)
 
-    p.init_obstacle(x=0, y=7, h=0.5, l=6)    # Mur haut gauche
-    p.init_obstacle(x=4, y=5, h=0.5, l=6)    # Mur milieu droite
-    p.init_obstacle(x=0, y=3, h=0.5, l=6)    # Mur bas gauche
-    p.init_obstacle(x=7, y=0, h=4, l=0.5)    # Entrée du goulot (vertical)
-    p.init_obstacle(x=9.5, y=0, h=4, l=0.5)  # Mur extérieur droit
-    p.init_obstacle(x=7, y=0, h=0.5, l=3)    # Fond du cul-de-sac
+    p.init_obstacle(x=0, y=7, h=0.5, l=6)    
+    p.init_obstacle(x=4, y=5, h=0.5, l=6)    
+    p.init_obstacle(x=0, y=3, h=0.5, l=6)   
+    p.init_obstacle(x=9.5, y=0, h=4, l=0.5)  
+    p.init_obstacle(x=7, y=0, h=0.5, l=3)   
 
     #Robot 
     r = Robot(1.0, 1.0, 0.0, 0.5, 0.5, 0.7, p)

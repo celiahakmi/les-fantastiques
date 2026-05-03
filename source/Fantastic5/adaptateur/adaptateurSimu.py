@@ -15,8 +15,9 @@ class AdaptateurSimu(Adaptateur):
         self.robot.vL = v_gauche
         self.robot.vR = v_droite
 
-    def get_distance(self):
-        return self.robot.get_distance()
+    def get_distance(self, angle_offset=0.0):
+        # On transmet l'angle au robot pour qu'il puisse regarder ailleurs que devant lui
+        return self.robot.get_distance(angle_offset=angle_offset)
 
     def get_distance_parcourue(self):
         x = self.robot.x
@@ -24,7 +25,7 @@ class AdaptateurSimu(Adaptateur):
     
         dx = x - self.x_prec
         dy = y - self.y_prec
-    
+
         # distance euclidienne
         distance = math.sqrt(dx**2 + dy**2)
     

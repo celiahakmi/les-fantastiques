@@ -103,30 +103,34 @@ class Robot:
             
         return True 
 
-    def get_distance(self, distance_max=100.0, step=0.1):
-        """Retourne la distance jusqu'au premier obstacle rencontré"""
-        distance = 0.0 # point de départ
-        angle_offset = 0.0
+    def get_distance(self, distance_max=100.0, step=0.01, angle_offset=0.0):
+        """Retourne la distance jusqu'au premier obstacle ou mur rencontré"""
+        distance = 0.0 
+        # On ajoute l'offset à l'angle actuel pour orienter le "laser"
         direction = self.theta + angle_offset
 
         while distance < distance_max: 
-            # calculs de la position du point testé
-            test_x: float = self.x + distance * math.cos(self.theta)
-            test_y: float = self.y + distance * math.sin(self.theta)
+            # CRUCIAL : Utiliser 'direction' ici pour que le laser tourne
+            test_x: float = self.x + distance * math.cos(direction)
+            test_y: float = self.y + distance * math.sin(direction)
 
-            # vérifie la collision avec le mur 
-            if (test_x < 0 or test_x > self.plateforme.longueur or test_y < 0 or test_y > self.plateforme.hauteur):
-                return distance
+            # Vérification des murs (Sortie de la plateforme)
+            if (test_x < 0 or test_x > self.plateforme.longueur or 
+                test_y < 0 or test_y > self.plateforme.hauteur):
+                return distance # Le mur est détecté ici
             
-            # vérifie la collision avec les obstacles
+            # Vérification des obstacles rectangulaires
             for obstacle in self.plateforme.obstacles:
                 _, obstacle_x, obstacle_y, obstacle_h, obstacle_l = obstacle
-                if obstacle_x <= test_x <= obstacle_x + obstacle_l and obstacle_y <= test_y <= obstacle_y + obstacle_h:
+                if (obstacle_x <= test_x <= obstacle_x + obstacle_l and 
+                    obstacle_y <= test_y <= obstacle_y + obstacle_h):
                     return distance
+            
             distance += step
-                
-        return distance_max # si aucun (obstacle - mur) n'a été trouvé
-
+            
+        return distance_max
+    
+    
     def get_position(self):
         return self.x, self.y, self.theta 
        
