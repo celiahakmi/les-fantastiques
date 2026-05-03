@@ -14,14 +14,19 @@ def __getattr__(name):
 def initialisation_simulation():
     """Création  d'une simulation avec des paramètres par défaut pour faire déplacer le robot en carré et le faire avancer dans un plan continu contenant des obstacles dans le main"""
     # Plateforme
-    p = Plateforme(10.0, 10.0)
+    p = Plateforme(11.0, 11.0)
 
-    p.init_obstacle(x=0, y=7, h=0.5, l=6)    
-    p.init_obstacle(x=4, y=5, h=0.5, l=6)    
-    p.init_obstacle(x=0, y=3, h=0.5, l=6)   
-    p.init_obstacle(x=9.5, y=0, h=4, l=0.5)  
-    p.init_obstacle(x=7, y=0, h=0.5, l=3)   
+    p.init_obstacle(x=0.5, y=7, h=0.5, l=5)    
+    p.init_obstacle(x=4, y=5, h=0.5, l=6.5)    
+    p.init_obstacle(x=0.5, y=3, h=0.5, l=5)   
+    p.init_obstacle(x=10.5, y=0.5, h=10, l=0.5)  
+    p.init_obstacle(x=0, y=0, h=0.5, l=11)  
+    p.init_obstacle(x=0, y=10.5, h=0.5, l=11)
+    p.init_obstacle(x=0, y=0.5, h=7, l=0.5)   
 
+    p.init_obstacle(x=6.5, y=9, h=0.5, l=0.5)  
+    
+ 
     #Robot 
     r = Robot(1.0, 1.0, 0.0, 0.5, 0.5, 0.7, p)
     
