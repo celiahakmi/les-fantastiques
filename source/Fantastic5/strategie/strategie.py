@@ -50,6 +50,7 @@ class AvancerDroit(Strategie):
         return self.parcouru >= self.distance
 
 
+
 class Tourner(Strategie):
     def __init__(self, adaptateur, angle_deg: float, vitesse_angulaire: float = 0.1):
         super().__init__("Tourner")
@@ -155,39 +156,34 @@ class Condition(Strategie):
         self.condition = condition_func
         self.stratA = stratA
         self.stratB = stratB
-        self.current_strat = None
-
+        self._en_evitement = False
+ 
     def start(self):
-        self.current_strat = self.stratB
+        self._en_evitement = False
         self.stratB.start()
-
+ 
     def step(self):
-        # Si on est déjà en train de contourner (stratA)
-        if self.current_strat is self.stratA:
+        if self._en_evitement:
             if not self.stratA.stop():
                 self.stratA.step()
-                return # On continue le contournement
             else:
-                # Contournement fini, on reprend le parcours initial
-                self.current_strat = self.stratB
-                # On ne fait pas start() ici pour ne pas recommencer le parcours au début
-                # mais on peut appeler step() si besoin
-
-        # Si on est sur le parcours normal (stratB)
+                self._en_evitement = False
+    
+            return 
+ 
         if self.stratB.stop():
             return
-
-        # Vérification de la condition pour déclencher le contournement
+ 
         if self.condition(self.adaptateur):
-            print("Obstacle détecté ! Lancement du contournement.")
+            print(" Obstacle détecté! Lancement du contournement.")
+            self._en_evitement = True
             self.stratA.start()
-            self.current_strat = self.stratA
             self.stratA.step()
         else:
             self.stratB.step()
-
+ 
     def stop(self):
-        if self.current_strat is self.stratA and not self.stratA.stop():
+        if self._en_evitement:
             return False
         return self.stratB.stop()
 
@@ -274,4 +270,6 @@ class ContournerObstacle(Strategie):
 
     def stop(self):
         return self.manoeuvre is not None and self.manoeuvre.stop()
+
+
 
