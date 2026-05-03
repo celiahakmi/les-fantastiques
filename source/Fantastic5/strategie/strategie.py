@@ -156,18 +156,18 @@ class Condition(Strategie):
         self.condition = condition_func
         self.stratA = stratA
         self.stratB = stratB
-        self._en_evitement = False
+        self.en_evitement = False
  
     def start(self):
-        self._en_evitement = False
+        self.en_evitement = False
         self.stratB.start()
  
     def step(self):
-        if self._en_evitement:
+        if self.en_evitement:
             if not self.stratA.stop():
                 self.stratA.step()
             else:
-                self._en_evitement = False
+                self.en_evitement = False
     
             return 
  
@@ -176,16 +176,21 @@ class Condition(Strategie):
  
         if self.condition(self.adaptateur):
             print(" Obstacle détecté! Lancement du contournement.")
-            self._en_evitement = True
+            self.en_evitement = True
             self.stratA.start()
             self.stratA.step()
         else:
             self.stratB.step()
  
     def stop(self):
-        if self._en_evitement:
+        if self.en_evitement:
             return False
         return self.stratB.stop()
+
+
+
+   
+
 
 
 class Boucle(Strategie):
@@ -218,13 +223,13 @@ class Boucle(Strategie):
 class ContournerObstacle(Strategie):
     ETATS = [
         "AVANCER",
-        "TOURNER_DROITE",
-        "LONGER",
-        "TOURNER_GAUCHE",
+        "TOURNER_DROITE1",
+        "LONGER1",
+        "TOURNER_GAUCHE1",
         "PASSER_DEVANT",
-        "TOURNER_GAUCHE",
+        "TOURNER_GAUCHE2",
         "REJOINDRE",
-        "TOURNER_DROITE_2",
+        "TOURNER_DROITE2",
     ]
  
     def __init__(self, adaptateur,
@@ -242,23 +247,33 @@ class ContournerObstacle(Strategie):
         self.dist_rejoindre = dist_rejoindre
  
         self._etat = "AVANCER"
-        self._action_courante = None
+        self.action_courante = None
  
-    def _nouvelle_action(self, etat: str):
+    def nouvelle_action(self, etat: str):
         adp = self.adaptateur
         v = self.vitesse
         vr = self.vitesse_rot
         actions = {
-            "TOURNER_DROITE": Tourner(adp, 90, vr),
-            "LONGER":         LongerObstacleSurCote(adp, self.seuil_obstacle_cote, v),
-            "TOURNER_GAUCHE": Tourner(adp, -90, vr),
+            "TOURNER_DROITE1": Tourner(adp, 90, vr),
+            "LONGER1":         LongerObstacleSurCote(adp, self.seuil_obstacle_cote, v),
+            "TOURNER_GAUCHE1": Tourner(adp, -90, vr),
             "PASSER_DEVANT":    LongerObstacleSurCote(adp, self.seuil_obstacle_cote, v),
-            "TOURNER_GAUCHE": Tourner(adp, -90, vr),
+            "TOURNER_GAUCHE2": Tourner(adp, -90, vr),
             "REJOINDRE":        AvancerDroit(adp, self.dist_rejoindre),
-            "TOURNER_DROITE": Tourner(adp, 90, vr),
+            "TOURNER_DROITE2": Tourner(adp, 90, vr),
         }
         return actions.get(etat)
  
+    def etat_suivant(self):
+        idx = self.ETATS.index(self._etat)
+        suivant = self.ETATS[(idx + 1) % len(self.ETATS)]
+        print(f"[ContournerObstacle] → {suivant}")
+        self._etat = suivant
+        if suivant == "AVANCER":
+            self.action_courante = None
+        else:
+            self.action_courante = self.nouvelle_action(suivant)
+            self.action_courante.start()
  
 
 
