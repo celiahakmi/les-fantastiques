@@ -216,60 +216,36 @@ class Boucle(Strategie):
 
 
 class ContournerObstacle(Strategie):
-    def __init__(
-        self,
-        adaptateur,
-        angle_deg: float = 90.0,
-        distance_deport: float = 0.9,
-        distance_avance: float = 0.6,
-    ):
-        super().__init__("Contourner Obstacle")
+    ETATS = [
+        "AVANCER",
+        "TOURNER_DROITE_1",
+        "LONGER_1",
+        "TOURNER_GAUCHE_1",
+        "PASSER_DEVANT",
+        "TOURNER_GAUCHE_2",
+        "REJOINDRE",
+        "TOURNER_DROITE_2",
+    ]
+ 
+    def __init__(self, adaptateur,
+                 vitesse: float = 0.1,
+                 vitesse_rot: float = 0.1,
+                 seuil_detection: float = 0.5,
+                 seuil_obstacle_cote: float = 1.5,
+                 dist_rejoindre: float = 0.8):
+        super().__init__("ContournerObstacle")
         self.adaptateur = adaptateur
-        self.angle_deg = abs(angle_deg)
-        self.distance_deport = distance_deport
-        self.distance_avance = distance_avance
-        self.sens_precedent = 1
-        self.manoeuvre = None
+        self.vitesse = vitesse
+        self.vitesse_rot = vitesse_rot
+        self.seuil_detection = seuil_detection
+        self.seuil_obstacle_cote = seuil_obstacle_cote
+        self.dist_rejoindre = dist_rejoindre
+ 
+        self._etat = "AVANCER"
+        self._action_courante = None
+ 
 
-    def _distance_laterale(self, angle_offset):
-        try:
-            return self.adaptateur.get_distance(angle_offset=angle_offset)
-        except TypeError:
-            return None
-
-    def _choisir_angle(self):
-        distance_gauche = self._distance_laterale(math.pi / 2)
-        distance_droite = self._distance_laterale(-math.pi / 2)
-
-        if distance_gauche is not None and distance_droite is not None:
-            if distance_gauche > distance_droite + 1e-6:
-                self.sens_precedent = 1
-                return self.angle_deg
-            if distance_droite > distance_gauche + 1e-6:
-                self.sens_precedent = -1
-                return -self.angle_deg
-
-        self.sens_precedent *= -1
-        return self.sens_precedent * self.angle_deg
-
-    def start(self):
-        angle = self._choisir_angle()
-        self.manoeuvre = Choregraphie(
-            self.adaptateur,
-            [   Tourner(self.adaptateur, angle),
-                AvancerDroit(self.adaptateur, self.distance_deport),
-                Tourner(self.adaptateur, -angle),
-                AvancerDroit(self.adaptateur, self.distance_avance),
-            ],
-        )
-        self.manoeuvre.start()
-
-    def step(self):
-        if not self.stop():
-            self.manoeuvre.step()
-
-    def stop(self):
-        return self.manoeuvre is not None and self.manoeuvre.stop()
+ 
 
 
 
