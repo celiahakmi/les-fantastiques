@@ -75,7 +75,9 @@ def main():
 
         if simu:
             if not r.update():
-                pass 
+                print("le robot a trouvé la sortie")  
+                adp.set_vitesse(0.0, 0.0)
+                running = False  
                 
 
             view.dessiner()
