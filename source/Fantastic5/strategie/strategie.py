@@ -218,11 +218,11 @@ class Boucle(Strategie):
 class ContournerObstacle(Strategie):
     ETATS = [
         "AVANCER",
-        "TOURNER_DROITE_1",
-        "LONGER_1",
-        "TOURNER_GAUCHE_1",
+        "TOURNER_DROITE",
+        "LONGER",
+        "TOURNER_GAUCHE",
         "PASSER_DEVANT",
-        "TOURNER_GAUCHE_2",
+        "TOURNER_GAUCHE",
         "REJOINDRE",
         "TOURNER_DROITE_2",
     ]
@@ -244,7 +244,21 @@ class ContournerObstacle(Strategie):
         self._etat = "AVANCER"
         self._action_courante = None
  
-
+    def _nouvelle_action(self, etat: str):
+        adp = self.adaptateur
+        v = self.vitesse
+        vr = self.vitesse_rot
+        actions = {
+            "TOURNER_DROITE": Tourner(adp, 90, vr),
+            "LONGER":         LongerObstacleSurCote(adp, self.seuil_obstacle_cote, v),
+            "TOURNER_GAUCHE": Tourner(adp, -90, vr),
+            "PASSER_DEVANT":    LongerObstacleSurCote(adp, self.seuil_obstacle_cote, v),
+            "TOURNER_GAUCHE": Tourner(adp, -90, vr),
+            "REJOINDRE":        AvancerDroit(adp, self.dist_rejoindre),
+            "TOURNER_DROITE": Tourner(adp, 90, vr),
+        }
+        return actions.get(etat)
+ 
  
 
 
