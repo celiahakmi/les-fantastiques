@@ -156,18 +156,18 @@ class Condition(Strategie):
         self.condition = condition_func
         self.stratA = stratA
         self.stratB = stratB
-        self.en_evitement = False
+        self._en_evitement = False
  
     def start(self):
-        self.en_evitement = False
+        self._en_evitement = False
         self.stratB.start()
  
     def step(self):
-        if self.en_evitement:
+        if self._en_evitement:
             if not self.stratA.stop():
                 self.stratA.step()
             else:
-                self.en_evitement = False
+                self._en_evitement = False
     
             return 
  
@@ -176,21 +176,16 @@ class Condition(Strategie):
  
         if self.condition(self.adaptateur):
             print(" Obstacle détecté! Lancement du contournement.")
-            self.en_evitement = True
+            self._en_evitement = True
             self.stratA.start()
             self.stratA.step()
         else:
             self.stratB.step()
  
     def stop(self):
-        if self.en_evitement:
+        if self._en_evitement:
             return False
         return self.stratB.stop()
-
-
-
-   
-
 
 
 class Boucle(Strategie):
@@ -246,7 +241,7 @@ class ContournerObstacle(Strategie):
         self.seuil_obstacle_cote = seuil_obstacle_cote
         self.dist_rejoindre = dist_rejoindre
  
-        self._etat = "AVANCER"
+        self.etat = "AVANCER"
         self.action_courante = None
  
     def nouvelle_action(self, etat: str):
@@ -265,16 +260,38 @@ class ContournerObstacle(Strategie):
         return actions.get(etat)
  
     def etat_suivant(self):
-        idx = self.ETATS.index(self._etat)
+        idx = self.ETATS.index(self.etat)
         suivant = self.ETATS[(idx + 1) % len(self.ETATS)]
         print(f"[ContournerObstacle] → {suivant}")
-        self._etat = suivant
+        self.etat = suivant
         if suivant == "AVANCER":
             self.action_courante = None
         else:
             self.action_courante = self.nouvelle_action(suivant)
             self.action_courante.start()
  
+    def start(self):
+        self.etat = "AVANCER"
+        self.action_courante = None
+        self.adaptateur.set_vitesse(self.vitesse, 0.0)
+ 
+    def step(self):
+        if self.etat == "AVANCER":
+            dist = self.adaptateur.get_distance()
+            if dist <= self.seuil_detection:
+                print(f"Obstacle détecté à {dist:.2f}")
+                self.adaptateur.set_vitesse(0.0, 0.0)
+                self.etat_suivant()
+            else:
+                self.adaptateur.set_vitesse(self.vitesse, 0.0)
+        else:
+            self.action_courante.step()
+            if self.action_courante.stop():
+                self.etat_suivant()
+ 
+    def stop(self):
+        return False 
+
 
 
 
