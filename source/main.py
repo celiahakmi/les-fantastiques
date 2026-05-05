@@ -59,7 +59,7 @@ def main():
 ])
     contournement = ContournerObstacle(adp)
 
-    strat_globale = Choregraphie(adp, [action1, action2, contournement, Arreter(adp),])
+    strat_globale = Choregraphie(adp, [action1, action2, contournement, Arreter(adp)])
 
     strat_globale.start()
 
