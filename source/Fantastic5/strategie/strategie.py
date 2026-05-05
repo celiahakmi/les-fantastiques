@@ -245,12 +245,7 @@ class ContournerObstacle(Strategie):
         vr = self.vitesse_rot
         actions = {
             "TOURNER_DROITE1": Tourner(adp, 90, vr),
-            "LONGER1":         LongerObstacle(adp, self.seuil_obstacle_cote, v),
-            "TOURNER_GAUCHE1": Tourner(adp, -90, vr),
-            "PASSER_DEVANT":    LongerObstacle(adp, self.seuil_obstacle_cote, v),
-            "TOURNER_GAUCHE2": Tourner(adp, -90, vr),
-            "REJOINDRE":        AvancerDroit(adp, self.dist_rejoindre),
-            "TOURNER_DROITE2": Tourner(adp, 90, vr),
+            "LONGER1": LongerObstacle(adp, self.seuil_obstacle_cote, v),
         }
         return actions.get(etat)
  
