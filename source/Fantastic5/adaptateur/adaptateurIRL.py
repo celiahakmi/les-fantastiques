@@ -10,13 +10,13 @@ class AdaptateurIRL(Adaptateur):
         self.precL, self.precR= self.robot.get_motor_position()
 
     def set_vitesse(self, v_lineaire, v_angulaire):
-        # 1Calcul des vitesses des roues
+        # Calcul des vitesses des roues
         v_gauche = v_lineaire - (v_angulaire * self.L / 2)
         v_droite = v_lineaire + (v_angulaire * self.L / 2)
 
-        # Conversion m/s en dps
         # Rayon = diametre / 2
         rayon = self.diametre / 2
+        # Conversion m/s en dps
         dps_gauche = (v_gauche / rayon) * (180 / math.pi)
         dps_droite = (v_droite / rayon) * (180 / math.pi)
 
