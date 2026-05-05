@@ -85,6 +85,7 @@ class TournerArc(Strategie):
         self.rayon = abs(rayon)
         self.vitesse_lineaire = abs(vitesse_lineaire)
         self.angle_parcouru = 0.0
+        #On détermine si on tourne à gauche(1) ou à droite(-1)
         self.sens = 1.0 if self.angle >= 0 else -1.0
 
     def start(self):
@@ -228,7 +229,7 @@ class ContournerObstacle(Strategie):
         self.adaptateur = adaptateur
         self.vitesse = vitesse
         self.vitesse_rot = vitesse_rot
-        self.seuil_detection = seuil_detection
+        self.seuil_detection = seuil_detection   
         self.seuil_obstacle_cote = seuil_obstacle_cote
         self.dist_rejoindre = dist_rejoindre
  
@@ -288,7 +289,7 @@ class LongerObstacle(Strategie):
                  vitesse: float = 0.1, avance_min: float = 0.3):
         super().__init__("LongerObstacle")
         self.adaptateur = adaptateur
-        self.seuil = seuil_obstacle
+        self.seuil = seuil_obstacle   #distance max pour considérer que y a un mur 
         self.vitesse = vitesse
         self.avance_min = avance_min
  
@@ -314,10 +315,12 @@ class LongerObstacle(Strategie):
         self.parcouru += self.adaptateur.get_distance_parcourue()
         self.adaptateur.set_vitesse(self.vitesse, 0.0)
         dist_cote = self.dist_gauche()
- 
+
+        #on vérifie qu'on est à coté de l'obstacle
         if dist_cote < self.seuil:
             self.obstacle_vu = True
- 
+
+        #si on était à coté de l'obstacle mais qu'on a rien vu, c'est fini
         if self.obstacle_vu and dist_cote >= self.seuil and self.parcouru >= self.avance_min:
             self.fini = True
             self.adaptateur.set_vitesse(0.0, 0.0)
