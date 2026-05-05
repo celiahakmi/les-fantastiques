@@ -220,11 +220,7 @@ class ContournerObstacle(Strategie):
         "AVANCER",
         "TOURNER_DROITE1",
         "LONGER1",
-        "TOURNER_GAUCHE1",
-        "PASSER_DEVANT",
-        "TOURNER_GAUCHE2",
-        "REJOINDRE",
-        "TOURNER_DROITE2",
+
     ]
  
     def __init__(self, adaptateur, vitesse: float = 0.1, vitesse_rot: float = 0.1, seuil_detection: float = 0.5, seuil_obstacle_cote: float = 1.5, dist_rejoindre: float = 0.8):
@@ -246,6 +242,8 @@ class ContournerObstacle(Strategie):
         actions = {
             "TOURNER_DROITE1": Tourner(adp, 90, vr),
             "LONGER1": LongerObstacle(adp, self.seuil_obstacle_cote, v),
+
+      
         }
         return actions.get(etat)
  
