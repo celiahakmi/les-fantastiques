@@ -36,26 +36,7 @@ class PygameView:
         return coins
         
     def dessiner(self):
-        self.fenetre.fill((255, 255, 255))
-
-        # Grille verticale
-        for i in range(int(self.plateforme.longueur) + 1):
-            x: int = i * self.TAILLE_PIXEL
-            pygame.draw.line(
-                self.fenetre,
-                (220, 220, 220),
-                (x, 0),
-                (x, int(self.plateforme.hauteur * self.TAILLE_PIXEL)),
-            )
-        # Grille horizontale
-        for j in range(int(self.plateforme.hauteur) + 1):
-            y: int = j * self.TAILLE_PIXEL
-            pygame.draw.line(
-                self.fenetre,
-                (220, 220, 220),
-                (0, y),
-                (int(self.plateforme.longueur * self.TAILLE_PIXEL), y),
-            )
+        self.fenetre.fill((255, 255, 255))      
         # Obstacles
         for obs in self.plateforme.obstacles:
             if obs[0] != "rect":

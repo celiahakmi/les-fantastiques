@@ -24,7 +24,7 @@ def initialisation_simulation():
     p.init_obstacle(x=0, y=10.5, h=0.5, l=11)
     p.init_obstacle(x=0, y=0.5, h=7, l=0.5)   
 
-    p.init_obstacle(x=6.5, y=9, h=0.5, l=0.5)  
+    p.init_obstacle(x=6, y=9, h=1, l=1)  
     
  
     #Robot 
