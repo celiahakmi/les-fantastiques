@@ -1,4 +1,4 @@
-# les-fantastiques
+# Projet de Robotique : Contrôleur de voiture robot autonome
 
 Dans notre dossier se trouvent :
 
